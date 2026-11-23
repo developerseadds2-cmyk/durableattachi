@@ -1,0 +1,3 @@
+@extends('admin.layout.app')
+@section('title','Product Report')
+@section('content')<div class="page-header"><h4>Product Report</h4></div><div class="admin-table"><table class="table"><thead><tr><th>Product</th><th>Orders</th><th>Sales</th></tr></thead><tbody>@forelse($products as $product)<tr><td>{{ $product->name }}</td><td>{{ $product->order_items_count }}</td><td>{{ number_format($product->order_items_sum_total_price ?? 0,2) }}</td></tr>@empty<tr><td colspan="3" class="text-center py-4">No products found.</td></tr>@endforelse</tbody></table><div class="p-3">{{ $products->links() }}</div></div>@endsection

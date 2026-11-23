@@ -1,0 +1,3 @@
+@extends('admin.layout.app')
+@section('title','Customer Report')
+@section('content')<div class="page-header"><h4>Customer Report</h4></div><div class="admin-table"><table class="table"><thead><tr><th>Customer</th><th>Email</th><th>Orders</th><th>Total Spent</th></tr></thead><tbody>@forelse($customers as $customer)<tr><td>{{ $customer->name }}</td><td>{{ $customer->email }}</td><td>{{ $customer->orders_count }}</td><td>{{ number_format($customer->orders_sum_total_amount ?? 0,2) }}</td></tr>@empty<tr><td colspan="4" class="text-center py-4">No customers found.</td></tr>@endforelse</tbody></table><div class="p-3">{{ $customers->links() }}</div></div>@endsection

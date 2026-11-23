@@ -1,0 +1,14 @@
+@extends('admin.layout.app')
+@php($editing=isset($blog))
+@section('title',$editing?'Edit Blog Post':'Add Blog Post')
+@section('content')
+<div class="page-header"><h4>{{ $editing?'Edit Blog Post':'Add Blog Post' }}</h4><a href="{{ route('admin.blog.index') }}" class="btn btn-outline-secondary btn-sm">Back</a></div>
+<form method="POST" action="{{ $editing?route('admin.blog.update',$blog):route('admin.blog.store') }}" enctype="multipart/form-data">@csrf @if($editing) @method('PUT') @endif
+	<div class="row g-4"><div class="col-lg-8"><div class="form-card mb-4">
+		<div class="mb-3"><label class="form-label">Title</label><input name="title" class="form-control" value="{{ old('title',$blog->title??'') }}" required></div>
+		<div class="row g-3"><div class="col-md-6"><label class="form-label">Category</label><select name="category_id" class="form-select"><option value="">Uncategorized</option>@foreach($categories as $category)<option value="{{ $category->id }}" @selected(old('category_id',$blog->category_id??'')==$category->id)>{{ $category->name }}</option>@endforeach</select></div><div class="col-md-6"><label class="form-label">Status</label><select name="status" class="form-select"><option value="draft" @selected(old('status',$blog->status??'draft')==='draft')>Draft</option><option value="published" @selected(old('status',$blog->status??'')==='published')>Published</option></select></div></div>
+		<div class="mt-3"><label class="form-label">Excerpt</label><textarea name="excerpt" class="form-control" rows="3">{{ old('excerpt',$blog->excerpt??'') }}</textarea></div>
+		<div class="mt-3"><label class="form-label">Full Content</label><textarea name="body" id="blogBody" class="form-control" rows="16">{{ old('body',$blog->body??'') }}</textarea><small class="text-muted">HTML headings, links and lists are supported.</small></div>
+	</div><div class="form-card"><h6 class="fw-bold mb-3">SEO Details</h6><div class="mb-3"><label class="form-label">Meta Title</label><input name="meta_title" class="form-control" value="{{ old('meta_title',$blog->meta_title??'') }}"></div><label class="form-label">Meta Description</label><textarea name="meta_description" class="form-control" rows="3">{{ old('meta_description',$blog->meta_description??'') }}</textarea></div></div>
+	<div class="col-lg-4"><div class="form-card"><label class="form-label">Thumbnail</label><input type="file" name="thumbnail" class="form-control" accept="image/*">@if($editing && $blog->thumbnail)<img src="{{ $blog->thumbnail_url }}" class="img-preview-large mt-3" alt="{{ $blog->title }}">@endif<div class="form-check form-switch mt-4"><input class="form-check-input" type="checkbox" name="is_featured" value="1" @checked(old('is_featured',$blog->is_featured??false))><label class="form-check-label">Featured Post</label></div><button class="btn btn-gold w-100 mt-4">Save Post</button></div></div></div>
+</form>@endsection

@@ -1,0 +1,3 @@
+@extends('admin.layout.app')
+@section('title','Contact Message')
+@section('content')<div class="page-header"><h4>Contact Message</h4><a href="{{ route('admin.contacts.index') }}" class="btn btn-outline-secondary btn-sm">Back</a></div><div class="form-card" style="max-width:850px"><h5>{{ $contact->subject ?: 'Contact message' }}</h5><p class="text-muted">From {{ $contact->name }} ({{ $contact->email }}){{ $contact->phone ? ' · '.$contact->phone : '' }}</p><hr><div style="white-space:pre-line">{{ $contact->message }}</div></div>@endsection
