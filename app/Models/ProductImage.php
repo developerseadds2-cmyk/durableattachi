@@ -17,6 +17,15 @@ class ProductImage extends Model
 
     public function getUrlAttribute(): string
     {
+        if (\Illuminate\Support\Str::startsWith($this->image, ['http://', 'https://'])) {
+            return $this->image;
+        }
+        if (file_exists(public_path('uploads/products/' . $this->image))) {
+            return asset('uploads/products/' . $this->image);
+        }
+        if (file_exists(public_path('images/products/' . $this->image))) {
+            return asset('images/products/' . $this->image);
+        }
         return asset('uploads/products/' . $this->image);
     }
 }

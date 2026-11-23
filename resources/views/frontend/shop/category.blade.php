@@ -1,5 +1,5 @@
-@extends('frontend.layouts.app')
-@section('title', $category->name . ' — Ayur Naman')
+﻿@extends('frontend.layouts.app')
+@section('title', $category->name . ' — Durable Suitcase House')
 @section('content')
 <div class="shop-hero"><div class="container"><span class="section-label">Collection</span><h1 style="font-family:var(--font-serif);font-size:2.5rem;font-weight:400;">{{ $category->name }}</h1><nav aria-label="breadcrumb" class="mt-3"><ol class="breadcrumb justify-content-center small text-muted" style="background:none;padding:0;margin:0;"><li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li><li class="breadcrumb-item"><a href="{{ route('shop.index') }}">Shop</a></li><li class="breadcrumb-item active">{{ $category->name }}</li></ol></nav></div></div>
 <div class="container-xl-custom py-5"><div class="d-flex justify-content-between align-items-center mb-4 pb-3" style="border-bottom:1px solid var(--border);"><span class="small text-muted">Showing <strong>{{ $products->total() }}</strong> products</span><a href="{{ route('shop.index') }}" class="btn-outline-glamora" style="padding:8px 16px;font-size:.7rem;">All Collections</a></div>

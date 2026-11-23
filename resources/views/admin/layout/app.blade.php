@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<title>@yield('title', 'Dashboard') — Ayur Naman Admin</title>
+<title>@yield('title', 'Dashboard') — Durable Suitcase House Admin</title>
 <link rel="icon" href="{{ asset('uploads/favicon.png') }}" type="image/png">
 <!-- Bootstrap 5 -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -159,7 +159,7 @@
 <nav id="sidebar">
   <div class="sidebar-header">
     <div class="sidebar-logo">G</div>
-    <div class="sidebar-logo-text"><span>Ayur Naman</span> Admin</div>
+    <div class="sidebar-logo-text"><span>Durable Suitcase House</span> Admin</div>
   </div>
 
   <ul class="nav flex-column py-2">
@@ -424,3 +424,4 @@
 @stack('scripts')
 </body>
 </html>
+

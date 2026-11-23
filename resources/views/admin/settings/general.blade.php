@@ -1,4 +1,4 @@
-@extends('admin.layout.app')
+﻿@extends('admin.layout.app')
 @section('title', 'General Settings')
 @section('breadcrumb')
   <li class="breadcrumb-item active">Settings</li>
@@ -26,7 +26,7 @@
         <div class="row g-3">
           <div class="col-md-6">
             <label class="form-label">Site Name</label>
-            <input type="text" name="site_name" class="form-control" value="{{ $settings['site_name'] ?? 'Ayur Naman' }}">
+            <input type="text" name="site_name" class="form-control" value="{{ $settings['site_name'] ?? 'Durable Suitcase House' }}">
           </div>
           <div class="col-md-6">
             <label class="form-label">Contact Email</label>
@@ -101,3 +101,4 @@
   </div>
 </form>
 @endsection
+

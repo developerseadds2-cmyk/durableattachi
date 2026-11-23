@@ -1,5 +1,5 @@
-@extends('frontend.layouts.app')
-@section('title', 'Reset Password — Ayur Naman')
+﻿@extends('frontend.layouts.app')
+@section('title', 'Reset Password — Durable Suitcase House')
 
 @section('content')
 <div style="background:var(--pd-ice);min-height:calc(100vh - 200px);display:flex;align-items:center;padding:60px 0;">
@@ -9,7 +9,7 @@
 
         <div style="background:#fff;border:1px solid var(--border);padding:40px;">
           <div class="text-center mb-5">
-            <a href="{{ route('home') }}" style="font-family:var(--font-serif);font-size:2rem;font-weight:300;font-style:italic;color:var(--dark);letter-spacing:2px;">Ayur Naman</a>
+            <a href="{{ route('home') }}" style="font-family:var(--font-serif);font-size:2rem;font-weight:300;font-style:italic;color:var(--dark);letter-spacing:2px;">Durable Suitcase House</a>
             <h4 style="font-family:var(--font-serif);font-weight:400;font-size:1.4rem;margin-top:20px;margin-bottom:8px;">Reset Password</h4>
             <p class="text-muted small">Choose a new secure password.</p>
           </div>
@@ -50,3 +50,4 @@
   </div>
 </div>
 @endsection
+

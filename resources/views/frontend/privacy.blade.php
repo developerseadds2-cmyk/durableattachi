@@ -1,6 +1,6 @@
-@extends('frontend.layouts.app')
-@section('title', 'Privacy Policy — Ayur Naman')
-@section('meta_description', 'Ayur Naman Privacy Policy — how we collect, use, and protect your personal information.')
+﻿@extends('frontend.layouts.app')
+@section('title', 'Privacy Policy — Durable Suitcase House')
+@section('meta_description', 'Durable Suitcase House Privacy Policy — how we collect, use, and protect your personal information.')
 
 @push('styles')
 <style>
@@ -72,7 +72,7 @@
 
       <div class="policy-highlight">
         <i class="bi bi-shield-check me-2" style="color:var(--pd-blue);"></i>
-        <strong>Your privacy matters to us.</strong> Ayur Naman is committed to protecting your personal information. This policy explains what we collect, how we use it, and your rights.
+        <strong>Your privacy matters to us.</strong> Durable Suitcase House is committed to protecting your personal information. This policy explains what we collect, how we use it, and your rights.
       </div>
 
       <div class="policy-section" id="info-collect">
@@ -158,7 +158,7 @@
           <li><strong>Opt-out:</strong> Unsubscribe from marketing emails at any time</li>
           <li><strong>Portability:</strong> Request your data in a machine-readable format</li>
         </ul>
-        <p>To exercise your rights, contact us at <a href="mailto:{{ \App\Models\Setting::get('site_email','info@ayurnaman.com') }}" style="color:var(--pd-blue);">{{ \App\Models\Setting::get('site_email','info@ayurnaman.com') }}</a></p>
+        <p>To exercise your rights, contact us at <a href="mailto:{{ \App\Models\Setting::get('site_email','durablesuitcasehouse@gmail.com') }}" style="color:var(--pd-blue);">{{ \App\Models\Setting::get('site_email','durablesuitcasehouse@gmail.com') }}</a></p>
       </div>
 
       <div class="policy-section" id="retention">
@@ -185,7 +185,7 @@
         <h2><span class="section-num">11</span> Contact Us</h2>
         <p>For any questions, concerns, or requests regarding this Privacy Policy or your personal data:</p>
         <ul>
-          <li><strong>Email:</strong> <a href="mailto:{{ \App\Models\Setting::get('site_email','info@ayurnaman.com') }}" style="color:var(--pd-blue);">{{ \App\Models\Setting::get('site_email','info@ayurnaman.com') }}</a></li>
+          <li><strong>Email:</strong> <a href="mailto:{{ \App\Models\Setting::get('site_email','durablesuitcasehouse@gmail.com') }}" style="color:var(--pd-blue);">{{ \App\Models\Setting::get('site_email','durablesuitcasehouse@gmail.com') }}</a></li>
           <li><strong>Phone:</strong> {{ \App\Models\Setting::get('site_phone','+92-300-1234567') }}</li>
           <li><strong>Address:</strong> {{ \App\Models\Setting::get('site_address','123 Jewelry Street, Karachi, Pakistan') }}</li>
         </ul>
@@ -196,3 +196,5 @@
   </div>
 </div>
 @endsection
+
+

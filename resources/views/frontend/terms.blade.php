@@ -1,6 +1,6 @@
-@extends('frontend.layouts.app')
-@section('title', 'Terms & Conditions — Ayur Naman')
-@section('meta_description', 'Read the Terms & Conditions for Ayur Naman. Understand your rights and responsibilities when using our website and purchasing our jewelry.')
+﻿@extends('frontend.layouts.app')
+@section('title', 'Terms & Conditions — Durable Suitcase House')
+@section('meta_description', 'Read the Terms & Conditions for Durable Suitcase House. Understand your rights and responsibilities when using our website and purchasing our jewelry.')
 
 @push('styles')
 <style>
@@ -110,18 +110,18 @@
     <div class="col-lg-9">
 
       <div class="policy-highlight">
-        <strong>Please read these Terms & Conditions carefully</strong> before using the Ayur Naman website or making a purchase. By accessing our website or placing an order, you agree to be bound by these terms.
+        <strong>Please read these Terms & Conditions carefully</strong> before using the Durable Suitcase House website or making a purchase. By accessing our website or placing an order, you agree to be bound by these terms.
       </div>
 
       <div class="policy-section" id="acceptance">
         <h2><span class="section-num">1</span> Acceptance of Terms</h2>
-        <p>By accessing and using the Ayur Naman website (ayurnaman.com) and/or purchasing our products, you accept and agree to be bound by these Terms & Conditions and our Privacy Policy. If you do not agree with any part of these terms, please do not use our services.</p>
+        <p>By accessing and using the Durable Suitcase House website (durablesuitcasehouse.com) and/or purchasing our products, you accept and agree to be bound by these Terms & Conditions and our Privacy Policy. If you do not agree with any part of these terms, please do not use our services.</p>
         <p>We reserve the right to update these terms at any time. Continued use of the website after changes constitutes acceptance of the revised terms. The date of last revision is shown above.</p>
       </div>
 
       <div class="policy-section" id="products">
         <h2><span class="section-num">2</span> Products & Pricing</h2>
-        <p>Ayur Naman offers a range of diamond and gemstone jewelry. We take every effort to accurately display our products, including descriptions, images, and specifications. However:</p>
+        <p>Durable Suitcase House offers a range of diamond and gemstone jewelry. We take every effort to accurately display our products, including descriptions, images, and specifications. However:</p>
         <ul>
           <li>Colors may vary slightly due to screen display settings.</li>
           <li>All product images are for illustrative purposes and actual products may differ slightly.</li>
@@ -148,7 +148,7 @@
 
       <div class="policy-section" id="shipping">
         <h2><span class="section-num">4</span> Shipping & Delivery</h2>
-        <p>Ayur Naman ships nationwide across Pakistan. Delivery timelines are estimates and may vary.</p>
+        <p>Durable Suitcase House ships nationwide across Pakistan. Delivery timelines are estimates and may vary.</p>
         <ul>
           <li>Standard delivery: 3–5 business days</li>
           <li>Express delivery: 1–2 business days (additional charge applies)</li>
@@ -172,7 +172,7 @@
 
       <div class="policy-section" id="warranty">
         <h2><span class="section-num">6</span> Warranty</h2>
-        <p>Ayur Naman provides a <strong>1-year manufacturing warranty</strong> on all jewelry against defects in materials and workmanship. This warranty does not cover:</p>
+        <p>Durable Suitcase House provides a <strong>1-year manufacturing warranty</strong> on all jewelry against defects in materials and workmanship. This warranty does not cover:</p>
         <ul>
           <li>Normal wear and tear</li>
           <li>Damage due to misuse, accidents, or improper care</li>
@@ -184,12 +184,12 @@
 
       <div class="policy-section" id="intellectual">
         <h2><span class="section-num">7</span> Intellectual Property</h2>
-        <p>All content on this website — including text, images, logos, designs, and product descriptions — is the property of Ayur Naman and is protected by copyright law. You may not reproduce, distribute, or use our content without written permission.</p>
+        <p>All content on this website — including text, images, logos, designs, and product descriptions — is the property of Durable Suitcase House and is protected by copyright law. You may not reproduce, distribute, or use our content without written permission.</p>
       </div>
 
       <div class="policy-section" id="liability">
         <h2><span class="section-num">8</span> Limitation of Liability</h2>
-        <p>To the maximum extent permitted by law, Ayur Naman shall not be liable for any indirect, incidental, special, or consequential damages arising from the use of our website or products. Our total liability shall not exceed the amount paid for the specific product in question.</p>
+        <p>To the maximum extent permitted by law, Durable Suitcase House shall not be liable for any indirect, incidental, special, or consequential damages arising from the use of our website or products. Our total liability shall not exceed the amount paid for the specific product in question.</p>
       </div>
 
       <div class="policy-section" id="privacy">
@@ -206,7 +206,7 @@
         <h2><span class="section-num">11</span> Contact Us</h2>
         <p>If you have any questions about these Terms & Conditions, please contact us:</p>
         <ul>
-          <li><strong>Email:</strong> {{ \App\Models\Setting::get('site_email','info@ayurnaman.com') }}</li>
+          <li><strong>Email:</strong> {{ \App\Models\Setting::get('site_email','durablesuitcasehouse@gmail.com') }}</li>
           <li><strong>Phone:</strong> {{ \App\Models\Setting::get('site_phone','+92-300-1234567') }}</li>
           <li><strong>Address:</strong> {{ \App\Models\Setting::get('site_address','123 Jewelry Street, Karachi, Pakistan') }}</li>
         </ul>
@@ -217,3 +217,5 @@
   </div>
 </div>
 @endsection
+
+

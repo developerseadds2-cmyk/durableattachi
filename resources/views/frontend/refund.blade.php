@@ -1,6 +1,6 @@
-@extends('frontend.layouts.app')
-@section('title', 'Refund & Return Policy — Ayur Naman')
-@section('meta_description', 'Ayur Naman Refund and Return Policy. Easy 30-day returns on all jewelry purchases. Learn how to return or exchange your order.')
+﻿@extends('frontend.layouts.app')
+@section('title', 'Refund & Return Policy — Durable Suitcase House')
+@section('meta_description', 'Durable Suitcase House Refund and Return Policy. Easy 30-day returns on all jewelry purchases. Learn how to return or exchange your order.')
 
 @push('styles')
 <style>
@@ -143,7 +143,7 @@
           <div class="step-num">1</div>
           <div>
             <h6>Initiate Your Return</h6>
-            <p>Contact our customer service team within 30 days of delivery via email at <a href="mailto:{{ \App\Models\Setting::get('site_email','info@ayurnaman.com') }}" style="color:var(--pd-blue);">{{ \App\Models\Setting::get('site_email','info@ayurnaman.com') }}</a> or call <strong>{{ \App\Models\Setting::get('site_phone','+92-300-1234567') }}</strong> with your order number and reason for return.</p>
+            <p>Contact our customer service team within 30 days of delivery via email at <a href="mailto:{{ \App\Models\Setting::get('site_email','durablesuitcasehouse@gmail.com') }}" style="color:var(--pd-blue);">{{ \App\Models\Setting::get('site_email','durablesuitcasehouse@gmail.com') }}</a> or call <strong>{{ \App\Models\Setting::get('site_phone','+92-300-1234567') }}</strong> with your order number and reason for return.</p>
           </div>
         </div>
 
@@ -187,7 +187,7 @@
           <li><strong>Credit/Debit Card:</strong> Refund within 5–7 business days to your card</li>
           <li><strong>Bank Transfer:</strong> Refund within 3–5 business days</li>
           <li><strong>Cash on Delivery:</strong> Bank transfer refund within 5–7 business days (bank details required)</li>
-          <li><strong>Store Credit:</strong> Immediately added to your Ayur Naman account</li>
+          <li><strong>Store Credit:</strong> Immediately added to your Durable Suitcase House account</li>
         </ul>
         <div class="policy-highlight">
           <i class="bi bi-info-circle me-2"></i>Original shipping fees are non-refundable. Only the product price will be refunded.
@@ -216,7 +216,7 @@
         <ul>
           <li>Customers are responsible for return shipping costs, except for defective or incorrect items.</li>
           <li>We strongly recommend using an insured, trackable courier service.</li>
-          <li>Ayur Naman is not responsible for items lost or damaged during return shipping.</li>
+          <li>Durable Suitcase House is not responsible for items lost or damaged during return shipping.</li>
           <li>Return shipping address will be provided with your Return Authorization.</li>
         </ul>
       </div>
@@ -226,7 +226,7 @@
         <p>Our customer care team is available to help you with returns, exchanges, and refunds.</p>
         <div class="row g-3 mt-2">
           @foreach([
-            ['bi-envelope','Email',\App\Models\Setting::get('site_email','info@ayurnaman.com'),'mailto:'.(\App\Models\Setting::get('site_email','info@ayurnaman.com'))],
+            ['bi-envelope','Email',\App\Models\Setting::get('site_email','durablesuitcasehouse@gmail.com'),'mailto:'.(\App\Models\Setting::get('site_email','durablesuitcasehouse@gmail.com'))],
             ['bi-telephone','Phone',\App\Models\Setting::get('site_phone','+92-300-1234567'),'tel:'.(\App\Models\Setting::get('site_phone','+92-300-1234567'))],
             ['bi-whatsapp','WhatsApp','+92-300-1234567','https://wa.me/923001234567'],
           ] as $c)
@@ -250,3 +250,5 @@
   </div>
 </div>
 @endsection
+
+

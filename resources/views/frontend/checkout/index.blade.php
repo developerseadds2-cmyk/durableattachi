@@ -1,10 +1,10 @@
-@extends('frontend.layouts.app')
-@section('title', 'Checkout — Ayur Naman')
+﻿@extends('frontend.layouts.app')
+@section('title', 'Checkout — Durable Suitcase House')
 
 @push('styles')
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <style>
-/* Select2 Ayurnaman Custom Theme */
+/* Select2 Durable Suitcase House Custom Theme */
 .select2-container--default .select2-selection--single {
   border: 1px solid #cbd5e1 !important;
   border-radius: 6px !important;
@@ -16,7 +16,7 @@
 }
 .select2-container--default .select2-selection--single:focus,
 .select2-container--default.select2-container--open .select2-selection--single {
-  border-color: var(--ayur-green) !important;
+  border-color: var(--dsh-navy-light) !important;
   box-shadow: 0 0 0 3px rgba(45, 90, 39, 0.12) !important;
 }
 .select2-container--default .select2-selection--single .select2-selection__rendered {
@@ -42,15 +42,15 @@
   outline: none !important;
 }
 .select2-container--default .select2-search--dropdown .select2-search__field:focus {
-  border-color: var(--ayur-green) !important;
+  border-color: var(--dsh-navy-light) !important;
 }
 .select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
-  background-color: var(--ayur-green) !important;
+  background-color: var(--dsh-navy-light) !important;
   color: #fff !important;
 }
 .select2-container--default .select2-results__option--selected {
   background-color: #eef4ec !important;
-  color: var(--ayur-green-dark) !important;
+  color: var(--dsh-navy) !important;
   font-weight: 600 !important;
 }
 .select2-container {
@@ -77,7 +77,7 @@
   color: #718096;
 }
 .checkout-step.active {
-  color: var(--ayur-green-dark);
+  color: var(--dsh-navy);
 }
 .checkout-step-num {
   width: 24px;
@@ -92,7 +92,7 @@
   font-weight: 700;
 }
 .checkout-step.active .checkout-step-num {
-  background: var(--ayur-green);
+  background: var(--dsh-navy-light);
   color: #fff;
 }
 .checkout-step-line {
@@ -113,7 +113,7 @@
   font-family: var(--font-serif);
   font-size: 1.2rem;
   font-weight: 600;
-  color: var(--ayur-green-dark);
+  color: var(--dsh-navy);
   margin-bottom: 18px;
   padding-bottom: 10px;
   border-bottom: 1px solid #edf1eb;
@@ -138,7 +138,7 @@
   background: #fff;
 }
 .payment-option.selected {
-  border-color: var(--ayur-green);
+  border-color: var(--dsh-navy-light);
   background: rgba(45, 90, 39, 0.03);
 }
 
@@ -152,7 +152,7 @@
   background: #fff;
 }
 .shipping-option.selected {
-  border-color: var(--ayur-green);
+  border-color: var(--dsh-navy-light);
   background: rgba(45, 90, 39, 0.03);
 }
 
@@ -163,7 +163,7 @@
   font-size: 0.9rem;
 }
 .form-control:focus, .form-select:focus {
-  border-color: var(--ayur-green);
+  border-color: var(--dsh-navy-light);
   box-shadow: 0 0 0 3px rgba(45, 90, 39, 0.12);
 }
 
@@ -201,7 +201,7 @@
   .checkout-mobile-sticky-total .amount {
     font-size: 1.15rem;
     font-weight: 700;
-    color: var(--ayur-green-dark);
+    color: var(--dsh-navy);
   }
   .checkout-mobile-sticky-btn {
     flex: 1;
@@ -422,7 +422,7 @@
       <!-- Right: Order Summary -->
       <div class="col-lg-5">
         <div class="checkout-summary-card">
-          <h5 style="font-family:var(--font-serif);font-size:1.25rem;font-weight:600;color:var(--ayur-green-dark);margin-bottom:18px;border-bottom:1px solid rgba(27,56,43,0.08);padding-bottom:10px;">
+          <h5 style="font-family:var(--font-serif);font-size:1.25rem;font-weight:600;color:var(--dsh-navy);margin-bottom:18px;border-bottom:1px solid rgba(27,56,43,0.08);padding-bottom:10px;">
             Order Summary
           </h5>
           <div class="checkout-items-list mb-3" style="max-height:300px;overflow-y:auto;">
@@ -430,13 +430,13 @@
             <div class="d-flex gap-3 mb-3 pb-3" style="border-bottom:1px solid #edf1eb;">
               <div style="position:relative;flex-shrink:0;">
                 <img src="{{ $item['thumbnail'] }}" style="width:60px;height:65px;object-fit:contain;background:#fff;border-radius:6px;border:1px solid #e2e8f0;padding:2px;" alt="{{ $item['name'] }}">
-                <span style="position:absolute;top:-6px;right:-6px;background:var(--ayur-green-dark);color:#fff;border-radius:50%;width:20px;height:20px;font-size:0.65rem;display:flex;align-items:center;justify-content:center;font-weight:700;">{{ $item['quantity'] }}</span>
+                <span style="position:absolute;top:-6px;right:-6px;background:var(--dsh-navy);color:#fff;border-radius:50%;width:20px;height:20px;font-size:0.65rem;display:flex;align-items:center;justify-content:center;font-weight:700;">{{ $item['quantity'] }}</span>
               </div>
               <div class="flex-grow-1 min-w-0">
                 <div class="fw-600 small text-truncate text-dark">{{ $item['name'] }}</div>
                 <div class="text-muted small">₨{{ number_format($item['price'], 2) }} each</div>
               </div>
-              <div class="fw-700 small text-end text-nowrap" style="color:var(--ayur-green-dark);">
+              <div class="fw-700 small text-end text-nowrap" style="color:var(--dsh-navy);">
                 ₨{{ number_format($item['price'] * $item['quantity'], 2) }}
               </div>
             </div>
@@ -458,7 +458,7 @@
               <span class="text-muted">Shipping</span>
               <span id="shippingDisplay" class="fw-semibold">—</span>
             </div>
-            <div class="d-flex justify-content-between fw-bold border-top pt-3 mt-2" style="font-size:1.15rem;color:var(--ayur-green-dark);">
+            <div class="d-flex justify-content-between fw-bold border-top pt-3 mt-2" style="font-size:1.15rem;color:var(--dsh-navy);">
               <span>Total Amount</span>
               <span id="grandTotal">₨{{ number_format($subtotal - $discount, 2) }}</span>
             </div>
@@ -906,3 +906,5 @@ const firstShip = document.querySelector('.shipping-radio:checked');
 if (firstShip) firstShip.dispatchEvent(new Event('change'));
 </script>
 @endpush
+
+

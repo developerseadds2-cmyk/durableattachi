@@ -1,5 +1,5 @@
-@extends('frontend.layouts.app')
-@section('title', 'My Addresses — Ayur Naman')
+﻿@extends('frontend.layouts.app')
+@section('title', 'My Addresses — Durable Suitcase House')
 
 @section('content')
 <div class="account-hero">
@@ -29,11 +29,11 @@
       <div class="row g-3 mb-4">
         @foreach($addresses as $address)
         <div class="col-md-6">
-          <div class="account-card" style="height:100%;position:relative;border-color:{{ $address->is_default ? 'var(--ayur-green)' : '#e7eae3' }};">
+          <div class="account-card" style="height:100%;position:relative;border-color:{{ $address->is_default ? 'var(--dsh-navy-light)' : '#e7eae3' }};">
             @if($address->is_default)
-              <span style="position:absolute;top:14px;right:14px;font-size:0.62rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:var(--ayur-green);color:#fff;padding:3px 10px;border-radius:20px;">Default</span>
+              <span style="position:absolute;top:14px;right:14px;font-size:0.62rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:var(--dsh-navy-light);color:#fff;padding:3px 10px;border-radius:20px;">Default</span>
             @endif
-            <div style="font-size:0.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--ayur-green-dark);margin-bottom:10px;">
+            <div style="font-size:0.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--dsh-navy);margin-bottom:10px;">
               <i class="bi bi-geo-alt me-1 text-ayur-leaf"></i>{{ ucfirst($address->type) }}
             </div>
             <p style="font-size:0.88rem;line-height:1.8;margin-bottom:16px;color:var(--text);">
@@ -57,7 +57,7 @@
 
       <!-- Add New Address -->
       <div class="account-card">
-        <h5 style="font-family:var(--font-serif);font-size:1.15rem;margin-bottom:20px;color:var(--ayur-green-dark);border-bottom:1px solid #eef2ec;padding-bottom:12px;">Add New Address</h5>
+        <h5 style="font-family:var(--font-serif);font-size:1.15rem;margin-bottom:20px;color:var(--dsh-navy);border-bottom:1px solid #eef2ec;padding-bottom:12px;">Add New Address</h5>
         <form method="POST" action="{{ route('account.addresses.store') }}">
           @csrf
           <div class="row g-3">
@@ -122,3 +122,4 @@
   </div>
 </div>
 @endsection
+

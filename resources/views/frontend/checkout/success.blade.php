@@ -1,5 +1,5 @@
-@extends('frontend.layouts.app')
-@section('title', 'Order Confirmed — Ayur Naman')
+﻿@extends('frontend.layouts.app')
+@section('title', 'Order Confirmed — Durable Suitcase House')
 
 @push('styles')
 <style>
@@ -15,7 +15,7 @@
 .success-icon-wrap {
   width: 76px;
   height: 76px;
-  background: linear-gradient(135deg, var(--ayur-green), var(--ayur-green-dark));
+  background: linear-gradient(135deg, var(--dsh-navy-light), var(--dsh-navy));
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -110,8 +110,8 @@
       <i class="bi bi-check-lg text-white" style="font-size:2.2rem;"></i>
     </div>
 
-    <span class="section-label" style="color:var(--ayur-green);">Thank You</span>
-    <h1 style="font-family:var(--font-serif);font-size:2.4rem;font-weight:400;margin-bottom:6px;color:var(--ayur-green-dark);">
+    <span class="section-label" style="color:var(--dsh-navy-light);">Thank You</span>
+    <h1 style="font-family:var(--font-serif);font-size:2.4rem;font-weight:400;margin-bottom:6px;color:var(--dsh-navy);">
       Order Confirmed!
     </h1>
     <p class="text-muted small mb-0">
@@ -135,14 +135,14 @@
         </div>
         <div class="col-6 col-sm-3 order-meta-item">
           <div class="order-meta-label">Total Amount</div>
-          <div class="order-meta-value" style="color:var(--ayur-green-dark);">₨{{ number_format($order->total_amount, 2) }}</div>
+          <div class="order-meta-value" style="color:var(--dsh-navy);">₨{{ number_format($order->total_amount, 2) }}</div>
         </div>
       </div>
     </div>
 
     <!-- Items Ordered -->
     <div class="text-start mt-4">
-      <h5 style="font-family:var(--font-serif);font-size:1.15rem;font-weight:600;color:var(--ayur-green-dark);margin-bottom:14px;border-bottom:1px solid #edf1eb;padding-bottom:8px;">
+      <h5 style="font-family:var(--font-serif);font-size:1.15rem;font-weight:600;color:var(--dsh-navy);margin-bottom:14px;border-bottom:1px solid #edf1eb;padding-bottom:8px;">
         Items in This Order
       </h5>
       @foreach($order->items as $item)
@@ -157,7 +157,7 @@
             <div class="text-muted small" style="font-size:0.75rem;">Qty: {{ $item->quantity }} × ₨{{ number_format($item->unit_price, 2) }}</div>
           </div>
         </div>
-        <div class="fw-700 text-nowrap text-end flex-shrink-0" style="color:var(--ayur-green-dark);font-size:0.95rem;">
+        <div class="fw-700 text-nowrap text-end flex-shrink-0" style="color:var(--dsh-navy);font-size:0.95rem;">
           ₨{{ number_format($item->total_price, 2) }}
         </div>
       </div>
@@ -179,7 +179,7 @@
           <span class="text-muted">Shipping</span>
           <span class="fw-semibold">{{ $order->shipping_amount > 0 ? '₨'.number_format($order->shipping_amount, 2) : 'Free' }}</span>
         </div>
-        <div class="d-flex justify-content-between fw-bold border-top pt-2 mt-2" style="font-size:1.1rem;color:var(--ayur-green-dark);">
+        <div class="d-flex justify-content-between fw-bold border-top pt-2 mt-2" style="font-size:1.1rem;color:var(--dsh-navy);">
           <span>Total Paid</span>
           <span>₨{{ number_format($order->total_amount, 2) }}</span>
         </div>
@@ -199,3 +199,5 @@
   </div>
 </div>
 @endsection
+
+

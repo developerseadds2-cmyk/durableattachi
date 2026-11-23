@@ -1,7 +1,7 @@
 <div class="product-card">
   <div class="product-card-img">
     <a href="<?php echo e(route('product.show', $product->slug)); ?>">
-      <img src="<?php echo e($product->thumbnail_url); ?>" alt="<?php echo e($product->name); ?>" loading="lazy">
+      <img src="<?php echo e($product->thumbnail_url); ?>" alt="<?php echo e($product->name); ?>" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?w=700&q=80&fit=crop';">
     </a>
 
     <!-- Badges -->
@@ -70,4 +70,4 @@
     </div>
   </div>
 </div>
-<?php /**PATH C:\xampp8.2\htdocs\ayushnaman\resources\views/frontend/partials/product-card.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\xampp8.2\htdocs\durableattachi\resources\views/frontend/partials/product-card.blade.php ENDPATH**/ ?>

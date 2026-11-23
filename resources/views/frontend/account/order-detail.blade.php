@@ -1,5 +1,5 @@
-@extends('frontend.layouts.app')
-@section('title', 'Order #{{ $order->order_number }} — Ayur Naman')
+﻿@extends('frontend.layouts.app')
+@section('title', 'Order #{{ $order->order_number }} — Durable Suitcase House')
 
 @section('content')
 <div class="account-hero">
@@ -44,7 +44,7 @@
 
       <!-- Order Items -->
       <div class="account-card mb-4">
-        <h5 style="font-family:var(--font-serif);font-size:1.15rem;margin-bottom:20px;color:var(--ayur-green-dark);border-bottom:1px solid #eef2ec;padding-bottom:12px;">Items Ordered</h5>
+        <h5 style="font-family:var(--font-serif);font-size:1.15rem;margin-bottom:20px;color:var(--dsh-navy);border-bottom:1px solid #eef2ec;padding-bottom:12px;">Items Ordered</h5>
         @foreach($order->items as $item)
         <div class="d-flex gap-3 py-3" style="border-bottom:1px solid #f0f0f0;">
           <div style="width:70px;height:75px;background:#f8f9fa;border-radius:6px;flex-shrink:0;overflow:hidden;border:1px solid #ecefe9;">
@@ -63,7 +63,7 @@
             @endif
             <div class="text-muted small">Qty: {{ $item->quantity }} × ₨{{ number_format($item->unit_price, 2) }}</div>
           </div>
-          <div style="font-weight:700;font-size:0.95rem;color:var(--ayur-green-dark);white-space:nowrap;">₨{{ number_format($item->total_price, 2) }}</div>
+          <div style="font-weight:700;font-size:0.95rem;color:var(--dsh-navy);white-space:nowrap;">₨{{ number_format($item->total_price, 2) }}</div>
         </div>
         @endforeach
 
@@ -91,7 +91,7 @@
           @endif
           <div class="d-flex justify-content-between py-3 mt-2" style="border-top:2px solid var(--border);">
             <span style="font-weight:700;font-size:1rem;color:var(--dark);">Total</span>
-            <span style="font-weight:700;font-size:1.15rem;color:var(--ayur-green-dark);">₨{{ number_format($order->total_amount, 2) }}</span>
+            <span style="font-weight:700;font-size:1.15rem;color:var(--dsh-navy);">₨{{ number_format($order->total_amount, 2) }}</span>
           </div>
         </div>
       </div>
@@ -100,7 +100,7 @@
       <div class="row g-4">
         <div class="col-md-6">
           <div class="account-card h-100">
-            <h6 style="font-size:0.75rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--ayur-green-dark);margin-bottom:14px;border-bottom:1px solid #eef2ec;padding-bottom:10px;">
+            <h6 style="font-size:0.75rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--dsh-navy);margin-bottom:14px;border-bottom:1px solid #eef2ec;padding-bottom:10px;">
               <i class="bi bi-geo-alt me-1 text-ayur-leaf"></i> Shipping Address
             </h6>
             @if($order->shipping_address)
@@ -119,7 +119,7 @@
         </div>
         <div class="col-md-6">
           <div class="account-card h-100">
-            <h6 style="font-size:0.75rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--ayur-green-dark);margin-bottom:14px;border-bottom:1px solid #eef2ec;padding-bottom:10px;">
+            <h6 style="font-size:0.75rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--dsh-navy);margin-bottom:14px;border-bottom:1px solid #eef2ec;padding-bottom:10px;">
               <i class="bi bi-credit-card me-1 text-ayur-leaf"></i> Payment Method
             </h6>
             @if($order->payments->count())
@@ -139,3 +139,4 @@
   </div>
 </div>
 @endsection
+

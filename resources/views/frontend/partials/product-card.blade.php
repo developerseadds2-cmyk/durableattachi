@@ -1,7 +1,7 @@
 <div class="product-card">
   <div class="product-card-img">
     <a href="{{ route('product.show', $product->slug) }}">
-      <img src="{{ $product->thumbnail_url }}" alt="{{ $product->name }}" loading="lazy">
+      <img src="{{ $product->thumbnail_url }}" alt="{{ $product->name }}" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?w=700&q=80&fit=crop';">
     </a>
 
     <!-- Badges -->

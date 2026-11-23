@@ -1,5 +1,5 @@
-@extends('frontend.layouts.app')
-@section('title', $q ? 'Search: '.$q.' — Ayur Naman' : 'Search — Ayur Naman')
+﻿@extends('frontend.layouts.app')
+@section('title', $q ? 'Search: '.$q.' — Durable Suitcase House' : 'Search — Durable Suitcase House')
 
 @push('styles')
 <style>
@@ -21,7 +21,7 @@
   font-size: 0.95rem;
 }
 .search-input-custom:focus {
-  border-color: var(--ayur-green);
+  border-color: var(--dsh-navy-light);
   box-shadow: 0 0 0 3px rgba(45, 90, 39, 0.12);
 }
 .search-grid {
@@ -116,9 +116,9 @@
   @else
     <div class="text-center py-5">
       <div style="width:72px;height:72px;background:var(--pd-ice);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
-        <i class="bi bi-search" style="font-size:2rem;color:var(--ayur-green);"></i>
+        <i class="bi bi-search" style="font-size:2rem;color:var(--dsh-navy-light);"></i>
       </div>
-      <h5 style="font-family:var(--font-serif);font-size:1.35rem;color:var(--ayur-green-dark);margin-bottom:8px;">
+      <h5 style="font-family:var(--font-serif);font-size:1.35rem;color:var(--dsh-navy);margin-bottom:8px;">
         {{ $q ? 'No products found for "'.e($q).'"' : 'What are you looking for?' }}
       </h5>
       <p class="text-muted small mb-4">
@@ -131,3 +131,5 @@
   @endif
 </div>
 @endsection
+
+

@@ -1,5 +1,5 @@
-@extends('frontend.layouts.app')
-@section('title', $product->name . ' — Ayur Naman')
+﻿@extends('frontend.layouts.app')
+@section('title', $product->name . ' — Durable Suitcase House Since 1960')
 @section('meta_description', $product->meta_description ?? $product->short_description)
 
 @push('styles')
@@ -31,7 +31,7 @@
   transition: all 0.2s ease; 
 }
 .thumb-item.active, .thumb-item:hover { 
-  border-color: var(--ayur-green-dark, #163624); 
+  border-color: var(--dsh-navy, #163624); 
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
@@ -43,7 +43,7 @@
   color: var(--dark); 
   line-height: 1.25; 
 }
-.product-price { font-size: 1.75rem; font-weight: 700; color: var(--ayur-green-dark, #163624); }
+.product-price { font-size: 1.75rem; font-weight: 700; color: var(--dsh-navy, #163624); }
 .product-price-old { font-size: 1.05rem; color: var(--text-muted); text-decoration: line-through; }
 .product-badge-save { 
   background: #c2410c; 
@@ -86,7 +86,7 @@
   color: var(--dark);
   transition: all 0.2s; 
 }
-.qty-btn:hover { background: var(--ayur-green-dark, #163624); color: #fff; }
+.qty-btn:hover { background: var(--dsh-navy, #163624); color: #fff; }
 .attr-option { display: none; }
 .attr-label {
   padding: 8px 16px;
@@ -99,8 +99,8 @@
   background: #fff;
 }
 .attr-option:checked + .attr-label { 
-  border-color: var(--ayur-green-dark, #163624); 
-  background: var(--ayur-green-dark, #163624); 
+  border-color: var(--dsh-navy, #163624); 
+  background: var(--dsh-navy, #163624); 
   color: #fff; 
 }
 .product-meta-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; font-size: 0.9rem; }
@@ -209,7 +209,7 @@
   .product-mobile-bar .price-now {
     font-size: 1.15rem;
     font-weight: 800;
-    color: var(--ayur-green-dark, #163624);
+    color: var(--dsh-navy, #163624);
     line-height: 1.1;
   }
   .product-mobile-bar .price-sub {
@@ -217,7 +217,7 @@
     color: var(--text-muted);
   }
   .product-mobile-bar .btn-mobile-buy {
-    background: var(--ayur-green-dark, #163624);
+    background: var(--dsh-navy, #163624);
     color: #fff;
     font-weight: 700;
     font-size: 0.88rem;
@@ -392,7 +392,7 @@
       <div class="guarantee-box mt-4 pt-3 border-top">
         @foreach(['bi-shield-check' => 'Certified Genuine', 'bi-truck' => 'Free Shipping', 'bi-arrow-repeat' => '30-Day Returns', 'bi-lock' => 'Secure Payment'] as $icon => $text)
         <div class="guarantee-item">
-          <i class="bi {{ $icon }}" style="font-size:1.35rem; color:var(--ayur-green-dark, #163624);"></i>
+          <i class="bi {{ $icon }}" style="font-size:1.35rem; color:var(--dsh-navy, #163624);"></i>
           <span style="font-size:0.75rem; font-weight:600; line-height:1.2;">{{ $text }}</span>
         </div>
         @endforeach
@@ -404,7 +404,7 @@
   <div class="mt-5 pt-3">
     <ul class="nav border-bottom mb-4 d-flex" id="productTabs">
       <li class="nav-item">
-        <button class="nav-link active px-0 me-4 fw-600" style="background:none;border:none;border-bottom:2px solid var(--ayur-green-dark, #163624);color:var(--dark);padding-bottom:12px;font-size:0.95rem;" data-tab="description">Description</button>
+        <button class="nav-link active px-0 me-4 fw-600" style="background:none;border:none;border-bottom:2px solid var(--dsh-navy, #163624);color:var(--dark);padding-bottom:12px;font-size:0.95rem;" data-tab="description">Description</button>
       </li>
       <li class="nav-item">
         <button class="nav-link px-0 me-4 text-muted" style="background:none;border:none;padding-bottom:12px;font-size:0.95rem;" data-tab="reviews">
@@ -581,3 +581,4 @@ document.querySelectorAll('[data-tab]').forEach(btn => {
 });
 </script>
 @endpush
+

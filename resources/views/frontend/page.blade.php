@@ -1,5 +1,5 @@
-@extends('frontend.layouts.app')
-@section('title', $page->meta_title ?? $page->title . ' — Ayur Naman')
+﻿@extends('frontend.layouts.app')
+@section('title', $page->meta_title ?? $page->title . ' — Durable Suitcase House')
 @section('meta_description', $page->meta_description ?? '')
 
 @section('content')
@@ -7,7 +7,7 @@
 <!-- Page Header -->
 <div style="background:var(--pd-ice);padding:60px 0 40px;text-align:center;">
   <div class="container-xl-custom">
-    <span class="section-label">Ayur Naman</span>
+    <span class="section-label">Durable Suitcase House</span>
     <h1 style="font-family:var(--font-serif);font-size:2.8rem;font-weight:400;color:var(--dark);margin-bottom:0;">{{ $page->title }}</h1>
   </div>
 </div>
@@ -39,3 +39,4 @@
 </style>
 @endpush
 @endsection
+

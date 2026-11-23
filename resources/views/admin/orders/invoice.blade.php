@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Invoice #{{ $order->order_number }} — Ayur Naman</title>
+<title>Invoice #{{ $order->order_number }} — Durable Suitcase House</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'Segoe UI', sans-serif; font-size: 13px; color: #333; padding: 40px; }
@@ -31,7 +31,7 @@
 
 <div class="invoice-header">
   <div>
-    <div class="brand">Ayur Naman</div>
+    <div class="brand">Durable Suitcase House</div>
     <div style="font-size:0.8rem;color:#666;margin-top:4px;">{{ \App\Models\Setting::get('site_address') }}</div>
     <div style="font-size:0.8rem;color:#666;">{{ \App\Models\Setting::get('site_email') }} | {{ \App\Models\Setting::get('site_phone') }}</div>
   </div>
@@ -119,8 +119,9 @@
 @endif
 
 <div class="footer-note">
-  <p>Thank you for shopping with Ayur Naman!</p>
+  <p>Thank you for shopping with Durable Suitcase House!</p>
   <p>For questions, contact us at {{ \App\Models\Setting::get('site_email') }}</p>
 </div>
 </body>
 </html>
+

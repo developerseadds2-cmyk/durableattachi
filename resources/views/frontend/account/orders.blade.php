@@ -1,10 +1,10 @@
-@extends('frontend.layouts.app')
-@section('title', 'My Orders — Ayur Naman')
+﻿@extends('frontend.layouts.app')
+@section('title', 'My Orders — Durable Suitcase House')
 
 @section('content')
 <div class="account-hero">
   <div class="container-xl-custom">
-    <h4 style="font-family:var(--font-serif);font-weight:500;color:var(--ayur-green-dark);margin:0;">My Orders</h4>
+    <h4 style="font-family:var(--font-serif);font-weight:500;color:var(--dsh-navy);margin:0;">My Orders</h4>
   </div>
 </div>
 
@@ -76,3 +76,5 @@
   </div>
 </div>
 @endsection
+
+

@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Login — Ayur Naman</title>
+<title>Admin Login — Durable Suitcase House</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
 <style>
@@ -24,7 +24,7 @@
       <div class="login-card mx-auto animate__animated animate__fadeInUp">
         <div class="text-center mb-4">
           <div class="login-logo">G</div>
-          <h4 class="fw-800 mb-1" style="color:#1a1a2e;">Ayur Naman Admin</h4>
+          <h4 class="fw-800 mb-1" style="color:#1a1a2e;">Durable Suitcase House Admin</h4>
           <p class="text-muted small mb-0">Sign in to manage your store</p>
         </div>
 
@@ -95,3 +95,4 @@ function togglePwd() {
 </script>
 </body>
 </html>
+

@@ -1,5 +1,5 @@
-@extends('frontend.layouts.app')
-@section('title', 'Shopping Cart — Ayur Naman')
+﻿@extends('frontend.layouts.app')
+@section('title', 'Shopping Cart — Durable Suitcase House')
 
 @push('styles')
 <style>
@@ -41,13 +41,13 @@
   font-family: var(--font-serif);
   font-size: 1.05rem;
   font-weight: 600;
-  color: var(--ayur-green-dark);
+  color: var(--dsh-navy);
   text-decoration: none;
   line-height: 1.3;
   display: block;
 }
 .cart-item-name:hover {
-  color: var(--ayur-green);
+  color: var(--dsh-navy-light);
 }
 .cart-qty-box {
   display: inline-flex;
@@ -119,7 +119,7 @@
   font-family: var(--font-serif);
   font-size: 1rem;
   font-weight: 600;
-  color: var(--ayur-green-dark);
+  color: var(--dsh-navy);
   text-decoration: none;
   display: block;
   line-height: 1.3;
@@ -131,7 +131,7 @@
 .cart-mobile-price {
   font-size: 0.95rem;
   font-weight: 700;
-  color: var(--ayur-green);
+  color: var(--dsh-navy-light);
   margin-bottom: 8px;
 }
 .cart-mobile-bottom {
@@ -193,7 +193,7 @@
   .cart-mobile-sticky-total .amount {
     font-size: 1.15rem;
     font-weight: 700;
-    color: var(--ayur-green-dark);
+    color: var(--dsh-navy);
   }
   .cart-mobile-sticky-btn {
     flex: 1;
@@ -237,10 +237,10 @@
 @section('content')
 <div class="cart-hero">
   <div class="container-xl-custom">
-    <h1 style="font-family:var(--font-serif); font-size:2rem; font-weight:500; color:var(--ayur-green-dark);">Shopping Cart</h1>
+    <h1 style="font-family:var(--font-serif); font-size:2rem; font-weight:500; color:var(--dsh-navy);">Shopping Cart</h1>
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb small text-muted mb-0" style="background:none;padding:0;">
-        <li class="breadcrumb-item"><a href="{{ route('home') }}" style="color:var(--ayur-green);">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('home') }}" style="color:var(--dsh-navy-light);">Home</a></li>
         <li class="breadcrumb-item active">Cart</li>
       </ol>
     </nav>
@@ -251,7 +251,7 @@
   @if(empty($cart))
     <div class="text-center py-5">
       <i class="bi bi-bag" style="font-size:4rem;color:var(--border);display:block;margin-bottom:20px;"></i>
-      <h4 style="font-family:var(--font-serif); color:var(--ayur-green-dark);">Your cart is empty</h4>
+      <h4 style="font-family:var(--font-serif); color:var(--dsh-navy);">Your cart is empty</h4>
       <p class="text-muted">Explore authentic Ayurvedic wellness and herbal remedies</p>
       <a href="{{ route('shop.index') }}" class="btn-glamora" style="padding:14px 36px;">Continue Shopping</a>
     </div>
@@ -296,7 +296,7 @@
                     <button class="cart-qty-btn" onclick="updateCartQty('{{ $rowId }}', {{ $item['quantity'] + 1 }})" aria-label="Increase">+</button>
                   </div>
                 </td>
-                <td id="total-{{ $rowId }}" class="fw-700" style="color:var(--ayur-green-dark);">₨{{ number_format($item['price'] * $item['quantity'], 2) }}</td>
+                <td id="total-{{ $rowId }}" class="fw-700" style="color:var(--dsh-navy);">₨{{ number_format($item['price'] * $item['quantity'], 2) }}</td>
                 <td class="text-end">
                   <button class="cart-remove-btn" onclick="removeFromCart('{{ $rowId }}')" title="Remove item">
                     <i class="bi bi-trash3"></i>
@@ -336,7 +336,7 @@
               </div>
               <div class="text-end">
                 <span class="small text-muted d-block" style="font-size:0.7rem; letter-spacing:1px; text-transform:uppercase;">Item Total</span>
-                <span id="mobile-total-{{ $rowId }}" class="fw-700" style="color:var(--ayur-green-dark); font-size:1.05rem;">
+                <span id="mobile-total-{{ $rowId }}" class="fw-700" style="color:var(--dsh-navy); font-size:1.05rem;">
                   ₨{{ number_format($item['price'] * $item['quantity'], 2) }}
                 </span>
               </div>
@@ -355,14 +355,14 @@
       <!-- Order Summary -->
       <div class="col-lg-4">
         <div class="cart-summary-card">
-          <h5 style="font-family:var(--font-serif); font-size:1.25rem; font-weight:600; color:var(--ayur-green-dark); margin-bottom:20px;">Order Summary</h5>
+          <h5 style="font-family:var(--font-serif); font-size:1.25rem; font-weight:600; color:var(--dsh-navy); margin-bottom:20px;">Order Summary</h5>
 
           <!-- Coupon -->
           <div class="mb-4">
             <label style="font-size:0.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);" class="d-block mb-2">Coupon Code</label>
             <div class="d-flex">
               <input type="text" id="couponCode" placeholder="Enter coupon code" style="flex:1;border:1px solid var(--border);border-radius:4px 0 0 4px;padding:10px 14px;font-size:0.85rem;outline:none;background:#fff;">
-              <button onclick="applyCoupon()" style="background:var(--ayur-green-dark);color:#fff;border:none;border-radius:0 4px 4px 0;padding:10px 16px;font-size:0.78rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;">Apply</button>
+              <button onclick="applyCoupon()" style="background:var(--dsh-navy);color:#fff;border:none;border-radius:0 4px 4px 0;padding:10px 16px;font-size:0.78rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;">Apply</button>
             </div>
             @if($coupon)
               <div class="mt-2 d-flex justify-content-between align-items-center">
@@ -387,7 +387,7 @@
               <span class="text-muted">Shipping</span>
               <span class="text-muted">Calculated at checkout</span>
             </div>
-            <div class="d-flex justify-content-between fw-bold border-top pt-3 mt-2" style="font-size:1.1rem; color:var(--ayur-green-dark);">
+            <div class="d-flex justify-content-between fw-bold border-top pt-3 mt-2" style="font-size:1.1rem; color:var(--dsh-navy);">
               <span>Estimated Total</span>
               <span id="summaryTotal">₨{{ number_format($subtotal - $discount, 2) }}</span>
             </div>
@@ -515,3 +515,5 @@ function removeCoupon() {
 }
 </script>
 @endpush
+
+

@@ -1,5 +1,5 @@
-@extends('frontend.layouts.app')
-@section('title', 'Shop — Ayur Naman')
+﻿@extends('frontend.layouts.app')
+@section('title', 'Shop — Durable Suitcase House')
 
 @push('styles')
 <style>
@@ -33,7 +33,7 @@
   font-weight: 700;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: var(--ayur-green-dark);
+  color: var(--dsh-navy);
   margin-bottom: 12px;
   cursor: pointer;
   display: flex;
@@ -69,11 +69,11 @@
   transition: color 0.15s;
 }
 .filter-list label:hover {
-  color: var(--ayur-green);
+  color: var(--dsh-navy-light);
 }
 .filter-list input[type="radio"],
 .filter-list input[type="checkbox"] {
-  accent-color: var(--ayur-green);
+  accent-color: var(--dsh-navy-light);
   cursor: pointer;
   width: 16px;
   height: 16px;
@@ -92,7 +92,7 @@
   outline: none;
 }
 .price-input:focus {
-  border-color: var(--ayur-green);
+  border-color: var(--dsh-navy-light);
 }
 
 /* Shop Products Grid */
@@ -125,7 +125,7 @@
   color: var(--text);
 }
 .sort-bar select:focus {
-  border-color: var(--ayur-green);
+  border-color: var(--dsh-navy-light);
 }
 
 /* Mobile Filter Drawer / Offcanvas */
@@ -247,7 +247,7 @@
                 + (request('featured') ? 1 : 0);
             @endphp
             @if($activeFiltersCount > 0)
-              <span class="badge" style="background:var(--ayur-green);color:#fff;border-radius:50%;font-size:0.65rem;padding:2px 6px;">{{ $activeFiltersCount }}</span>
+              <span class="badge" style="background:var(--dsh-navy-light);color:#fff;border-radius:50%;font-size:0.65rem;padding:2px 6px;">{{ $activeFiltersCount }}</span>
             @endif
           </button>
 
@@ -273,31 +273,31 @@
         <div class="d-flex flex-wrap align-items-center gap-2 mb-3 pb-2">
           <span class="small text-muted fw-semibold me-1">Active:</span>
           @if(request('category'))
-            <span class="badge" style="background:#eef4ec;color:var(--ayur-green-dark);font-size:0.75rem;padding:6px 10px;border-radius:20px;font-weight:500;">
+            <span class="badge" style="background:#eef4ec;color:var(--dsh-navy);font-size:0.75rem;padding:6px 10px;border-radius:20px;font-weight:500;">
               {{ ucfirst(request('category')) }}
               <a href="{{ request()->fullUrlWithQuery(['category' => null]) }}" class="ms-1 text-muted">&times;</a>
             </span>
           @endif
           @if(request('min_price') || request('max_price'))
-            <span class="badge" style="background:#eef4ec;color:var(--ayur-green-dark);font-size:0.75rem;padding:6px 10px;border-radius:20px;font-weight:500;">
+            <span class="badge" style="background:#eef4ec;color:var(--dsh-navy);font-size:0.75rem;padding:6px 10px;border-radius:20px;font-weight:500;">
               ₨{{ request('min_price', 0) }} - ₨{{ request('max_price', '∞') }}
               <a href="{{ request()->fullUrlWithQuery(['min_price' => null, 'max_price' => null]) }}" class="ms-1 text-muted">&times;</a>
             </span>
           @endif
           @if(request('best_seller'))
-            <span class="badge" style="background:#eef4ec;color:var(--ayur-green-dark);font-size:0.75rem;padding:6px 10px;border-radius:20px;font-weight:500;">
+            <span class="badge" style="background:#eef4ec;color:var(--dsh-navy);font-size:0.75rem;padding:6px 10px;border-radius:20px;font-weight:500;">
               Best Sellers
               <a href="{{ request()->fullUrlWithQuery(['best_seller' => null]) }}" class="ms-1 text-muted">&times;</a>
             </span>
           @endif
           @if(request('new_arrival'))
-            <span class="badge" style="background:#eef4ec;color:var(--ayur-green-dark);font-size:0.75rem;padding:6px 10px;border-radius:20px;font-weight:500;">
+            <span class="badge" style="background:#eef4ec;color:var(--dsh-navy);font-size:0.75rem;padding:6px 10px;border-radius:20px;font-weight:500;">
               New Arrivals
               <a href="{{ request()->fullUrlWithQuery(['new_arrival' => null]) }}" class="ms-1 text-muted">&times;</a>
             </span>
           @endif
           @if(request('featured'))
-            <span class="badge" style="background:#eef4ec;color:var(--ayur-green-dark);font-size:0.75rem;padding:6px 10px;border-radius:20px;font-weight:500;">
+            <span class="badge" style="background:#eef4ec;color:var(--dsh-navy);font-size:0.75rem;padding:6px 10px;border-radius:20px;font-weight:500;">
               Featured
               <a href="{{ request()->fullUrlWithQuery(['featured' => null]) }}" class="ms-1 text-muted">&times;</a>
             </span>
@@ -321,9 +321,9 @@
       @else
         <div class="text-center py-5">
           <div style="width:72px;height:72px;background:var(--pd-ice);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
-            <i class="bi bi-funnel" style="font-size:2rem;color:var(--ayur-green);"></i>
+            <i class="bi bi-funnel" style="font-size:2rem;color:var(--dsh-navy-light);"></i>
           </div>
-          <h5 style="font-family:var(--font-serif);font-size:1.3rem;color:var(--ayur-green-dark);margin-bottom:8px;">No Products Found</h5>
+          <h5 style="font-family:var(--font-serif);font-size:1.3rem;color:var(--dsh-navy);margin-bottom:8px;">No Products Found</h5>
           <p class="text-muted small mb-4">Try relaxing or clearing your filter criteria.</p>
           <a href="{{ route('shop.index') }}" class="btn-glamora" style="padding:11px 28px;border-radius:6px;">
             <i class="bi bi-arrow-repeat me-1"></i> Reset Filters
@@ -341,7 +341,7 @@
   <div class="mobile-filter-header">
     <div class="d-flex align-items-center gap-2">
       <i class="bi bi-sliders text-ayur-leaf"></i>
-      <h6 class="mb-0 fw-bold" style="font-family:var(--font-serif);font-size:1.15rem;color:var(--ayur-green-dark);">Filter Products</h6>
+      <h6 class="mb-0 fw-bold" style="font-family:var(--font-serif);font-size:1.15rem;color:var(--dsh-navy);">Filter Products</h6>
     </div>
     <button type="button" class="btn-close" onclick="closeFilterDrawer()" aria-label="Close"></button>
   </div>
@@ -399,3 +399,5 @@ function applySort(sortVal) {
 }
 </script>
 @endpush
+
+

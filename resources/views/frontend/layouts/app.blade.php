@@ -1,18 +1,18 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="csrf-token" content="{{ csrf_token() }}">
-<title>@yield('title', \App\Models\Setting::get('meta_title', 'Ayur Naman — Premium Jewelry'))</title>
-<meta name="description" content="@yield('meta_description', \App\Models\Setting::get('meta_description', 'Shop the finest jewelry collection'))">
+<title>@yield('title', \App\Models\Setting::get('meta_title', 'Durable Suitcase House — Luggage & Travel Store Since 1960'))</title>
+<meta name="description" content="@yield('meta_description', \App\Models\Setting::get('meta_description', 'Your trusted destination for bags, luggage & travel essentials since 1960.'))">
 
-<link rel="icon" href="{{ asset('uploads/favicon.png') }}" type="image/png">
+<link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png">
 
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,700&family=Jost:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&display=swap" rel="stylesheet">
 
 <!-- Bootstrap 5 -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -25,57 +25,73 @@
 
 <style>
 /* ============================================
-   Ayur Naman - Global Styles
+   DURABLE SUITCASE HOUSE - Option 1: Classic Heritage
+   Navy Blue: #142D4E | Cream: #F7F3E8 | Gold: #C59A55 | Charcoal: #333333 | Taupe: #B9A391
    ============================================ */
 :root {
-  /* ── Ayurnaman Ayurvedic Wellness Color Palette ── */
-  --ayur-green-dark:   #1B382B;   /* Deep Forest/Herbal Green – Headers, Topbar, Footer, Primary buttons */
-  --ayur-green:        #2E5A44;   /* Herbal Green – Hover states, badges */
-  --ayur-green-light:  #3D7357;   /* Sage Leaf Green – Accents & borders */
-  --ayur-green-subtle: #EAF2EC;   /* Pale Mint Green – Badges, active tab backgrounds */
-  
-  --ayur-cream:        #ECEABD;   /* Warm Herbal Cream/Sand Background */
-  --ayur-cream-light:  #F4F2D4;   /* Soft Sand / Card hover background */
-  --ayur-cream-dark:   #DCD9A6;   /* Borders, Dividers, Card subtle borders */
-  
-  --ayur-gold:         #D49B45;   /* Warm Ayurvedic Ochre/Saffron/Gold – Badges, highlights, stars */
-  --ayur-gold-dark:    #B87D28;   /* Deep Ochre/Gold hover */
-  --ayur-gold-light:   #F9EED9;   /* Pale Gold / Highlight background */
-  
-  --ayur-charcoal:     #1E2220;   /* Deep Charcoal/Slate – Main Headings & Body text */
-  --ayur-text-muted:   #5D6B64;   /* Muted Botanical Slate – Subheadings & secondary labels */
-  --ayur-white:        #FFFFFF;   /* Pure White */
+  /* Option 1 Brand Colors */
+  --dsh-navy:          #142D4E;   /* Navy Blue – Timeless, trustworthy & premium */
+  --dsh-navy-dark:     #0F2137;   /* Deep Navy for headers, footers & hero buttons */
+  --dsh-navy-light:    #1F4068;   /* Medium Navy for links & subtle states */
+  --dsh-navy-subtle:   #E9EFF6;   /* Ice Navy Background for badges & active tabs */
 
-  /* ── Legacy Aliases mapped to Ayurnaman colors ── */
-  --pd-blue:           var(--ayur-green-dark);
-  --pd-ocean:          var(--ayur-green);
-  --pd-sapphire:       var(--ayur-green-light);
-  --pd-aqua:           var(--ayur-gold);
-  --pd-ice:            var(--ayur-cream);
-  --pd-navy:           var(--ayur-green-dark);
-  --pd-slate:          var(--ayur-text-muted);
-  --pd-silver:         var(--ayur-cream-dark);
+  --dsh-cream:         #F7F3E8;   /* Warm Heritage Cream background */
+  --dsh-cream-light:   #FCFBF7;   /* Soft Sand / Card background */
+  --dsh-cream-dark:    #E5DEC9;   /* Subtle borders, card outlines */
+
+  --dsh-gold:          #C59A55;   /* Warm Heritage Gold – Accents, stars, highlight badges */
+  --dsh-gold-dark:     #A97E3B;   /* Deep Gold hover */
+  --dsh-gold-light:    #FBF6ED;   /* Pale Gold / highlight background */
+
+  --dsh-charcoal:      #333333;   /* Charcoal – Body text & prominent headings */
+  --dsh-taupe:         #B9A391;   /* Taupe – Warm muted neutral */
+  --dsh-text-muted:    #666666;   /* Muted secondary labels */
+  --dsh-white:         #FFFFFF;   /* Pure White */
+
+  /* Aliases for consistency across application */
+  --dsh-navy:   var(--dsh-navy);
+  --dsh-navy-light:        var(--dsh-navy-light);
+  --dsh-gold:  var(--dsh-gold);
+  --dsh-navy-subtle: var(--dsh-navy-subtle);
+  --dsh-cream:        var(--dsh-cream);
+  --dsh-cream-light:  var(--dsh-cream-light);
+  --dsh-cream-dark:   var(--dsh-cream-dark);
+  --dsh-gold:         var(--dsh-gold);
+  --dsh-gold-dark:    var(--dsh-gold-dark);
+  --dsh-gold-light:   var(--dsh-gold-light);
+  --dsh-charcoal:     var(--dsh-charcoal);
+  --dsh-text-muted:   var(--dsh-text-muted);
+  --dsh-white:        var(--dsh-white);
+
+  --pd-blue:           var(--dsh-navy);
+  --pd-ocean:          var(--dsh-navy-light);
+  --pd-sapphire:       var(--dsh-gold);
+  --pd-aqua:           var(--dsh-gold);
+  --pd-ice:            var(--dsh-cream);
+  --pd-navy:           var(--dsh-navy-dark);
+  --pd-slate:          var(--dsh-text-muted);
+  --pd-silver:         var(--dsh-cream-dark);
   --pd-white:          #FFFFFF;
 
-  /* ── Gradients ── */
-  --pd-grad-dark:      linear-gradient(135deg, #1B382B 0%, #2E5A44 100%);
-  --pd-grad-ocean:     linear-gradient(135deg, #1B382B 0%, #3D7357 100%);
-  --pd-grad-sky:       linear-gradient(135deg, #2E5A44 0%, #D49B45 100%);
-  --pd-grad-full:      linear-gradient(90deg, #1B382B 0%, #2E5A44 40%, #3D7357 70%, #D49B45 100%);
+  /* Gradients */
+  --pd-grad-dark:      linear-gradient(135deg, #142D4E 0%, #1F4068 100%);
+  --pd-grad-ocean:     linear-gradient(135deg, #142D4E 0%, #C59A55 100%);
+  --pd-grad-sky:       linear-gradient(135deg, #1F4068 0%, #C59A55 100%);
+  --pd-grad-full:      linear-gradient(90deg, #142D4E 0%, #1F4068 40%, #C59A55 75%, #B9A391 100%);
 
-  /* ── Global Theme Variables ── */
-  --gold:              var(--ayur-gold);
-  --gold-dark:         var(--ayur-gold-dark);
-  --gold-light:        var(--ayur-gold-light);
-  --cream:             var(--ayur-cream);
-  --cream-dark:        var(--ayur-cream-dark);
-  --dark:              var(--ayur-charcoal);
-  --text:              var(--ayur-charcoal);
-  --text-muted:        var(--ayur-text-muted);
-  --border:            var(--ayur-cream-dark);
+  /* Global Theme Variables */
+  --gold:              var(--dsh-gold);
+  --gold-dark:         var(--dsh-gold-dark);
+  --gold-light:        var(--dsh-gold-light);
+  --cream:             var(--dsh-cream);
+  --cream-dark:        var(--dsh-cream-dark);
+  --dark:              var(--dsh-charcoal);
+  --text:              var(--dsh-charcoal);
+  --text-muted:        var(--dsh-text-muted);
+  --border:            var(--dsh-cream-dark);
 
-  --font-serif: 'Cormorant Garamond', serif;
-  --font-sans:  'Jost', sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans:  'Plus Jakarta Sans', system-ui, sans-serif;
 }
 
 html, body {
@@ -314,7 +330,7 @@ img { max-width: 100%; }
 .search-result-price {
   font-size: 0.84rem;
   font-weight: 700;
-  color: var(--ayur-green-dark);
+  color: var(--dsh-navy);
 }
 .search-result-footer {
   padding: 10px 14px;
@@ -325,7 +341,7 @@ img { max-width: 100%; }
 .search-result-footer a {
   font-size: 0.78rem;
   font-weight: 600;
-  color: var(--ayur-green-dark);
+  color: var(--dsh-navy);
 }
 
 /* Mobile search */
@@ -384,7 +400,7 @@ img { max-width: 100%; }
 .mobile-header-btn:hover,
 .mobile-header-btn.active {
   background: var(--pd-ice);
-  color: var(--ayur-green-dark);
+  color: var(--dsh-navy);
 }
 
 /* Icons with label */
@@ -744,7 +760,7 @@ img { max-width: 100%; }
 .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding: 22px 0; margin-top: 48px; }
 .footer-bottom-text { font-size: 0.78rem; color: rgba(255,255,255,0.5); }
 .footer-dev-link { color: rgba(255,255,255,0.65); text-decoration: none; font-weight: 600; transition: color 0.2s; }
-.footer-dev-link:hover { color: var(--ayur-gold); text-decoration: underline; }
+.footer-dev-link:hover { color: var(--dsh-gold); text-decoration: underline; }
 @media (max-width: 768px) {
   .footer-bottom {
     margin-top: 32px;
@@ -968,7 +984,7 @@ img { max-width: 100%; }
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--ayur-green-dark, #1b382b);
+    background: var(--dsh-navy, #1b382b);
     color: #fff;
     border: none;
   }
@@ -1015,9 +1031,9 @@ img { max-width: 100%; }
   border-radius: 4px;
 }
 .account-nav-link:hover, .account-nav-link.active {
-  color: var(--ayur-green-dark);
+  color: var(--dsh-navy);
   background: #fff;
-  border-left: 2px solid var(--ayur-green);
+  border-left: 2px solid var(--dsh-navy-light);
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
 .account-card {
@@ -1036,7 +1052,7 @@ img { max-width: 100%; }
 }
 .account-stat-box:hover {
   transform: translateY(-3px);
-  border-color: var(--ayur-green);
+  border-color: var(--dsh-navy-light);
 }
 
 /* Mobile Clean Segmented Menu */
@@ -1084,7 +1100,7 @@ img { max-width: 100%; }
 .account-mobile-dropdown-item:hover,
 .account-mobile-dropdown-item.active {
   background: var(--pd-ice);
-  color: var(--ayur-green-dark);
+  color: var(--dsh-navy);
   font-weight: 600;
 }
 
@@ -1149,7 +1165,7 @@ img { max-width: 100%; }
     }
     .mobile-bottom-item.active,
     .mobile-bottom-item:hover {
-      color: var(--ayur-green-dark);
+      color: var(--dsh-navy);
       font-weight: 600;
     }
     .mobile-bottom-badge {
@@ -1157,7 +1173,7 @@ img { max-width: 100%; }
       top: 3px;
       right: 50%;
       margin-right: -18px;
-      background: var(--ayur-green);
+      background: var(--dsh-navy-light);
       color: #fff;
       font-size: 0.58rem;
       font-weight: 700;
@@ -1265,7 +1281,7 @@ img { max-width: 100%; }
     } elseif (file_exists(public_path('uploads/logo/logo.png'))) {
       $logoSrc = asset('uploads/logo/logo.png');
     }
-    $siteName = \App\Models\Setting::get('site_name', 'Ayur Naman');
+    $siteName = \App\Models\Setting::get('site_name', 'Durable Suitcase House');
   @endphp
   @if($logoSrc)
     <img src="{{ $logoSrc }}" alt="{{ $siteName }}" style="height:60px;width:auto;margin-bottom:24px;animation:preloaderFade 1s ease infinite alternate;object-fit:contain;">
@@ -1302,22 +1318,22 @@ img { max-width: 100%; }
 </div> -->
 
 <!-- Marquee / Top Announcement Strip -->
-<div class="marquee-strip" style="background:var(--ayur-green-dark);border-bottom:1px solid rgba(255,255,255,0.08);padding:8px 0;">
+<div class="marquee-strip" style="background:var(--dsh-navy-dark);border-bottom:1px solid rgba(255,255,255,0.08);padding:8px 0;">
   <div class="marquee-track">
     <div class="marquee-content">
-      <span><i class="bi bi-truck me-1"></i> Free Shipping on Orders Above Rs. {{ number_format(\App\Models\Setting::get('free_shipping_above', 499)) }}</span>
-      <span><i class="bi bi-patch-check-fill me-1 text-gold"></i> 100% Ayurvedic &amp; Herbal</span>
-      <span><i class="bi bi-tag-fill me-1"></i> Exclusive Online Offers</span>
-      <span><i class="bi bi-shield-fill-check me-1 text-gold"></i> Authentic Ayurvedic Formulations</span>
-      <span><i class="bi bi-flower1 me-1"></i> Pure Herbs &amp; Safe Wellness</span>
+      <span><i class="bi bi-award-fill me-1 text-gold"></i> A Legacy of Trust Since 1960</span>
+      <span><i class="bi bi-shield-check me-1 text-gold"></i> Authorized Dealer: American Tourister, Safari, VIP &amp; Samsonite</span>
+      <span><i class="bi bi-truck me-1"></i> Free Shipping on Orders Above ₹{{ number_format(\App\Models\Setting::get('free_shipping_above', 1999)) }}</span>
+      <span><i class="bi bi-stars me-1 text-gold"></i> Huge Range in Bridal &amp; Wedding Purse Collection</span>
+      <span><i class="bi bi-geo-alt-fill me-1"></i> Visit Us: Dharampura Bazar, Patiala</span>
     </div>
     <!-- Duplicate for seamless loop -->
     <div class="marquee-content" aria-hidden="true">
-      <span><i class="bi bi-truck me-1"></i> Free Shipping on Orders Above Rs. {{ number_format(\App\Models\Setting::get('free_shipping_above', 499)) }}</span>
-      <span><i class="bi bi-patch-check-fill me-1 text-gold"></i> 100% Ayurvedic &amp; Herbal</span>
-      <span><i class="bi bi-tag-fill me-1"></i> Exclusive Online Offers</span>
-      <span><i class="bi bi-shield-fill-check me-1 text-gold"></i> Authentic Ayurvedic Formulations</span>
-      <span><i class="bi bi-flower1 me-1"></i> Pure Herbs &amp; Safe Wellness</span>
+      <span><i class="bi bi-award-fill me-1 text-gold"></i> A Legacy of Trust Since 1960</span>
+      <span><i class="bi bi-shield-check me-1 text-gold"></i> Authorized Dealer: American Tourister, Safari, VIP &amp; Samsonite</span>
+      <span><i class="bi bi-truck me-1"></i> Free Shipping on Orders Above ₹{{ number_format(\App\Models\Setting::get('free_shipping_above', 1999)) }}</span>
+      <span><i class="bi bi-stars me-1 text-gold"></i> Huge Range in Bridal &amp; Wedding Purse Collection</span>
+      <span><i class="bi bi-geo-alt-fill me-1"></i> Visit Us: Dharampura Bazar, Patiala</span>
     </div>
   </div>
 </div>
@@ -1353,13 +1369,14 @@ img { max-width: 100%; }
           } elseif (file_exists(public_path('uploads/logo/logo.png'))) {
             $logoUrl = asset('uploads/logo/logo.png');
           }
-          $siteName = \App\Models\Setting::get('site_name', 'Ayur Naman');
+          $siteName = \App\Models\Setting::get('site_name', 'Durable Suitcase House');
         @endphp
         @if($logoUrl)
           <img src="{{ $logoUrl }}" alt="{{ $siteName }}" class="site-header-logo-img">
         @else
           <span class="site-logo-fallback">
-            <span class="logo-pacific" style="color:var(--ayur-green-dark);font-size:1.1rem;font-weight:700;">{{ $siteName }}</span>
+            <span class="logo-pacific" style="color:var(--dsh-navy);font-size:1.15rem;font-weight:800;letter-spacing:1px;">{{ $siteName }}</span>
+            <small style="font-size:0.65rem;color:var(--dsh-gold);letter-spacing:2px;text-transform:uppercase;font-weight:700;">Since 1960</small>
           </span>
         @endif
       </a>
@@ -1368,7 +1385,7 @@ img { max-width: 100%; }
       <div class="header-search-bar d-none d-lg-flex position-relative">
         <form action="{{ route('search') }}" method="GET" class="header-search-form" autocomplete="off">
           <i class="bi bi-search header-search-icon"></i>
-          <input type="text" name="q" placeholder="Search Ayurvedic wellness, herbal skincare..." class="header-search-input live-search-input" id="desktopSearchInput" data-target="desktopSearchResults">
+          <input type="text" name="q" placeholder="Search suitcases, trolley bags, school bags, handbags, bridal purses..." class="header-search-input live-search-input" id="desktopSearchInput" data-target="desktopSearchResults">
           <button type="button" class="header-search-btn mic-btn" title="Voice Search" onclick="startVoiceSearch('desktopSearchInput', this)">
             <i class="bi bi-mic"></i>
           </button>
@@ -1452,12 +1469,12 @@ img { max-width: 100%; }
           <div class="tanishq-megamenu" style="top: calc(var(--header-bottom, 110px))">
             {{-- Left Sidebar --}}
             <div class="mm-sidebar">
-              <a href="#" class="mm-sidebar-item active">Category</a>
-              <a href="#" class="mm-sidebar-item">Price</a>
-              <a href="#" class="mm-sidebar-item">Occasion</a>
-              <a href="#" class="mm-sidebar-item">Gender</a>
-              <a href="#" class="mm-sidebar-item">Metal</a>
-              <a href="#" class="mm-sidebar-item">Stone</a>
+              <a href="{{ route('shop.index') }}" class="mm-sidebar-item active">Category</a>
+              <a href="{{ route('shop.index') }}" class="mm-sidebar-item">Brands</a>
+              <a href="{{ route('shop.index') }}" class="mm-sidebar-item">Luggage</a>
+              <a href="{{ route('shop.index') }}" class="mm-sidebar-item">Handbags</a>
+              <a href="{{ route('shop.index') }}" class="mm-sidebar-item">School Bags</a>
+              <a href="{{ route('shop.index') }}" class="mm-sidebar-item">Bridal</a>
             </div>
 
             {{-- Center Grid --}}
@@ -1478,13 +1495,13 @@ img { max-width: 100%; }
               {{-- Promo Bar --}}
               <div class="mm-promo-bar">
                 <div class="mm-promo-imgs">
-                  <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=80&q=70&fit=crop" alt="">
-                  <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=80&q=70&fit=crop" alt="">
-                  <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=80&q=70&fit=crop" alt="">
+                  <img src="https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?w=80&q=70&fit=crop" alt="Luggage">
+                  <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=80&q=70&fit=crop" alt="Handbag">
+                  <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=80&q=70&fit=crop" alt="Backpack">
                 </div>
                 <div>
-                  <div class="mm-promo-bar-text">Jewellery for Every Moment — See It All Here!</div>
-                  <div class="mm-promo-bar-sub">14,000+ designs to choose from</div>
+                  <div class="mm-promo-bar-text">The Perfect Companions for Every Journey Since 1960!</div>
+                  <div class="mm-promo-bar-sub">American Tourister, Safari, VIP, Samsonite &amp; more</div>
                 </div>
                 <a href="{{ route('shop.index') }}" class="mm-promo-bar-btn">View All</a>
               </div>
@@ -1492,11 +1509,11 @@ img { max-width: 100%; }
 
             {{-- Right Image Panel --}}
             <div class="mm-image-panel">
-              <img src="https://dt-glamora.myshopify.com/cdn/shop/files/grid-banner-1.png?v=1689751925&width=1500" alt="Collection">
+              <img src="https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?w=700&q=80&fit=crop" alt="Durable Suitcase House">
               <div class="mm-image-panel-body">
-                <div class="mm-image-panel-label">Featured</div>
-                <div class="mm-image-panel-title">Discover Timeless Crafted Gold Jewellery.</div>
-                <a href="{{ route('shop.index') }}" class="mm-image-panel-link">Explore Now →</a>
+                <div class="mm-image-panel-label">Authorized Dealer</div>
+                <div class="mm-image-panel-title">Explore Unbreakable Luggage &amp; Bags.</div>
+                <a href="{{ route('shop.index') }}" class="mm-image-panel-link">Shop Collection →</a>
               </div>
             </div>
           </div>
@@ -1560,7 +1577,7 @@ img { max-width: 100%; }
       @if(!empty($logoUrl))
         <img src="{{ $logoUrl }}" alt="{{ $siteName }}" style="height:40px;width:auto;object-fit:contain;">
       @else
-        <span style="color:var(--ayur-green-dark);font-weight:700;font-size:1.1rem;">{{ $siteName }}</span>
+        <span style="color:var(--dsh-navy);font-weight:700;font-size:1.1rem;">{{ $siteName }}</span>
       @endif
     </a>
     <button onclick="closeMobileMenu()" style="background:none;border:none;font-size:1.6rem;color:var(--text);line-height:1;">&times;</button>
@@ -1676,13 +1693,16 @@ img { max-width: 100%; }
       <div class="col-lg-4 col-md-6">
         @if(!empty($logoUrl))
           <div class="mb-3">
-            <img src="{{ $logoUrl }}" alt="{{ $siteName }}" style="max-height:56px;max-width:200px;object-fit:contain;">
+            <img src="{{ $logoUrl }}" alt="{{ $siteName }}" style="max-height:64px;max-width:230px;object-fit:contain;background:#fff;padding:6px 12px;border-radius:6px;">
           </div>
         @else
           <div class="footer-brand">{{ $siteName }}</div>
         @endif
-        <p class="footer-desc">{{ \App\Models\Setting::get('site_description', 'Authentic Ayurvedic wellness, skincare and haircare crafted with pure, natural ingredients for a healthier, more radiant you.') }}</p>
+        <p class="footer-desc">{{ \App\Models\Setting::get('site_description', 'A Legacy of Trust. A Journey Since 1960. Your trusted destination for bags, luggage & travel essentials.') }}</p>
         <div class="social-links">
+          <a href="https://wa.me/919914469211" class="social-link" target="_blank" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+          <a href="tel:9914469211" class="social-link" title="Call Store"><i class="bi bi-telephone"></i></a>
+          <a href="mailto:durablesuitcasehouse@gmail.com" class="social-link" title="Email Us"><i class="bi bi-envelope"></i></a>
           @foreach(['facebook' => 'bi-facebook', 'instagram' => 'bi-instagram', 'twitter' => 'bi-twitter-x', 'youtube' => 'bi-youtube'] as $platform => $icon)
             @if($url = \App\Models\Setting::get("{$platform}_url"))
               <a href="{{ $url }}" class="social-link" target="_blank"><i class="bi {{ $icon }}"></i></a>
@@ -1693,14 +1713,14 @@ img { max-width: 100%; }
 
       <!-- Quick Links -->
       <div class="col-lg-2 col-md-3 col-6">
-        <h6 class="footer-heading">Quick Links</h6>
+        <h6 class="footer-heading">Categories</h6>
         <ul class="footer-links">
-          <li><a href="{{ route('shop.index') }}">Shop All</a></li>
-          <li><a href="{{ route('shop.index', ['new_arrival' => 1]) }}">New Arrivals</a></li>
-          <li><a href="{{ route('shop.index', ['featured' => 1]) }}">Featured</a></li>
-          <li><a href="{{ route('page.show', 'about') }}">About Us</a></li>
-          <li><a href="{{ route('blog.index') }}">Blog</a></li>
-          <li><a href="{{ route('contact.index') }}">Contact</a></li>
+          <li><a href="{{ route('shop.index', ['category' => 'luggage']) }}">Luggage &amp; Trolleys</a></li>
+          <li><a href="{{ route('shop.index', ['category' => 'ladies-handbags']) }}">Ladies Handbags</a></li>
+          <li><a href="{{ route('shop.index', ['category' => 'school-bags']) }}">School Bags</a></li>
+          <li><a href="{{ route('shop.index', ['category' => 'bridal-purse-collection']) }}">Bridal Purses</a></li>
+          <li><a href="{{ route('shop.index', ['category' => 'travel-accessories']) }}">Travel Accessories</a></li>
+          <li><a href="{{ route('page.show', 'about') }}">About Us (Since 1960)</a></li>
         </ul>
       </div>
 
@@ -1708,18 +1728,18 @@ img { max-width: 100%; }
       <div class="col-lg-2 col-md-3 col-6">
         <h6 class="footer-heading">Customer Care</h6>
         <ul class="footer-links">
-          <li><a href="{{ route('page.show', 'refund') }}">Returns & Refunds</a></li>
-          <li><a href="{{ route('page.show', 'terms') }}">Terms & Conditions</a></li>
+          <li><a href="{{ route('page.show', 'refund') }}">Warranty &amp; Refunds</a></li>
+          <li><a href="{{ route('page.show', 'terms') }}">Terms &amp; Conditions</a></li>
           <li><a href="{{ route('page.show', 'privacy') }}">Privacy Policy</a></li>
-          <li><a href="{{ route('contact.index') }}">Help Center</a></li>
+          <li><a href="{{ route('contact.index') }}">Store Location</a></li>
           <li><a href="{{ route('account.orders') }}">Track Order</a></li>
         </ul>
       </div>
 
       <!-- Newsletter -->
       <div class="col-lg-4 col-md-6">
-        <h6 class="footer-heading">Newsletter</h6>
-        <p class="small mb-3" style="color:rgba(255,255,255,0.7);">Subscribe for exclusive Ayurvedic wellness tips, new arrivals and special offers.</p>
+        <h6 class="footer-heading">Join Our Heritage Journey</h6>
+        <p class="small mb-3" style="color:rgba(255,255,255,0.7);">Subscribe for exclusive brand launches, seasonal luggage discounts, and travel guides.</p>
         <form action="{{ route('newsletter.subscribe') }}" method="POST">
           @csrf
           <div class="d-flex">
@@ -1728,11 +1748,12 @@ img { max-width: 100%; }
           </div>
         </form>
         <div class="mt-4">
-          <div class="footer-heading mb-2">Contact</div>
+          <div class="footer-heading mb-2">Store Details</div>
           <div class="small" style="color:rgba(255,255,255,0.7); line-height:1.8;">
-            <i class="bi bi-geo-alt me-1 text-gold"></i>{{ \App\Models\Setting::get('site_address', 'Fountain Chowk, College Road, Ludhiana - 141001') }}<br>
-            <i class="bi bi-telephone me-1 text-gold"></i>{{ \App\Models\Setting::get('site_phone', '+91 8556839980') }}<br>
-            <i class="bi bi-envelope me-1 text-gold"></i>{{ \App\Models\Setting::get('site_email', 'ayurnaman@gmail.com') }}
+            <i class="bi bi-geo-alt me-1 text-gold"></i>{{ \App\Models\Setting::get('site_address', 'Near Anardana Chowk, Dharampura Bazar, Patiala, Punjab - 147001') }}<br>
+            <i class="bi bi-telephone me-1 text-gold"></i>{{ \App\Models\Setting::get('site_phone', '9914469211') }} / {{ \App\Models\Setting::get('site_phone_alt', '9814041822') }}<br>
+            <i class="bi bi-whatsapp me-1 text-gold"></i>WhatsApp: {{ \App\Models\Setting::get('site_whatsapp', '9914469211') }}<br>
+            <i class="bi bi-envelope me-1 text-gold"></i>{{ \App\Models\Setting::get('site_email', 'durablesuitcasehouse@gmail.com') }}
           </div>
         </div>
       </div>
@@ -1744,7 +1765,7 @@ img { max-width: 100%; }
     <div class="container-xl-custom">
       <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
         <div class="footer-bottom-text text-center text-md-start">
-          <span>© {{ date('Y') }} Ayur Naman. All rights reserved.</span>
+          <span>© {{ date('Y') }} Durable Suitcase House. All rights reserved.</span>
           <span class="d-block d-sm-inline ms-sm-2 mt-1 mt-sm-0 text-white-50">
             Designed &amp; Developed by <a href="https://punjabit.co/" target="_blank" rel="noopener" class="footer-dev-link">punjabit</a>
           </span>
@@ -2251,3 +2272,5 @@ window.addEventListener('load', function () {
 @stack('scripts')
 </body>
 </html>
+
+

@@ -1,5 +1,5 @@
-@extends('frontend.layouts.app')
-@section('title', $post->meta_title ?? $post->title . ' — Ayur Naman')
+﻿@extends('frontend.layouts.app')
+@section('title', $post->meta_title ?? $post->title . ' — Durable Suitcase House')
 @section('meta_description', $post->meta_description ?? $post->excerpt)
 
 @section('content')
@@ -88,3 +88,4 @@
 </style>
 @endpush
 @endsection
+

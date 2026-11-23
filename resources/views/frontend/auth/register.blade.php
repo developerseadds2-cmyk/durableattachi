@@ -1,5 +1,5 @@
-@extends('frontend.layouts.app')
-@section('title', 'Register — Ayur Naman')
+﻿@extends('frontend.layouts.app')
+@section('title', 'Register — Durable Suitcase House')
 
 @section('content')
 <div style="background:var(--pd-ice);padding:60px 0;text-align:center;">
@@ -10,7 +10,7 @@
     <div class="col-md-5">
       <form method="POST" action="{{ route('register.post') }}" style="background:var(--pd-ice);padding:36px;">
         @csrf
-        <h5 style="font-family:var(--font-serif);font-size:1.3rem;margin-bottom:24px;text-align:center;">Join Ayur Naman</h5>
+        <h5 style="font-family:var(--font-serif);font-size:1.3rem;margin-bottom:24px;text-align:center;">Join Durable Suitcase House</h5>
         <div class="mb-3">
           <label class="small fw-600 d-block mb-1">Full Name *</label>
           <input type="text" name="name" class="form-control" style="border-radius:0;" value="{{ old('name') }}" required>
@@ -40,3 +40,4 @@
   </div>
 </div>
 @endsection
+

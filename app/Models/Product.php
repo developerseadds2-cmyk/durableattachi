@@ -94,24 +94,39 @@ class Product extends Model
     public function getThumbnailUrlAttribute(): string
     {
         if ($this->thumbnail) {
+            if (Str::startsWith($this->thumbnail, ['http://', 'https://'])) {
+                return $this->thumbnail;
+            }
+            if (file_exists(public_path('uploads/products/' . $this->thumbnail))) {
+                return asset('uploads/products/' . $this->thumbnail);
+            }
+            if (file_exists(public_path('images/products/' . $this->thumbnail))) {
+                return asset('images/products/' . $this->thumbnail);
+            }
             return asset('uploads/products/' . $this->thumbnail);
         }
+
         // First product image if available
-        if ($this->relationLoaded('images') && $this->images->isNotEmpty()) {
-            return asset('uploads/products/' . $this->images->first()->image);
+        $firstImage = $this->relationLoaded('images') ? $this->images->first() : $this->images()->first();
+        if ($firstImage && $firstImage->image) {
+            if (Str::startsWith($firstImage->image, ['http://', 'https://'])) {
+                return $firstImage->image;
+            }
+            if (file_exists(public_path('uploads/products/' . $firstImage->image))) {
+                return asset('uploads/products/' . $firstImage->image);
+            }
+            if (file_exists(public_path('images/products/' . $firstImage->image))) {
+                return asset('images/products/' . $firstImage->image);
+            }
+            return asset('uploads/products/' . $firstImage->image);
         }
-        return 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600&q=80&fit=crop';
+
+        return 'https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?w=700&q=80&fit=crop';
     }
 
     public function getPrimaryImageAttribute(): string
     {
-        if ($this->thumbnail) {
-            return asset('uploads/products/' . $this->thumbnail);
-        }
-        if ($this->relationLoaded('images') && $this->images->isNotEmpty()) {
-            return asset('uploads/products/' . $this->images->first()->image);
-        }
-        return 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600&q=80&fit=crop';
+        return $this->thumbnail_url;
     }
 
     public function getAverageRatingAttribute(): float

@@ -1,5 +1,5 @@
-@extends('frontend.layouts.app')
-@section('title', 'My Wishlist — Ayur Naman')
+﻿@extends('frontend.layouts.app')
+@section('title', 'My Wishlist — Durable Suitcase House')
 
 @section('content')
 <div class="account-hero">
@@ -19,7 +19,7 @@
     <div class="col-lg-9">
       <div class="account-card">
         <div class="d-flex align-items-center justify-content-between mb-4 pb-2" style="border-bottom:1px solid #eef2ec;">
-          <h5 style="font-family:var(--font-serif);font-size:1.2rem;margin-bottom:0;color:var(--ayur-green-dark);">
+          <h5 style="font-family:var(--font-serif);font-size:1.2rem;margin-bottom:0;color:var(--dsh-navy);">
             Saved Items <span id="wishlistSavedCount" class="text-muted" style="font-size:0.9rem;font-family:var(--font-sans);">({{ $wishlist->count() }})</span>
           </h5>
           @if($wishlist->count())
@@ -46,7 +46,7 @@
             <!-- Info -->
             <div class="flex-grow-1 text-center text-sm-start">
               @if($item->product->category)
-                <div class="text-muted small mb-1" style="font-size:0.7rem;letter-spacing:1px;text-transform:uppercase;font-weight:600;color:var(--ayur-green);">
+                <div class="text-muted small mb-1" style="font-size:0.7rem;letter-spacing:1px;text-transform:uppercase;font-weight:600;color:var(--dsh-navy-light);">
                   {{ $item->product->category->name }}
                 </div>
               @endif
@@ -54,7 +54,7 @@
                 {{ $item->product->name }}
               </a>
               <div class="d-flex align-items-center justify-content-center justify-content-sm-start gap-2 mb-3">
-                <span style="font-weight:700;font-size:1rem;color:var(--ayur-green-dark);">₨{{ number_format($item->product->sale_price ?? $item->product->price, 2) }}</span>
+                <span style="font-weight:700;font-size:1rem;color:var(--dsh-navy);">₨{{ number_format($item->product->sale_price ?? $item->product->price, 2) }}</span>
                 @if($item->product->sale_price)
                   <span style="font-size:0.85rem;color:var(--text-muted);text-decoration:line-through;">₨{{ number_format($item->product->price, 2) }}</span>
                   <span class="badge" style="background:#fef2f2;color:#dc2626;font-size:0.68rem;font-weight:700;padding:3px 6px;border-radius:4px;">
@@ -92,9 +92,9 @@
           @empty
           <div class="text-center py-5">
             <div style="width:72px;height:72px;background:var(--pd-ice);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;">
-              <i class="bi bi-heart" style="font-size:2rem;color:var(--ayur-green);"></i>
+              <i class="bi bi-heart" style="font-size:2rem;color:var(--dsh-navy-light);"></i>
             </div>
-            <h5 style="font-family:var(--font-serif);font-size:1.25rem;color:var(--ayur-green-dark);margin-bottom:6px;">Your Wishlist is Empty</h5>
+            <h5 style="font-family:var(--font-serif);font-size:1.25rem;color:var(--dsh-navy);margin-bottom:6px;">Your Wishlist is Empty</h5>
             <p class="text-muted small mb-4">Explore our pure Ayurvedic wellness and herbal collection and save your favorites.</p>
             <a href="{{ route('shop.index') }}" class="btn-glamora" style="padding:11px 28px;border-radius:6px;">
               <i class="bi bi-shop me-1"></i> Browse Products
@@ -173,3 +173,4 @@ document.querySelectorAll('.wishlist-remove-form').forEach(form => {
 });
 </script>
 @endpush
+

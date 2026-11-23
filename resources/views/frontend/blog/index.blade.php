@@ -1,5 +1,5 @@
-@extends('frontend.layouts.app')
-@section('title', 'Blog — Ayur Naman')
+﻿@extends('frontend.layouts.app')
+@section('title', 'Blog — Durable Suitcase House')
 
 @section('content')
 <div style="background:var(--pd-ice);padding:60px 0;text-align:center;">
@@ -65,3 +65,4 @@
   </div>
 </div>
 @endsection
+
