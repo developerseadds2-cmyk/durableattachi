@@ -1,0 +1,44 @@
+
+<?php $__env->startSection('title', $category->name . ' — Ayur Naman'); ?>
+<?php $__env->startSection('content'); ?>
+<div class="shop-hero"><div class="container"><span class="section-label">Collection</span><h1 style="font-family:var(--font-serif);font-size:2.5rem;font-weight:400;"><?php echo e($category->name); ?></h1><nav aria-label="breadcrumb" class="mt-3"><ol class="breadcrumb justify-content-center small text-muted" style="background:none;padding:0;margin:0;"><li class="breadcrumb-item"><a href="<?php echo e(route('home')); ?>">Home</a></li><li class="breadcrumb-item"><a href="<?php echo e(route('shop.index')); ?>">Shop</a></li><li class="breadcrumb-item active"><?php echo e($category->name); ?></li></ol></nav></div></div>
+<div class="container-xl-custom py-5"><div class="d-flex justify-content-between align-items-center mb-4 pb-3" style="border-bottom:1px solid var(--border);"><span class="small text-muted">Showing <strong><?php echo e($products->total()); ?></strong> products</span><a href="<?php echo e(route('shop.index')); ?>" class="btn-outline-glamora" style="padding:8px 16px;font-size:.7rem;">All Collections</a></div>
+<?php if($products->count()): ?>
+  <div class="shop-grid">
+    <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+      <div class="shop-grid-item" data-aos="fade-up" data-aos-delay="<?php echo e($loop->index % 6 * 60); ?>">
+        <?php echo $__env->make('frontend.partials.product-card', ['product' => $product], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+      </div>
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+  </div>
+  <div class="mt-5 d-flex justify-content-center"><?php echo e($products->links()); ?></div>
+<?php else: ?><div class="text-center py-5"><i class="bi bi-search" style="font-size:3rem;color:var(--border);display:block;margin-bottom:16px;"></i><h5 style="font-family:var(--font-serif);">No products found</h5><p class="text-muted">There are no products in this category yet.</p><a href="<?php echo e(route('shop.index')); ?>" class="btn-gold" style="padding:12px 28px;font-size:.78rem;">Browse Collection</a></div><?php endif; ?></div>
+<?php $__env->startPush('styles'); ?>
+<style>
+.shop-hero {
+  background: var(--pd-ice);
+  padding: 50px 0;
+  text-align: center;
+}
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 300px));
+  gap: 24px;
+}
+.shop-grid-item {
+  width: 100%;
+}
+@media (max-width: 576px) {
+  .shop-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .shop-grid-item {
+    max-width: 360px;
+    margin: 0 auto;
+  }
+}
+</style>
+<?php $__env->stopPush(); ?>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('frontend.layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\xampp8.2\htdocs\ayushnaman\resources\views/frontend/shop/category.blade.php ENDPATH**/ ?>
