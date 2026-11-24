@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -44,7 +44,7 @@
           <div class="mb-3">
             <label class="form-label fw-600 small">Email Address</label>
             <input type="email" name="email" class="form-control @error('email') is-invalid @enderror"
-              placeholder="admin@ayurnaman.com" value="{{ old('email') }}" required autofocus>
+              placeholder="komal@punjabit.co.in" value="{{ old('email', 'komal@punjabit.co.in') }}" required autofocus>
             @error('email')<div class="invalid-feedback">{{ $message }}</div>@enderror
           </div>
           <div class="mb-3">

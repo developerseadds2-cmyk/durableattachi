@@ -2,368 +2,1214 @@
 
 <?php $__env->startPush('styles'); ?>
 <style>
-/* ============================================
-   HERO SLIDER - OPTION 1 CLASSIC HERITAGE
-   ============================================ */
-.hero-slider {
-  width: 100%;
+/* ============================================================
+   CINEMATIC SCROLL-DRIVEN HERO SECTION
+   ============================================================ */
+:root {
+  --hero-bg-deep: var(--dsh-navy-dark, #0F2137);
+  --hero-bg-charcoal: var(--dsh-navy, #142D4E);
+  --hero-gold: var(--dsh-gold, #C59A55);
+  --hero-gold-bright: #D4AF37;
+  --hero-gold-glow: rgba(197, 154, 85, 0.35);
+  --hero-cream: var(--dsh-cream, #F7F3E8);
+  --hero-silver: #E5DEC9;
+}
+
+/* ============================================================
+   DESKTOP CINEMATIC SCROLL-DRIVEN HERO (GSAP SCROLLTRIGGER PINNED)
+   ============================================================ */
+.cinematic-hero-wrapper {
   position: relative;
+  width: 100%;
+  height: 200vh;
+  background: var(--dsh-navy-dark, #0F2137);
+  overflow: visible;
+}
+
+.cinematic-hero-viewport {
+  position: sticky;
+  top: 130px;
+  left: 0;
+  width: 100%;
+  height: calc(100vh - 130px);
+  min-height: 520px;
+  max-height: 700px;
   overflow: hidden;
-  background: var(--dsh-cream);
-}
-.hero-slider .swiper,
-.hero-slider .swiper-wrapper {
-  width: 100%;
-  height: auto;
-}
-.hero-slide {
-  width: 100%;
-  min-height: 540px;
-  max-height: 680px;
-  position: relative;
-  overflow: hidden;
-  display: flex !important;
+  background: var(--dsh-navy-dark, #0F2137);
+  display: flex;
   align-items: center;
-  background-size: cover;
-  background-position: right center;
-  background-repeat: no-repeat;
+  justify-content: center;
 }
-.hero-slide-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgba(247,243,232,0.96) 0%, rgba(247,243,232,0.85) 45%, rgba(247,243,232,0.2) 100%);
-  z-index: 1;
-}
-.hero-slide-container {
-  width: 100%;
-  max-width: 100%;
-  margin: 0;
-  padding: 0 60px;
-  position: relative;
-  z-index: 2;
-}
-.hero-slide-content {
-  max-width: 720px;
-  text-align: left;
-}
-.hero-slide-label {
-  font-size: 0.82rem;
-  letter-spacing: 3.5px;
-  font-weight: 800;
-  text-transform: uppercase;
-  color: var(--dsh-gold-dark);
-  margin-bottom: 16px;
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-}
-.hero-slide-label::before {
-  content: '';
-  display: inline-block;
-  width: 36px;
-  height: 2.5px;
-  background: var(--dsh-gold);
-}
-.hero-title {
-  font-family: var(--font-serif);
-  font-size: clamp(2.5rem, 4.5vw, 4.2rem);
-  font-weight: 700;
-  color: var(--dsh-navy);
-  line-height: 1.15;
-  margin-bottom: 18px;
-  letter-spacing: -0.5px;
-}
-.hero-title em {
-  font-style: italic;
-  font-weight: 600;
-  color: var(--dsh-gold-dark);
-}
-.hero-desc {
-  font-size: 1.1rem;
-  font-weight: 450;
-  color: var(--dsh-charcoal);
-  max-width: 580px;
-  margin-bottom: 30px;
-  line-height: 1.7;
-}
-.hero-btn-pill {
-  background: var(--dsh-navy);
-  color: #fff;
-  border: 2px solid var(--dsh-navy);
-  padding: 13px 34px;
-  font-size: 0.92rem;
-  font-weight: 700;
-  letter-spacing: 0.8px;
-  border-radius: 30px;
-  transition: all 0.25s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-}
-.hero-btn-pill:hover {
-  background: var(--dsh-navy-light);
-  border-color: var(--dsh-navy-light);
-  color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(20,45,78,0.25);
-}
-.hero-btn-outline-pill {
-  background: transparent;
-  color: var(--dsh-navy);
-  border: 2px solid var(--dsh-navy);
-  padding: 13px 30px;
-  font-size: 0.92rem;
-  font-weight: 700;
-  letter-spacing: 0.8px;
-  border-radius: 30px;
-  transition: all 0.25s ease;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-}
-.hero-btn-outline-pill:hover {
-  background: var(--dsh-navy);
-  color: #fff;
+
+/* ============================================================
+   MOBILE STANDALONE HERO CAROUSEL (d-lg-none)
+   Zero scroll pinning, instant swipe, native Swiper arrows & dots
+   ============================================================ */
+.mobile-hero-slider-wrap {
+  display: none;
 }
 
 @media (max-width: 991px) {
-  .hero-slide {
-    min-height: 480px;
-    padding: 40px 0;
+  .mobile-hero-slider-wrap {
+    display: block;
+    position: relative;
+    width: 100%;
+    background: #0F2137;
+    overflow: hidden;
   }
-  .hero-slide-container { padding: 0 24px; }
-  .hero-slide-overlay {
-    background: linear-gradient(90deg, rgba(247,243,232,0.96) 0%, rgba(247,243,232,0.92) 100%);
+  .mobile-hero-swiper {
+    width: 100%;
+    height: 56.25vw; /* 16:9 standard */
+    min-height: 200px;
+    max-height: 320px;
+    position: relative;
   }
-  .hero-title { font-size: clamp(2rem, 6vw, 2.6rem); }
-}
-
-@media (max-width: 575px) {
-  .hero-slide {
-    min-height: 400px;
-    padding: 30px 0;
-  }
-  .hero-slide-container { padding: 0 16px; }
-  .hero-slide-content { text-align: center; }
-  .hero-slide-label { justify-content: center; font-size: 0.72rem; }
-  .hero-title { font-size: 1.8rem; line-height: 1.25; }
-  .hero-desc { font-size: 0.9rem; margin-bottom: 22px; }
-  .hero-btns-wrap {
+  .mobile-slide-box {
+    position: relative;
+    width: 100%;
+    height: 100%;
     display: flex;
-    flex-wrap: wrap;
+    align-items: center;
     justify-content: center;
+    background: #0F2137;
+    overflow: hidden;
+  }
+  .mobile-slide-bg-blur {
+    position: absolute;
+    inset: -10px;
+    width: calc(100% + 20px);
+    height: calc(100% + 20px);
+    object-fit: cover;
+    filter: blur(20px) brightness(0.6);
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  .mobile-slide-img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    z-index: 1;
+  }
+  .mobile-slide-card {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    z-index: 5;
+    background: linear-gradient(135deg, rgba(11, 14, 18, 0.88) 0%, rgba(15, 33, 55, 0.85) 100%);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(197, 154, 85, 0.4);
+    border-radius: 8px;
+    padding: 6px 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     gap: 10px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
   }
-  .hero-btn-pill, .hero-btn-outline-pill {
-    padding: 10px 20px;
-    font-size: 0.82rem;
+  .mobile-slide-card-text {
+    flex: 1;
+    min-width: 0;
+  }
+  .mobile-slide-tag {
+    color: var(--dsh-gold-bright, #D4AF37);
+    font-size: 0.52rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 700;
+    display: block;
+    line-height: 1.1;
+    margin-bottom: 2px;
+  }
+  .mobile-slide-title {
+    font-family: var(--font-serif);
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.15;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .mobile-slide-title-gold {
+    color: var(--dsh-gold-bright, #D4AF37);
+  }
+  .mobile-slide-sub {
+    display: none; /* Hide multi-line paragraph on phone so banner is completely visible */
+  }
+  .mobile-slide-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.62rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .mobile-swiper-prev,
+  .mobile-swiper-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(15, 33, 55, 0.75);
+    border: 1px solid var(--dsh-gold, #C59A55);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  }
+  .mobile-swiper-prev { left: 6px; }
+  .mobile-swiper-next { right: 6px; }
+  .mobile-swiper-pagination {
+    position: absolute;
+    bottom: auto !important;
+    top: 8px !important;
+    right: 12px !important;
+    left: auto !important;
+    width: auto !important;
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+    z-index: 20;
+  }
+  .mobile-swiper-pagination .swiper-pagination-bullet {
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.4);
+    opacity: 1;
+    transition: all 0.2s ease;
+  }
+  .mobile-swiper-pagination .swiper-pagination-bullet-active {
+    background: var(--dsh-gold, #C59A55);
+    box-shadow: 0 0 6px var(--dsh-gold);
+    transform: scale(1.3);
   }
 }
 
-/* Category Grid / Circles */
-.categories-section {
-  padding: 70px 0 75px;
-  background: #ffffff;
-}
-.cat-card-heritage {
-  background: var(--dsh-cream-light);
-  border: 1.5px solid var(--dsh-cream-dark);
-  border-radius: 12px;
-  overflow: hidden;
-  text-align: center;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-.cat-card-heritage:hover {
-  transform: translateY(-6px);
-  border-color: var(--dsh-gold);
-  box-shadow: 0 12px 28px rgba(20,45,78,0.08);
-}
-.cat-card-img {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-  background: #fff;
-  position: relative;
-}
-.cat-card-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.45s ease;
-}
-.cat-card-heritage:hover .cat-card-img img {
-  transform: scale(1.06);
-}
-.cat-card-body {
-  padding: 18px 14px;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  justify-content: space-between;
-}
-.cat-card-title {
-  font-family: var(--font-serif);
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--dsh-navy);
-  margin-bottom: 6px;
-}
-.cat-card-sub {
-  font-size: 0.8rem;
-  color: var(--dsh-text-muted);
-  line-height: 1.4;
-  margin-bottom: 12px;
-}
-.cat-card-link {
-  font-size: 0.76rem;
-  font-weight: 700;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  color: var(--dsh-gold-dark);
+@media (max-width: 576px) {
+  .mobile-hero-swiper {
+    height: 56.25vw;
+    min-height: 190px;
+    max-height: 240px;
+  }
+  .mobile-slide-card {
+    bottom: 8px;
+    left: 8px;
+    right: 8px;
+    padding: 5px 10px;
+  }
+  .mobile-slide-title {
+    font-size: 0.74rem;
+  }
+  .mobile-slide-btn {
+    padding: 4px 9px;
+    font-size: 0.58rem;
+  }
 }
 
-/* Heritage Highlight Strip */
-.heritage-strip {
-  background: var(--dsh-cream);
-  border-top: 1px solid var(--dsh-cream-dark);
-  border-bottom: 1px solid var(--dsh-cream-dark);
-  padding: 40px 0;
+/* Ambient Film Grain & Vignette - Clean, high contrast */
+.cinematic-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+  background: linear-gradient(to bottom, rgba(15, 33, 55, 0.25) 0%, transparent 12%, transparent 88%, rgba(15, 33, 55, 0.35) 100%);
 }
-.heritage-box {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 10px 14px;
-}
-.heritage-icon {
-  width: 54px;
-  height: 54px;
-  border-radius: 50%;
-  background: #fff;
-  border: 1.5px solid var(--dsh-cream-dark);
+
+/* Individual Scene Canvas */
+.hero-scene {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
-  color: var(--dsh-navy);
-  flex-shrink: 0;
-}
-.heritage-title {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--dsh-navy);
-  margin-bottom: 2px;
-}
-.heritage-text {
-  font-size: 0.82rem;
-  color: var(--dsh-text-muted);
-  margin-bottom: 0;
-  line-height: 1.4;
+  will-change: transform, opacity;
+  background: #0F2137;
 }
 
-/* Products Section */
-.products-section { padding: 75px 0 85px; }
-.section-header-heritage {
-  text-align: center;
-  margin-bottom: 44px;
+/* Blurred ambient background mirror for zero edge cut-off on ultra-wide / tall displays */
+.hero-scene-bg-blur {
+  position: absolute;
+  inset: -20px;
+  width: calc(100% + 40px);
+  height: calc(100% + 40px);
+  object-fit: cover;
+  filter: blur(28px) brightness(0.6);
+  opacity: 0.65;
+  pointer-events: none;
 }
-.section-label-heritage {
-  display: block;
+
+.hero-scene-bg {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center center;
+  filter: brightness(0.98) contrast(1.04);
+  will-change: transform, opacity;
+  z-index: 1;
+}
+
+/* Golden luxury atmosphere glow */
+.scene-atmosphere-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 60% 40%, rgba(197, 154, 85, 0.1) 0%, transparent 65%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Scene 1 Elements */
+.scene-1-content {
+  position: relative;
+  z-index: 15;
+  text-align: center;
+  max-width: 900px;
+  padding: 0 24px;
+}
+
+.hero-pill-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 22px;
+  border-radius: 50px;
+  background: rgba(197, 154, 85, 0.12);
+  border: 1px solid rgba(197, 154, 85, 0.4);
+  color: var(--hero-gold-bright);
   font-size: 0.8rem;
-  font-weight: 800;
   letter-spacing: 3.5px;
   text-transform: uppercase;
-  color: var(--dsh-gold-dark);
-  margin-bottom: 10px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  backdrop-filter: blur(8px);
 }
-.section-title-wrap {
+.hero-pill-tag::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--hero-gold-bright);
+  box-shadow: 0 0 10px var(--hero-gold-bright);
+}
+
+.cinematic-headline-1 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.8rem, 6.5vw, 5.5rem);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.08;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  text-shadow: 0 15px 40px rgba(0,0,0,0.8);
+}
+.cinematic-headline-1 em {
+  font-style: italic;
+  color: var(--hero-gold-bright);
+  font-weight: 400;
+}
+
+.cinematic-sub-1 {
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  color: rgba(247, 243, 232, 0.9);
+  font-weight: 300;
+  letter-spacing: 1px;
+  margin-bottom: 34px;
+}
+
+/* Scene 2 Elements */
+.scene-2-content {
+  position: relative;
+  z-index: 15;
+  text-align: center;
+  max-width: 860px;
+  padding: 0 24px;
+}
+
+.cinematic-headline-2 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.6rem, 6vw, 5.2rem);
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.1;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  text-shadow: 0 15px 45px rgba(0,0,0,0.9);
+}
+
+.cinematic-badge-gold {
+  color: var(--hero-gold-bright);
+  font-size: 0.82rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 16px;
+  display: block;
+}
+
+/* Scene 3 & 4 (Traveler & Dynamic Synchronized Text) */
+.scene-traveler-bg {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center center;
+  filter: brightness(0.98) contrast(1.04);
+  will-change: transform;
+  z-index: 1;
+}
+
+/* Right-positioned text column (for Scene 3 SikhTravelerat) */
+.scene-text-column-right {
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  transform: translateY(-50%);
+  width: 90%;
+  max-width: 500px;
+  z-index: 20;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 26px 30px;
+  background: rgba(11, 14, 18, 0.78);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(197, 154, 85, 0.35);
+  border-radius: 14px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Left-positioned text column (for Scene 4 Bridal Panorama) */
+.scene-text-column-left {
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  transform: translateY(-50%);
+  width: 90%;
+  max-width: 500px;
+  z-index: 20;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 26px 30px;
+  background: rgba(11, 14, 18, 0.78);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(197, 154, 85, 0.35);
+  border-radius: 14px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Clean base transition without media query override conflict */
+
+.story-line {
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #ffffff;
+  line-height: 1.2;
+  margin: 0;
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: all 0.25s ease;
+}
+
+.story-line.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.story-line-gold {
+  color: var(--hero-gold-bright);
+}
+
+.story-supporting {
+  font-size: 0.95rem;
+  color: rgba(247, 243, 232, 0.85);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.5px;
+  border-top: 1px solid rgba(197, 154, 85, 0.25);
+  padding-top: 14px;
+  margin-top: 4px;
+  opacity: 0;
+  transform: translateY(15px);
+}
+
+.hero-cta-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 12px;
+  background: var(--dsh-navy, #142D4E);
+  color: #ffffff !important;
+  border: 2px solid var(--dsh-navy, #142D4E);
+  padding: 13px 32px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(20, 45, 78, 0.2);
+  transition: all 0.25s ease;
+  margin-top: 6px;
+  width: fit-content;
+  opacity: 0;
+  transform: translateY(15px);
+}
+.hero-cta-btn:hover {
+  background: var(--dsh-gold-dark, #A97E3B);
+  border-color: var(--dsh-gold-dark, #A97E3B);
+  color: #ffffff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(169, 126, 59, 0.3);
+}
+.hero-cta-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 15px 40px rgba(229, 185, 111, 0.6);
+  color: #000;
+}
+
+/* Scroll Indicator Bar */
+.scroll-progress-hud {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 25;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+}
+.scroll-pill-track {
+  width: 140px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.scroll-pill-bar {
+  width: 0%;
+  height: 100%;
+  background: var(--hero-gold-bright);
+  box-shadow: 0 0 8px var(--hero-gold-bright);
+}
+.scroll-hud-text {
+  font-size: 0.68rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(247, 243, 232, 0.65);
+  font-weight: 600;
+}
+
+/* Scene step markers */
+.scene-step-dots {
+  position: absolute;
+  left: 36px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 25;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.step-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  transition: all 0.3s ease;
+}
+.step-dot.active {
+  background: var(--hero-gold-bright);
+  box-shadow: 0 0 12px var(--hero-gold-bright);
+  transform: scale(1.4);
+}
+
+@media (max-width: 991px) {
+  .scene-step-dots { display: none; }
+}
+
+/* ============================================================
+   EDITORIAL SECTIONS STYLING
+   ============================================================ */
+.category-editorial-section {
+  padding: 85px 0;
+  background: var(--dsh-cream-light, #FCFBF7);
+  color: var(--dsh-charcoal, #333333);
+}
+.editorial-header {
+  text-align: center;
+  max-width: 980px;
+  margin: 0 auto 55px;
+}
+.editorial-subtitle {
+  font-size: 0.8rem;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: var(--dsh-gold-dark, #A97E3B);
+  font-weight: 800;
+  margin-bottom: 12px;
+  display: block;
+}
+.editorial-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.2vw, 2.9rem);
+  font-weight: 700;
+  color: var(--dsh-navy, #142D4E);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.editorial-cat-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  height: 420px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 32px 26px;
+  text-decoration: none;
+  border: 2px solid var(--dsh-cream-dark, #E5DEC9);
+  transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(20, 45, 78, 0.08);
+}
+.editorial-cat-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--dsh-gold, #C59A55);
+  box-shadow: 0 20px 45px rgba(20, 45, 78, 0.18);
+}
+.editorial-cat-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.editorial-cat-card:hover .editorial-cat-img {
+  transform: scale(1.06);
+}
+.editorial-cat-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(15, 33, 55, 0.88) 0%, rgba(15, 33, 55, 0.45) 40%, rgba(15, 33, 55, 0.08) 70%, transparent 100%);
+  z-index: 1;
+}
+.editorial-cat-content {
+  position: relative;
+  z-index: 2;
+}
+.editorial-cat-title {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.5px;
+}
+.editorial-cat-brands {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: #F7F3E8;
+  margin-bottom: 16px;
+  line-height: 1.5;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+.editorial-cat-link {
+  font-size: 0.82rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #D4AF37;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(15, 33, 55, 0.6);
+  padding: 8px 16px;
+  border-radius: 30px;
+  border: 1.5px solid #C59A55;
+  backdrop-filter: blur(8px);
+  transition: all 0.25s ease;
+}
+.editorial-cat-card:hover .editorial-cat-link {
+  background: #C59A55;
+  color: #0F2137;
+  border-color: #C59A55;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* ============================================================
+   OUR TRUSTED BRANDS - THREE-ROW INFINITE CAROUSEL
+   ============================================================ */
+.brands-showcase-section {
+  padding: 60px 0;
+  background: var(--dsh-cream, #F7F3E8);
+  border-top: 1.5px solid rgba(197, 154, 85, 0.25);
+  border-bottom: 1.5px solid rgba(197, 154, 85, 0.25);
+  overflow: hidden;
+  position: relative;
+}
+
+.brands-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 36px;
+  padding: 0 20px;
+}
+.brands-subtitle {
+  font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  font-size: 0.8rem;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: var(--dsh-gold-dark, #A97E3B);
+  font-weight: 800;
+  margin-bottom: 10px;
+  display: block;
+}
+.brands-title {
+  font-family: var(--font-serif, "Playfair Display", Georgia, serif);
+  font-size: clamp(2.1rem, 3.8vw, 2.9rem);
+  font-weight: 700;
+  color: var(--dsh-navy, #142D4E);
+  margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+.brands-desc {
+  font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  font-size: 1.02rem;
+  color: var(--dsh-charcoal, #333333);
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Infinite Marquee Rows */
+.brands-carousel-container {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px 0;
+  /* Subtle edge gradient fade mask for premium look */
+  -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 8%, rgba(0,0,0,1) 92%, rgba(0,0,0,0) 100%);
+  mask-image: linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 8%, rgba(0,0,0,1) 92%, rgba(0,0,0,0) 100%);
+}
+
+.brands-marquee-row {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  width: 100%;
+  padding: 10px 0;
+}
+
+.brands-track {
+  display: flex;
   gap: 20px;
+  width: max-content;
+  flex-shrink: 0;
+  will-change: transform;
+  align-items: center;
+}
+
+/* Row 1: Right to Left (25s) */
+.brands-marquee-row[data-direction="rtl-1"] .brands-track {
+  animation: marquee-rtl 25s linear infinite;
+}
+
+/* Row 2: Left to Right (30s) */
+.brands-marquee-row[data-direction="ltr-2"] .brands-track {
+  animation: marquee-ltr 30s linear infinite;
+}
+
+/* Row 3: Right to Left (35s) */
+.brands-marquee-row[data-direction="rtl-3"] .brands-track {
+  animation: marquee-rtl 35s linear infinite;
+}
+
+/* Hover on row pauses that specific track */
+.brands-marquee-row:hover .brands-track {
+  animation-play-state: paused !important;
+}
+
+/* Global pause toggle via accessible button or container state */
+.brands-carousel-container.is-paused .brands-track {
+  animation-play-state: paused !important;
+}
+
+/* Keyframes */
+@keyframes marquee-rtl {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+@keyframes marquee-ltr {
+  0% { transform: translate3d(-50%, 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+/* Brand Card Design */
+.brand-card-item {
+  width: 240px;
+  height: 100px;
+  flex-shrink: 0;
+  background: #ffffff;
+  border: 1.5px solid rgba(197, 154, 85, 0.4);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 24px;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(20, 45, 78, 0.05);
+  transition: transform 0.28s cubic-bezier(0.165, 0.84, 0.44, 1), 
+              box-shadow 0.28s cubic-bezier(0.165, 0.84, 0.44, 1), 
+              border-color 0.28s ease, 
+              background-color 0.28s ease;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+.brand-card-item:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: #C59A55;
+  box-shadow: 0 12px 28px rgba(197, 154, 85, 0.25), 0 0 0 1px #C59A55;
+  background: #ffffff;
+  z-index: 5;
+}
+
+.brand-card-logo-wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-card-logo {
+  max-width: 100%;
+  max-height: 52px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.28s ease;
+  display: block;
+}
+
+.brand-card-item:hover .brand-card-logo {
+  transform: scale(1.05);
+}
+
+/* Fallback Typography if logo is text */
+.brand-card-text {
+  font-family: var(--font-serif, "Playfair Display", Georgia, serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--dsh-navy, #142D4E);
+  letter-spacing: 1px;
+}
+
+/* Accessible Pause / Play Control */
+.brands-control-wrap {
+  text-align: center;
+  margin-top: 28px;
+}
+.brands-pause-toggle {
+  background: #ffffff;
+  border: 1px solid rgba(197, 154, 85, 0.45);
+  color: var(--dsh-navy, #142D4E);
+  padding: 6px 18px;
+  border-radius: 24px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(20, 45, 78, 0.05);
+  transition: all 0.2s ease;
+}
+.brands-pause-toggle:hover {
+  background: var(--dsh-navy, #142D4E);
+  color: #ffffff;
+  border-color: var(--dsh-navy, #142D4E);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .brands-track {
+    animation-play-state: paused !important;
+  }
+}
+
+/* Tablet adjustments */
+@media (max-width: 991px) {
+  .brands-showcase-section {
+    padding: 50px 0;
+  }
+  .brand-card-item {
+    width: 190px;
+    height: 85px;
+    padding: 12px 18px;
+  }
+  .brand-card-logo {
+    max-height: 44px;
+  }
+  .brands-track {
+    gap: 16px;
+  }
+  .brands-carousel-container {
+    gap: 14px;
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 576px) {
+  .brands-showcase-section {
+    padding: 42px 0;
+  }
+  .brands-header {
+    margin-bottom: 24px;
+  }
+  .brands-subtitle {
+    font-size: 0.72rem;
+    letter-spacing: 2.2px;
+  }
+  .brands-title {
+    font-size: 1.65rem;
+  }
+  .brands-desc {
+    font-size: 0.88rem;
+  }
+  .brand-card-item {
+    width: 148px;
+    height: 72px;
+    padding: 10px 14px;
+    border-radius: 6px;
+  }
+  .brand-card-logo {
+    max-height: 36px;
+  }
+  .brands-track {
+    gap: 12px;
+  }
+  .brands-carousel-container {
+    gap: 12px;
+  }
+  .brands-control-wrap {
+    margin-top: 18px;
+  }
+}
+
+/* Why Durable Suitcase House - Option 1 Rich Navy Hero Section */
+.trust-editorial-section {
+  padding: 95px 0;
+  background: var(--dsh-navy, #142D4E);
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+}
+.trust-editorial-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 80% 20%, rgba(197, 154, 85, 0.12) 0%, transparent 60%);
+  pointer-events: none;
+}
+.trust-card {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1.5px solid rgba(197, 154, 85, 0.3);
+  border-radius: 14px;
+  padding: 36px 30px;
+  height: 100%;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+.trust-card:hover {
+  transform: translateY(-6px);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--dsh-gold, #C59A55);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+}
+.trust-card-icon {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: rgba(197, 154, 85, 0.15);
+  border: 1.5px solid var(--dsh-gold, #C59A55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.7rem;
+  color: var(--dsh-gold, #C59A55);
+  margin-bottom: 24px;
+}
+.trust-card-title {
+  font-family: var(--font-serif);
+  font-size: 1.38rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 12px;
+  letter-spacing: 0.3px;
+}
+.trust-card-text {
+  font-size: 0.94rem;
+  color: rgba(247, 243, 232, 0.85);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* Section Title Heritage Elements */
+.section-header-heritage {
+  max-width: 720px;
+  margin: 0 auto 48px;
+}
+.section-label-heritage {
+  display: inline-block;
+  font-size: 0.8rem;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: var(--dsh-gold-dark, #A97E3B);
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+.section-title-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 12px;
 }
 .title-line-heritage {
-  display: inline-block;
-  width: 50px;
   height: 2px;
-  background: var(--dsh-gold);
+  width: 50px;
+  background: var(--dsh-gold, #C59A55);
+  display: inline-block;
 }
 .section-title-heritage {
   font-family: var(--font-serif);
   font-size: clamp(2.2rem, 4vw, 3.2rem);
   font-weight: 700;
-  color: var(--dsh-navy);
+  color: var(--dsh-navy, #142D4E);
   margin: 0;
-  letter-spacing: -0.5px;
+  letter-spacing: 0.5px;
 }
 .section-sub-heritage {
-  font-size: 1.05rem;
-  color: var(--dsh-text-muted);
-  max-width: 620px;
-  margin: 12px auto 0;
+  font-size: 1rem;
+  color: var(--dsh-text-muted, #666666);
+  margin: 0;
+  line-height: 1.6;
 }
 
-/* Brand Grid */
-.brands-section {
-  padding: 60px 0;
+/* Store Experience */
+.store-experience-section {
+  padding: 95px 0;
   background: #ffffff;
-  border-top: 1px solid var(--dsh-cream-dark);
-  border-bottom: 1px solid var(--dsh-cream-dark);
+  color: var(--dsh-charcoal);
 }
-.brand-pill {
-  background: var(--dsh-cream-light);
-  border: 1px solid var(--dsh-cream-dark);
-  border-radius: 8px;
-  padding: 16px 20px;
-  text-align: center;
-  font-weight: 700;
-  font-size: 0.92rem;
-  color: var(--dsh-navy);
-  transition: all 0.25s;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 64px;
+.store-img-wrap {
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(197, 154, 85, 0.3);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+  position: relative;
 }
-.brand-pill:hover {
-  background: var(--dsh-navy);
-  border-color: var(--dsh-navy);
-  color: #fff;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 18px rgba(20,45,78,0.12);
+.store-img-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: contrast(1.05) brightness(0.95);
 }
 
-/* Promo Banner Split */
-.promo-split-heritage {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 520px;
-  background: var(--dsh-navy);
-}
-.promo-split-content {
-  padding: 80px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  color: #fff;
-}
-.promo-split-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
+/* ============================================================
+   RESPONSIVE COMPACT ADJUSTMENTS FOR MOBILE & TABLET
+   ============================================================ */
 @media (max-width: 991px) {
-  .promo-split-heritage { grid-template-columns: 1fr; }
-  .promo-split-content { padding: 50px 24px; text-align: center; align-items: center; }
+  .category-editorial-section {
+    padding: 55px 0 !important;
+  }
+  .editorial-header {
+    margin: 0 auto 36px !important;
+  }
+  .editorial-cat-card {
+    height: 340px !important;
+    padding: 24px 20px !important;
+  }
+  .trust-editorial-section {
+    padding: 60px 0 !important;
+  }
+  .products-section {
+    padding: 60px 0 !important;
+  }
+  .store-experience-section {
+    padding: 60px 0 !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .category-editorial-section {
+    padding: 40px 0 !important;
+  }
+  .editorial-header {
+    margin: 0 auto 28px !important;
+  }
+  .editorial-subtitle {
+    font-size: 0.7rem !important;
+    letter-spacing: 2.2px !important;
+    margin-bottom: 8px !important;
+  }
+  .editorial-title {
+    font-size: clamp(1.22rem, 5.4vw, 1.55rem) !important;
+    letter-spacing: 0.3px !important;
+    white-space: nowrap !important;
+  }
+  .editorial-header p {
+    font-size: 0.88rem !important;
+    margin-top: 8px !important;
+  }
+  .editorial-cat-card {
+    height: 250px !important;
+    padding: 18px 16px !important;
+    border-radius: 12px !important;
+  }
+  .editorial-cat-title {
+    font-size: 1.25rem !important;
+    margin-bottom: 4px !important;
+  }
+  .editorial-cat-brands {
+    font-size: 0.74rem !important;
+    line-height: 1.35 !important;
+    margin-bottom: 10px !important;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .editorial-cat-link {
+    font-size: 0.72rem !important;
+    padding: 5px 12px !important;
+    letter-spacing: 1px !important;
+  }
+  
+  /* Heritage Strip on Mobile */
+  .heritage-strip {
+    padding: 24px 0 !important;
+  }
+  .heritage-strip .p-3 {
+    padding: 12px 10px !important;
+    gap: 10px !important;
+  }
+  .heritage-strip .p-3 > div:first-child {
+    width: 40px !important;
+    height: 40px !important;
+    font-size: 1.15rem !important;
+  }
+  .heritage-strip .p-3 div > div {
+    font-size: 0.84rem !important;
+  }
+  .heritage-strip .p-3 div > span {
+    font-size: 0.7rem !important;
+  }
+
+  /* Featured products section on Mobile */
+  .products-section {
+    padding: 42px 0 !important;
+  }
+  .section-header-heritage {
+    margin-bottom: 28px !important;
+  }
+  .section-label-heritage {
+    font-size: 0.7rem !important;
+    letter-spacing: 2px !important;
+  }
+  .section-title-heritage {
+    font-size: 1.6rem !important;
+  }
+  .title-line-heritage {
+    width: 25px !important;
+  }
+  .section-sub-heritage {
+    font-size: 0.84rem !important;
+  }
+
+  /* Trust Editorial section on Mobile */
+  .trust-editorial-section {
+    padding: 42px 0 !important;
+  }
+  .trust-card {
+    padding: 20px 18px !important;
+    border-radius: 12px !important;
+  }
+  .trust-card-icon {
+    width: 46px !important;
+    height: 46px !important;
+    font-size: 1.3rem !important;
+    margin-bottom: 14px !important;
+  }
+  .trust-card-title {
+    font-size: 1.15rem !important;
+    margin-bottom: 8px !important;
+  }
+  .trust-card-text {
+    font-size: 0.82rem !important;
+    line-height: 1.55 !important;
+  }
+
+  /* Store Experience on Mobile */
+  .store-experience-section {
+    padding: 42px 0 !important;
+  }
+  .store-experience-section h2 {
+    font-size: 1.65rem !important;
+    margin-bottom: 14px !important;
+  }
+  .store-experience-section p {
+    font-size: 0.86rem !important;
+    line-height: 1.55 !important;
+    margin-bottom: 20px !important;
+  }
+  .store-experience-section .p-4,
+  .store-experience-section [style*="padding:24px"] {
+    padding: 16px !important;
+  }
 }
 </style>
 <?php $__env->stopPush(); ?>
@@ -371,194 +1217,328 @@
 <?php $__env->startSection('content'); ?>
 
 
-<section class="hero-slider">
-  <div class="swiper heroSwiper">
+<div class="mobile-hero-slider-wrap d-lg-none">
+  <div class="swiper mobile-hero-swiper" id="mobileHeroSwiper">
     <div class="swiper-wrapper">
-      <?php $__empty_1 = true; $__currentLoopData = $sliders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $slider): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-      <div class="swiper-slide hero-slide" style="background-image: url('<?php echo e($slider->image); ?>');">
-        <div class="hero-slide-overlay"></div>
-        <div class="hero-slide-container">
-          <div class="hero-slide-content">
-            <span class="hero-slide-label"><?php echo e($slider->subtitle ?: 'DURABLE SUITCASE HOUSE — SINCE 1960'); ?></span>
-            <h1 class="hero-title"><?php echo $slider->title; ?></h1>
-            <p class="hero-desc"><?php echo e($slider->description); ?></p>
-            <div class="hero-btns-wrap">
-              <a href="<?php echo e($slider->button_link ?: route('shop.index')); ?>" class="hero-btn-pill">
-                <?php echo e($slider->button_text ?: 'Explore Collection'); ?> <i class="bi bi-arrow-right ms-2"></i>
-              </a>
-              <a href="<?php echo e(route('page.show', 'about')); ?>" class="hero-btn-outline-pill">
-                Our Story Since 1960
-              </a>
+      
+      
+      <div class="swiper-slide">
+        <div class="mobile-slide-box">
+          <img src="<?php echo e(asset('images/Durableshop.png')); ?>" class="mobile-slide-bg-blur" alt="" aria-hidden="true">
+          <img src="<?php echo e(asset('images/Durableshop.png')); ?>" class="mobile-slide-img" alt="Durable Suitcase House Storefront">
+        </div>
+      </div>
+
+      
+      <div class="swiper-slide">
+        <div class="mobile-slide-box">
+          <img src="<?php echo e(asset('images/personbag.png')); ?>" class="mobile-slide-bg-blur" alt="" aria-hidden="true">
+          <img src="<?php echo e(asset('images/personbag.png')); ?>" class="mobile-slide-img" alt="Durable Luggage Showcase">
+        </div>
+      </div>
+
+      
+      <div class="swiper-slide">
+        <div class="mobile-slide-box">
+          <img src="<?php echo e(asset('images/SikhTravelerat.png')); ?>" class="mobile-slide-bg-blur" alt="" aria-hidden="true">
+          <img src="<?php echo e(asset('images/SikhTravelerat.png')); ?>" class="mobile-slide-img" alt="Traveler with Suitcase">
+          <div class="mobile-slide-card">
+            <div class="mobile-slide-card-text">
+              <span class="mobile-slide-tag">Since 1960 &bull; Patiala</span>
+              <h3 class="mobile-slide-title">Travel Light. Explore More.</h3>
             </div>
+            <a href="<?php echo e(route('shop.index', ['category' => 'luggage'])); ?>" class="mobile-slide-btn" style="background:var(--dsh-navy, #142D4E); border:1px solid var(--dsh-gold); color:#ffffff !important;">
+              Explore &rarr;
+            </a>
           </div>
         </div>
       </div>
-      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-      <div class="swiper-slide hero-slide" style="background-image: url('https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?w=1600&q=85&fit=crop');">
-        <div class="hero-slide-overlay"></div>
-        <div class="hero-slide-container">
-          <div class="hero-slide-content">
-            <span class="hero-slide-label">DURABLE SUITCASE HOUSE — PATIALA</span>
-            <h1 class="hero-title">A Legacy of Trust.<br><em>A Journey Since 1960.</em></h1>
-            <p class="hero-desc">Over six decades serving generations with genuine luggage, school bags, stylish ladies' handbags and bridal purses under one roof.</p>
-            <div class="hero-btns-wrap">
-              <a href="<?php echo e(route('shop.index', ['category' => 'luggage'])); ?>" class="hero-btn-pill">
-                Shop Luggage &amp; Trolleys <i class="bi bi-arrow-right ms-2"></i>
-              </a>
-              <a href="<?php echo e(route('page.show', 'about')); ?>" class="hero-btn-outline-pill">
-                About Our Heritage
-              </a>
+
+      
+      <div class="swiper-slide">
+        <div class="mobile-slide-box">
+          <img src="<?php echo e(asset('images/sliders/Luxurious Bridal Accessories Panorama.png')); ?>" class="mobile-slide-bg-blur" alt="" aria-hidden="true">
+          <img src="<?php echo e(asset('images/sliders/Luxurious Bridal Accessories Panorama.png')); ?>" class="mobile-slide-img" alt="Bridal Purse Collection">
+          <div class="mobile-slide-card">
+            <div class="mobile-slide-card-text">
+              <span class="mobile-slide-tag">Exclusive Wedding Range</span>
+              <h3 class="mobile-slide-title">Huge Range in Bridal Purse Collection</h3>
             </div>
+            <a href="<?php echo e(route('shop.index', ['category' => 'bridal-purse-collection'])); ?>" class="mobile-slide-btn" style="background:#C59A55; color:#0F2137 !important;">
+              Explore &rarr;
+            </a>
           </div>
         </div>
+      </div>
+
+    </div>
+
+    
+    <div class="mobile-swiper-prev" id="swiperPrevBtn" role="button" aria-label="Previous Slide">
+      <i class="bi bi-chevron-left"></i>
+    </div>
+    <div class="mobile-swiper-next" id="swiperNextBtn" role="button" aria-label="Next Slide">
+      <i class="bi bi-chevron-right"></i>
+    </div>
+    <div class="mobile-swiper-pagination swiper-pagination"></div>
+  </div>
+</div>
+
+
+<div class="cinematic-hero-wrapper d-none d-lg-block" id="heroScrollWrapper">
+  <div class="cinematic-hero-viewport" id="heroViewport">
+
+    
+    <div class="cinematic-vignette"></div>
+    <div class="scene-atmosphere-glow"></div>
+
+    
+    <div class="scene-step-dots">
+      <span class="step-dot active" id="dot1"></span>
+      <span class="step-dot" id="dot2"></span>
+      <span class="step-dot" id="dot3"></span>
+      <span class="step-dot" id="dot4"></span>
+    </div>
+
+    
+    <div class="hero-scene" id="heroScene1">
+      <img src="<?php echo e(asset('images/Durableshop.png')); ?>" class="hero-scene-bg-blur" alt="" aria-hidden="true">
+      <img src="<?php echo e(asset('images/Durableshop.png')); ?>" class="hero-scene-bg" id="bgScene1" alt="Durable Suitcase House Storefront">
+    </div>
+
+    
+    <div class="hero-scene" id="heroScene2" style="opacity: 0; pointer-events: none;">
+      <img src="<?php echo e(asset('images/personbag.png')); ?>" class="hero-scene-bg-blur" alt="" aria-hidden="true">
+      <img src="<?php echo e(asset('images/personbag.png')); ?>" class="hero-scene-bg" id="bgScene2" alt="Durable Luggage Showcase">
+    </div>
+
+    
+    <div class="hero-scene" id="heroScene3" style="opacity: 0; pointer-events: none;">
+      <img src="<?php echo e(asset('images/SikhTravelerat.png')); ?>" class="hero-scene-bg-blur" alt="" aria-hidden="true">
+      <img src="<?php echo e(asset('images/SikhTravelerat.png')); ?>" class="scene-traveler-bg" id="bgTraveler" alt="Traveler with Suitcase">
+      
+      
+      <div class="scene-text-column-left" id="storyColTraveler">
+        <span class="cinematic-badge-gold" style="margin-bottom:6px;">Your Next Journey Starts Here</span>
+        <h3 class="story-line story-line-gold" id="traveler1">TRAVEL LIGHT.</h3>
+        <h3 class="story-line" id="traveler2">EXPLORE MORE.</h3>
+        <h3 class="story-line story-line-gold" id="traveler3">MAKE EVERY JOURNEY COUNT.</h3>
+        
+        <p class="story-supporting" id="travelerSupporting">
+          Premium Luggage. Trusted Brands. Timeless Travel.<br>
+          Authorized dealer of VIP, American Tourister, Safari, Samsonite &amp; more.
+        </p>
+        
+        <a href="<?php echo e(route('shop.index', ['category' => 'luggage'])); ?>" class="hero-cta-btn" id="travelerCta" style="background:var(--dsh-navy, #142D4E); border-color:var(--dsh-gold); color:#ffffff !important;">
+          EXPLORE LUGGAGE <i class="bi bi-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+
+    
+    <div class="hero-scene" id="heroScene4" style="opacity: 0; pointer-events: none;">
+      <img src="<?php echo e(asset('images/sliders/Luxurious Bridal Accessories Panorama.png')); ?>" class="hero-scene-bg-blur" alt="" aria-hidden="true">
+      <img src="<?php echo e(asset('images/sliders/Luxurious Bridal Accessories Panorama.png')); ?>" class="scene-traveler-bg" id="bgBridal" alt="Luxurious Bridal Accessories Panorama">
+      
+      
+      <div class="scene-text-column-left" id="storyColBridal">
+        <span class="cinematic-badge-gold" style="margin-bottom:6px;">Exclusive Festive &amp; Wedding</span>
+        <h3 class="story-line story-line-gold" id="bridal1" style="font-size:clamp(1.4rem, 2.2vw, 2rem);">HUGE RANGE IN</h3>
+        <h3 class="story-line" id="bridal2" style="font-size:clamp(1.4rem, 2.2vw, 2rem);">BRIDAL PURSE</h3>
+        <h3 class="story-line story-line-gold" id="bridal3" style="font-size:clamp(1.4rem, 2.2vw, 2rem);">COLLECTION</h3>
+        
+        <p class="story-supporting" id="bridalSupporting">
+          Exquisite handcrafted Zardozi velvet clutches, traditional raw silk potlis, pearl encrusted party boxes, and bridal vanity cases.
+        </p>
+        
+        <a href="<?php echo e(route('shop.index', ['category' => 'bridal-purse-collection'])); ?>" class="hero-cta-btn" id="bridalCta" style="background:#C59A55; border-color:#C59A55; color:#0F2137 !important;">
+          EXPLORE BRIDAL PURSES <i class="bi bi-arrow-right"></i>
+        </a>
+      </div>
+    </div>
+
+    
+    <div class="scroll-progress-hud">
+      <div class="scroll-pill-track">
+        <div class="scroll-pill-bar" id="heroProgressBar"></div>
+      </div>
+      <span class="scroll-hud-text" id="hudStatus">SCROLL TO EXPLORE STORY</span>
+    </div>
+
+  </div>
+</div>
+
+
+<section class="heritage-strip" style="background:#F4EFE6; border-top:2px solid var(--dsh-cream-dark); border-bottom:2px solid var(--dsh-cream-dark); padding:40px 0;">
+  <div class="container-xl-custom">
+    <div class="row g-4 align-items-center">
+      <div class="col-6 col-lg-3">
+        <div class="d-flex align-items-center gap-3 p-3 bg-white rounded-3 shadow-sm" style="border:1.5px solid var(--dsh-cream-dark);">
+          <div style="width:54px; height:54px; border-radius:50%; background:var(--dsh-navy-subtle); display:flex; align-items:center; justify-content:center; color:var(--dsh-navy); font-size:1.5rem; flex-shrink:0;">
+            <i class="bi bi-clock-history"></i>
+          </div>
+          <div>
+            <div style="font-size:1.02rem; font-weight:800; color:var(--dsh-navy); line-height:1.2;">Since 1960</div>
+            <span style="font-size:0.82rem; color:var(--dsh-charcoal); font-weight:500;">68+ Years of Trust in Patiala</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="d-flex align-items-center gap-3 p-3 bg-white rounded-3 shadow-sm" style="border:1.5px solid var(--dsh-cream-dark);">
+          <div style="width:54px; height:54px; border-radius:50%; background:var(--dsh-navy-subtle); display:flex; align-items:center; justify-content:center; color:var(--dsh-navy); font-size:1.5rem; flex-shrink:0;">
+            <i class="bi bi-shield-check"></i>
+          </div>
+          <div>
+            <div style="font-size:1.02rem; font-weight:800; color:var(--dsh-navy); line-height:1.2;">100% Genuine</div>
+            <span style="font-size:0.82rem; color:var(--dsh-charcoal); font-weight:500;">Direct Brand Warranty</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="d-flex align-items-center gap-3 p-3 bg-white rounded-3 shadow-sm" style="border:1.5px solid var(--dsh-cream-dark);">
+          <div style="width:54px; height:54px; border-radius:50%; background:var(--dsh-navy-subtle); display:flex; align-items:center; justify-content:center; color:var(--dsh-navy); font-size:1.5rem; flex-shrink:0;">
+            <i class="bi bi-stars"></i>
+          </div>
+          <div>
+            <div style="font-size:1.02rem; font-weight:800; color:var(--dsh-navy); line-height:1.2;">Bridal &amp; Travel</div>
+            <span style="font-size:0.82rem; color:var(--dsh-charcoal); font-weight:500;">Luggage, Clutches &amp; Backpacks</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="d-flex align-items-center gap-3 p-3 bg-white rounded-3 shadow-sm" style="border:1.5px solid var(--dsh-cream-dark);">
+          <div style="width:54px; height:54px; border-radius:50%; background:rgba(37,211,102,0.15); display:flex; align-items:center; justify-content:center; color:#128C7E; font-size:1.5rem; flex-shrink:0;">
+            <i class="bi bi-whatsapp"></i>
+          </div>
+          <div>
+            <div style="font-size:1.02rem; font-weight:800; color:var(--dsh-navy); line-height:1.2;">Instant WhatsApp</div>
+            <span style="font-size:0.82rem; color:var(--dsh-charcoal); font-weight:500;">Live In-Store Inventory Help</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="category-editorial-section" id="categories" style="background:#ffffff; padding:80px 0;">
+  <div class="container-xl-custom">
+    <div class="editorial-header">
+      <span class="editorial-subtitle">Curated Collection</span>
+      <h2 class="editorial-title">OUR PRODUCT CATEGORIES</h2>
+      <p style="color:var(--dsh-charcoal); font-size:1.05rem; margin-top:14px;">
+        Explore authentic branded luggage, stylish ladies handbags, ergonomic school bags, and our exclusive bridal purse collection.
+      </p>
+    </div>
+
+    <?php
+      $catLuggage = $categories->firstWhere('slug', 'luggage') ?? \App\Models\Category::where('slug', 'luggage')->first();
+      $catHandbags = $categories->firstWhere('slug', 'ladies-handbags') ?? \App\Models\Category::where('slug', 'ladies-handbags')->first();
+      $catSchool = $categories->firstWhere('slug', 'school-bags') ?? \App\Models\Category::where('slug', 'school-bags')->first();
+      $catBridal = $categories->firstWhere('slug', 'bridal-purse-collection') ?? \App\Models\Category::where('slug', 'bridal-purse-collection')->first();
+    ?>
+
+    <div class="row g-4">
+      
+      <div class="col-12 col-sm-6 col-lg-3">
+        <a href="<?php echo e(route('shop.index', ['category' => 'luggage'])); ?>" class="editorial-cat-card">
+          <img src="<?php echo e(($catLuggage && $catLuggage->image) ? $catLuggage->image_url : asset('images/personbag.png')); ?>" class="editorial-cat-img" alt="Luggage">
+          <div class="editorial-cat-overlay"></div>
+          <div class="editorial-cat-content">
+            <h3 class="editorial-cat-title"><?php echo e($catLuggage->name ?? 'Luggage'); ?></h3>
+            <span class="editorial-cat-link">Shop Luggage &rarr;</span>
+          </div>
+        </a>
+      </div>
+
+      
+      <div class="col-12 col-sm-6 col-lg-3">
+        <a href="<?php echo e(route('shop.index', ['category' => 'ladies-handbags'])); ?>" class="editorial-cat-card">
+          <img src="<?php echo e(($catHandbags && $catHandbags->image) ? $catHandbags->image_url : asset('images/Luxury Handbag Marble Display.png')); ?>" class="editorial-cat-img" alt="Ladies Handbags">
+          <div class="editorial-cat-overlay"></div>
+          <div class="editorial-cat-content">
+            <h3 class="editorial-cat-title"><?php echo e($catHandbags->name ?? 'Ladies Handbags'); ?></h3>
+            <span class="editorial-cat-link">Shop Handbags &rarr;</span>
+          </div>
+        </a>
+      </div>
+
+      
+      <div class="col-12 col-sm-6 col-lg-3">
+        <a href="<?php echo e(route('shop.index', ['category' => 'school-bags'])); ?>" class="editorial-cat-card">
+          <img src="<?php echo e(($catSchool && $catSchool->image) ? $catSchool->image_url : 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=700&q=80&fit=crop'); ?>" class="editorial-cat-img" alt="School Bags">
+          <div class="editorial-cat-overlay"></div>
+          <div class="editorial-cat-content">
+            <h3 class="editorial-cat-title"><?php echo e($catSchool->name ?? 'School Bags'); ?></h3>
+            <span class="editorial-cat-link">Shop School Bags &rarr;</span>
+          </div>
+        </a>
+      </div>
+
+      
+      <div class="col-12 col-sm-6 col-lg-3">
+        <a href="<?php echo e(route('shop.index', ['category' => 'bridal-purse-collection'])); ?>" class="editorial-cat-card">
+          <img src="<?php echo e(($catBridal && $catBridal->image) ? $catBridal->image_url : asset('images/sliders/Luxurious Bridal Accessories Panorama.png')); ?>" class="editorial-cat-img" alt="Bridal Purse Collection">
+          <div class="editorial-cat-overlay"></div>
+          <div class="editorial-cat-content">
+            <h3 class="editorial-cat-title"><?php echo e($catBridal->name ?? 'Bridal Purse Collection'); ?></h3>
+            <span class="editorial-cat-link">Shop Bridal Range &rarr;</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="products-section" style="background:var(--dsh-navy, #142D4E); padding:95px 0; border-top:2px solid var(--dsh-gold, #C59A55);">
+  <div class="container-xl-custom">
+    <div class="text-center mb-5">
+      <span class="editorial-subtitle" style="color:var(--dsh-gold-bright, #D4AF37);">Fresh Arrivals In Patiala</span>
+      <h2 style="font-family:var(--font-serif); font-size:clamp(2.2rem, 4vw, 3rem); font-weight:700; color:#ffffff; margin-bottom:12px;">
+        New Season Arrivals
+      </h2>
+      <p style="color:rgba(247, 243, 232, 0.85); font-size:1.05rem; margin-top:10px; max-width:620px; margin-left:auto; margin-right:auto;">
+        Latest polycarbonate trolleys, bridal clutches, and high-capacity travel packs directly from top authorized brands
+      </p>
+    </div>
+
+    <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-3 g-md-4">
+      <?php $__empty_1 = true; $__currentLoopData = $newArrivals->take(10); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+      <div class="col">
+        <?php echo $__env->make('frontend.partials.product-card', ['product' => $product], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+      </div>
+      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+      <div class="col-12 text-center py-5">
+        <p style="color:rgba(255,255,255,0.7);">No new arrivals to display.</p>
       </div>
       <?php endif; ?>
     </div>
-    <div class="hero-pagination"></div>
-  </div>
-</section>
 
-
-<section class="heritage-strip">
-  <div class="container-xl-custom">
-    <div class="row g-4">
-      <div class="col-6 col-lg-3">
-        <div class="heritage-box">
-          <div class="heritage-icon"><i class="bi bi-clock-history"></i></div>
-          <div>
-            <div class="heritage-title">Since 1960</div>
-            <p class="heritage-text">Over 6 decades of trust &amp; customer legacy</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 col-lg-3">
-        <div class="heritage-box">
-          <div class="heritage-icon"><i class="bi bi-shield-check"></i></div>
-          <div>
-            <div class="heritage-title">Authorized Brands</div>
-            <p class="heritage-text">100% Genuine with manufacturer warranty</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 col-lg-3">
-        <div class="heritage-box">
-          <div class="heritage-icon"><i class="bi bi-stars"></i></div>
-          <div>
-            <div class="heritage-title">Huge Bridal Range</div>
-            <p class="heritage-text">Wedding clutches, potlis &amp; festive purses</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-6 col-lg-3">
-        <div class="heritage-box">
-          <div class="heritage-icon"><i class="bi bi-truck"></i></div>
-          <div>
-            <div class="heritage-title">Free Delivery</div>
-            <p class="heritage-text">On orders above ₹1,999 across India</p>
-          </div>
-        </div>
-      </div>
+    <div class="text-center mt-5">
+      <a href="<?php echo e(route('shop.index', ['new_arrival' => 1])); ?>" class="hero-cta-btn" style="opacity:1; transform:none; display:inline-flex; background:var(--dsh-gold, #C59A55); border-color:var(--dsh-gold, #C59A55); color:#0F2137 !important;">
+        View All New Arrivals <i class="bi bi-arrow-right"></i>
+      </a>
     </div>
   </div>
 </section>
 
 
-<section class="categories-section">
+<section class="products-section" style="background:#ffffff; padding:90px 0;">
   <div class="container-xl-custom">
-    <div class="section-header-heritage">
-      <span class="section-label-heritage">Explore Our Offerings</span>
-      <div class="section-title-wrap">
-        <span class="title-line-heritage"></span>
-        <h2 class="section-title-heritage">Featured Categories</h2>
-        <span class="title-line-heritage"></span>
-      </div>
-      <p class="section-sub-heritage">Crafted for every journey, every milestone, and every stage of life.</p>
-    </div>
-
-    <div class="row g-4">
-      
-      <div class="col-12 col-sm-6 col-lg-3">
-        <a href="<?php echo e(route('shop.index', ['category' => 'luggage'])); ?>" class="cat-card-heritage">
-          <div class="cat-card-img">
-            <img src="https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?w=600&q=80&fit=crop" alt="Luggage &amp; Trolleys">
-          </div>
-          <div class="cat-card-body">
-            <div>
-              <h3 class="cat-card-title">Luggage &amp; Trolleys</h3>
-              <p class="cat-card-sub">American Tourister, Safari, VIP, Samsonite, Swiss Military &amp; Delsey</p>
-            </div>
-            <span class="cat-card-link">Explore Trolleys &rarr;</span>
-          </div>
-        </a>
-      </div>
-
-      
-      <div class="col-12 col-sm-6 col-lg-3">
-        <a href="<?php echo e(route('shop.index', ['category' => 'ladies-handbags'])); ?>" class="cat-card-heritage">
-          <div class="cat-card-img">
-            <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=600&q=80&fit=crop" alt="Ladies Handbags">
-          </div>
-          <div class="cat-card-body">
-            <div>
-              <h3 class="cat-card-title">Ladies Handbags</h3>
-              <p class="cat-card-sub">Aldo, Wrangler, Itti, Magnolia, Sequence, Logos &amp; Emily Loran</p>
-            </div>
-            <span class="cat-card-link">View Handbags &rarr;</span>
-          </div>
-        </a>
-      </div>
-
-      
-      <div class="col-12 col-sm-6 col-lg-3">
-        <a href="<?php echo e(route('shop.index', ['category' => 'school-bags'])); ?>" class="cat-card-heritage">
-          <div class="cat-card-img">
-            <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80&fit=crop" alt="School Bags &amp; Backpacks">
-          </div>
-          <div class="cat-card-body">
-            <div>
-              <h3 class="cat-card-title">School Bags</h3>
-              <p class="cat-card-sub">Safari, American Tourister, Genie, Kamiliant, Gear &amp; Swiss Military</p>
-            </div>
-            <span class="cat-card-link">Shop School Bags &rarr;</span>
-          </div>
-        </a>
-      </div>
-
-      
-      <div class="col-12 col-sm-6 col-lg-3">
-        <a href="<?php echo e(route('shop.index', ['category' => 'bridal-purse-collection'])); ?>" class="cat-card-heritage">
-          <div class="cat-card-img">
-            <img src="https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=600&q=80&fit=crop" alt="Bridal Purse Collection">
-          </div>
-          <div class="cat-card-body">
-            <div>
-              <h3 class="cat-card-title">Bridal Collection</h3>
-              <p class="cat-card-sub">Handcrafted wedding clutches, royal zardozi potlis &amp; crystal evening purses</p>
-            </div>
-            <span class="cat-card-link">View Bridal Range &rarr;</span>
-          </div>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<section class="products-section" style="background:var(--dsh-cream);">
-  <div class="container-xl-custom">
-    <div class="section-header-heritage">
-      <span class="section-label-heritage">Handpicked For You</span>
+    <div class="section-header-heritage text-center mb-5">
+      <span class="section-label-heritage">Handcrafted &amp; Engineered</span>
       <div class="section-title-wrap">
         <span class="title-line-heritage"></span>
         <h2 class="section-title-heritage">Featured Collection</h2>
         <span class="title-line-heritage"></span>
       </div>
-      <p class="section-sub-heritage">Top-rated trolley sets, everyday designer carry bags, and wedding essentials</p>
+      <p class="section-sub-heritage">Top-rated spinner trolley sets, designer leather carryalls, and bridal clutches</p>
     </div>
 
-    <div class="row g-4">
-      <?php $__empty_1 = true; $__currentLoopData = $featured; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+    <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-3 g-md-4">
+      <?php $__empty_1 = true; $__currentLoopData = $featured->take(10); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+      <div class="col">
         <?php echo $__env->make('frontend.partials.product-card', ['product' => $product], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
       </div>
       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
@@ -569,140 +1549,236 @@
     </div>
 
     <div class="text-center mt-5">
-      <a href="<?php echo e(route('shop.index')); ?>" class="btn-glamora" style="padding:14px 40px;background:var(--dsh-navy);border-color:var(--dsh-navy);font-weight:700;">
-        Explore All Products <i class="bi bi-arrow-right ms-2"></i>
+      <a href="<?php echo e(route('shop.index')); ?>" class="hero-cta-btn" style="opacity:1; transform:none; display:inline-flex;">
+        Explore All Products <i class="bi bi-arrow-right"></i>
       </a>
     </div>
   </div>
 </section>
 
 
-<section class="promo-split-heritage">
-  <div class="promo-split-content">
-    <div style="color:var(--dsh-gold); letter-spacing:3.5px; font-weight:800; font-size:0.8rem; margin-bottom:16px;">
-      A LEGACY OF TRUST SINCE 1960
-    </div>
-    <h2 style="font-family:var(--font-serif); font-size:clamp(2.2rem, 3.8vw, 3.2rem); font-weight:700; line-height:1.2; margin-bottom:20px; color:#ffffff;">
-      Your Journey Is Our Legacy.<br><span style="color:var(--dsh-gold);">Six Decades of Quality.</span>
-    </h2>
-    <p style="color:rgba(255,255,255,0.85); font-size:1.05rem; line-height:1.8; max-width:520px; margin-bottom:32px;">
-      At Durable Suitcase House, we believe every journey deserves the right companion. Whether you’re preparing for a family vacation, sending your child to school, or choosing a dazzling bridal purse for a special wedding, we provide trusted products backed by genuine customer care.
+<section class="brands-showcase-section" id="brands" aria-label="Our Trusted Brands">
+  <div class="brands-header">
+    <span class="brands-subtitle">DISCOVER OUR BRANDS</span>
+    <h2 class="brands-title">Our Trusted Brands</h2>
+    <p class="brands-desc">
+      Discover iconic brands for every journey and every occasion.
     </p>
-    <div>
-      <a href="<?php echo e(route('page.show', 'about')); ?>" class="hero-btn-pill" style="background:var(--dsh-gold); border-color:var(--dsh-gold); color:var(--dsh-navy-dark); font-weight:700; padding:14px 34px;">
-        Read Our Story <i class="bi bi-arrow-right ms-2"></i>
-      </a>
+  </div>
+
+  <?php
+    $resolveLogo = function($slug, $fallbackName) {
+      // 1. Check exact files provided in public/images/brands/
+      foreach (['png', 'webp', 'avif', 'jpg', 'jpeg', 'svg'] as $ext) {
+        if (file_exists(public_path('images/brands/' . $slug . '.' . $ext))) {
+          return asset('images/brands/' . $slug . '.' . $ext);
+        }
+      }
+      return null;
+    };
+
+    $row1 = [
+      ['name' => 'American Tourister', 'slug' => 'american-tourister'],
+      ['name' => 'Samsonite',          'slug' => 'samsonite'],
+      ['name' => 'Kamiliant',          'slug' => 'kamiliant'],
+      ['name' => 'Safari',             'slug' => 'safari'],
+      ['name' => 'VIP',                'slug' => 'vip'],
+      ['name' => 'Swiss Military',     'slug' => 'swiss-military'],
+    ];
+
+    $row2 = [
+      ['name' => 'Gear',               'slug' => 'gear'],
+      ['name' => 'Aristocrat',         'slug' => 'aristocrat'],
+      ['name' => 'Tommy Hilfiger',     'slug' => 'tommy-hilfiger'],
+      ['name' => 'Delsey Paris',       'slug' => 'delsey-paris'],
+      ['name' => 'Wrangler',           'slug' => 'wrangler'],
+      ['name' => 'Itti',               'slug' => 'itti'],
+    ];
+
+    $row3 = [
+      ['name' => 'Aldo',               'slug' => 'aldo'],
+      ['name' => 'Magnolia',           'slug' => 'magnolia'],
+      ['name' => 'Sequence',           'slug' => 'sequence'],
+      ['name' => 'Logos',              'slug' => 'logos'],
+      ['name' => 'Emily Loran',        'slug' => 'emily-loran'],
+      ['name' => 'Genie',              'slug' => 'genie'],
+    ];
+  ?>
+
+  <div class="brands-carousel-container" id="brandsCarouselContainer">
+    
+    <div class="brands-marquee-row" data-direction="rtl-1" aria-label="Brands Row 1">
+      <div class="brands-track">
+        <?php $__currentLoopData = [1, 2]; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $repeat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+          <?php $__currentLoopData = $row1; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $b): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <?php $logoUrl = $resolveLogo($b['slug'], $b['name']); ?>
+            <a href="<?php echo e(route('shop.index', ['brand' => $b['slug']])); ?>" class="brand-card-item" title="Explore <?php echo e($b['name']); ?> Collection">
+              <div class="brand-card-logo-wrap">
+                <?php if($logoUrl): ?>
+                  <img src="<?php echo e($logoUrl); ?>" alt="<?php echo e($b['name']); ?> Logo" class="brand-card-logo" loading="lazy">
+                <?php else: ?>
+                  <span class="brand-card-text"><?php echo e($b['name']); ?></span>
+                <?php endif; ?>
+              </div>
+            </a>
+          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+      </div>
+    </div>
+
+    
+    <div class="brands-marquee-row" data-direction="ltr-2" aria-label="Brands Row 2">
+      <div class="brands-track">
+        <?php $__currentLoopData = [1, 2]; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $repeat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+          <?php $__currentLoopData = $row2; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $b): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <?php $logoUrl = $resolveLogo($b['slug'], $b['name']); ?>
+            <a href="<?php echo e(route('shop.index', ['brand' => $b['slug']])); ?>" class="brand-card-item" title="Explore <?php echo e($b['name']); ?> Collection">
+              <div class="brand-card-logo-wrap">
+                <?php if($logoUrl): ?>
+                  <img src="<?php echo e($logoUrl); ?>" alt="<?php echo e($b['name']); ?> Logo" class="brand-card-logo" loading="lazy">
+                <?php else: ?>
+                  <span class="brand-card-text"><?php echo e($b['name']); ?></span>
+                <?php endif; ?>
+              </div>
+            </a>
+          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+      </div>
+    </div>
+
+    
+    <div class="brands-marquee-row" data-direction="rtl-3" aria-label="Brands Row 3">
+      <div class="brands-track">
+        <?php $__currentLoopData = [1, 2]; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $repeat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+          <?php $__currentLoopData = $row3; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $b): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            <?php $logoUrl = $resolveLogo($b['slug'], $b['name']); ?>
+            <a href="<?php echo e(route('shop.index', ['brand' => $b['slug']])); ?>" class="brand-card-item" title="Explore <?php echo e($b['name']); ?> Collection">
+              <div class="brand-card-logo-wrap">
+                <?php if($logoUrl): ?>
+                  <img src="<?php echo e($logoUrl); ?>" alt="<?php echo e($b['name']); ?> Logo" class="brand-card-logo" loading="lazy">
+                <?php else: ?>
+                  <span class="brand-card-text"><?php echo e($b['name']); ?></span>
+                <?php endif; ?>
+              </div>
+            </a>
+          <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+      </div>
     </div>
   </div>
-  <div class="promo-split-image">
-    <img src="https://images.unsplash.com/photo-1581553680321-4fffae59fccd?w=1000&q=80&fit=crop" alt="Durable Suitcase House Heritage">
+
+  
+  <div class="brands-control-wrap">
+    <button type="button" class="brands-pause-toggle" id="brandsPauseToggle" aria-pressed="false" aria-label="Pause brand carousel animation">
+      <i class="bi bi-pause-fill" id="brandsControlIcon"></i>
+      <span id="brandsControlText">Pause Animation</span>
+    </button>
   </div>
 </section>
 
 
-<section class="brands-section">
-  <div class="container-xl-custom">
-    <div class="text-center mb-4">
-      <span class="section-label-heritage">Authorized Dealer &amp; Retailer</span>
-      <h3 style="font-family:var(--font-serif); font-size:2rem; font-weight:700; color:var(--dsh-navy); margin-bottom:8px;">
-        Official Partner Brands
-      </h3>
-      <p style="font-size:0.92rem; color:var(--dsh-text-muted);">We deal exclusively in trusted, genuine brands with manufacturer warranties</p>
-    </div>
-
-    <div class="row g-3 justify-content-center">
-      <?php $__currentLoopData = ['American Tourister', 'Safari', 'VIP', 'Samsonite', 'Kamiliant', 'Swiss Military', 'Tommy Hilfiger', 'Delsey Paris', 'Aldo', 'Wrangler', 'Genie', 'Aristocrat']; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $brandName): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-      <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-        <a href="<?php echo e(route('shop.index', ['brand' => \Illuminate\Support\Str::slug($brandName)])); ?>" class="brand-pill">
-          <?php echo e($brandName); ?>
-
-        </a>
-      </div>
-      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-    </div>
-  </div>
-</section>
-
-
-<section class="products-section">
-  <div class="container-xl-custom">
-    <div class="section-header-heritage">
-      <span class="section-label-heritage">Fresh In Store</span>
-      <div class="section-title-wrap">
-        <span class="title-line-heritage"></span>
-        <h2 class="section-title-heritage">New Arrivals</h2>
-        <span class="title-line-heritage"></span>
-      </div>
-      <p class="section-sub-heritage">Latest suitcase models, school collections, and party purse releases</p>
+<section class="trust-editorial-section">
+  <div class="container-xl-custom position-relative" style="z-index: 2;">
+    <div class="editorial-header">
+      <span class="editorial-subtitle" style="color:var(--dsh-gold-bright, #D4AF37);">The Patiala Heritage</span>
+      <h2 class="editorial-title" style="color:#ffffff;">WHY DURABLE SUITCASE HOUSE?</h2>
+      <p style="color:rgba(247, 243, 232, 0.85); font-size:1.05rem; margin-top:14px;">
+        Over six decades of honest advice, authentic brand partnerships, and thousands of journeys fulfilled.
+      </p>
     </div>
 
     <div class="row g-4">
-      <?php $__empty_1 = true; $__currentLoopData = $newArrivals->take(8); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
-      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-        <?php echo $__env->make('frontend.partials.product-card', ['product' => $product], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="trust-card">
+          <div class="trust-card-icon"><i class="bi bi-patch-check-fill"></i></div>
+          <h3 class="trust-card-title">Trusted Destination</h3>
+          <p class="trust-card-text">
+            Serving Patiala and Punjab families since 1960. Three generations of unmatched trust and repeat customer delight.
+          </p>
+        </div>
       </div>
-      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
-      <div class="col-12 text-center py-5">
-        <p class="text-muted">No new arrivals to display.</p>
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="trust-card">
+          <div class="trust-card-icon"><i class="bi bi-shield-lock-fill"></i></div>
+          <h3 class="trust-card-title">Multiple Brands Under 1 Roof</h3>
+          <p class="trust-card-text">
+            Official partner for VIP, American Tourister, Safari, Samsonite, Woodland, Mokobara and Swiss Military.
+          </p>
+        </div>
       </div>
-      <?php endif; ?>
-    </div>
-
-    <div class="text-center mt-5">
-      <a href="<?php echo e(route('shop.index', ['new_arrival' => 1])); ?>" class="btn-glamora" style="padding:14px 40px;background:var(--dsh-navy);border-color:var(--dsh-navy);">
-        View All New Arrivals
-      </a>
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="trust-card">
+          <div class="trust-card-icon"><i class="bi bi-bag-check-fill"></i></div>
+          <h3 class="trust-card-title">Travel &amp; Everyday Bags</h3>
+          <p class="trust-card-text">
+            Complete selection spanning heavy-duty trolleys, school and laptop backpacks, bridal clutches, and designer purses.
+          </p>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="trust-card">
+          <div class="trust-card-icon"><i class="bi bi-person-heart"></i></div>
+          <h3 class="trust-card-title">In-Store Assistance</h3>
+          <p class="trust-card-text">
+            Personal guidance to pick the perfect airline cabin dimension, weight-saving hard shells, and durable zippers.
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 
-<section style="padding:70px 0; background:var(--dsh-cream);">
+<section class="store-experience-section" id="store" style="background:#ffffff; padding:95px 0;">
   <div class="container-xl-custom">
     <div class="row g-5 align-items-center">
       <div class="col-lg-6">
-        <span class="section-label-heritage">Visit In Person</span>
-        <h2 style="font-family:var(--font-serif); font-size:2.4rem; font-weight:700; color:var(--dsh-navy); margin-bottom:18px;">
-          Experience Generations of Trust in Patiala
+        <span class="editorial-subtitle" style="color:var(--dsh-gold-dark, #A97E3B);">Physical Showroom</span>
+        <h2 style="font-family:var(--font-serif); font-size:clamp(2.4rem, 4vw, 3.6rem); font-weight:700; color:var(--dsh-navy, #142D4E); line-height:1.15; margin-bottom:20px;">
+          YOUR NEXT JOURNEY<br>
+          <span style="color:var(--dsh-gold-dark, #A97E3B);">STARTS HERE.</span>
         </h2>
-        <p style="color:var(--dsh-charcoal); font-size:1.05rem; line-height:1.75; margin-bottom:24px;">
-          Located in the heart of Dharampura Bazar near Anardana Chowk, our store welcomes you with an extensive display of suitcases, school bags, fashion handbags, and our renowned bridal purse collection.
+        <p style="color:var(--dsh-charcoal, #333333); font-size:1.05rem; line-height:1.75; margin-bottom:28px;">
+          Visit our flagship showroom in Dharampura Bazar, Near Anardana Chowk, Patiala. Touch, inspect, test the wheel gliding smoothness, and take home authentic brand travel gear.
         </p>
-        <div style="background:#fff; border:1px solid var(--dsh-cream-dark); border-radius:10px; padding:24px; margin-bottom:28px;">
-          <div class="d-flex align-items-center gap-3 mb-3">
+
+        <div style="background:#ffffff; border:2px solid var(--dsh-cream-dark); border-left:4px solid var(--dsh-navy, #142D4E); border-radius:12px; padding:24px; margin-bottom:32px; box-shadow:0 8px 24px rgba(20,45,78,0.06);">
+          <div class="d-flex align-items-start gap-3 mb-3">
             <i class="bi bi-geo-alt-fill" style="font-size:1.4rem; color:var(--dsh-gold-dark);"></i>
             <div>
               <strong style="color:var(--dsh-navy);">Store Address:</strong><br>
-              Near Anardana Chowk, Dharampura Bazar, Patiala, Punjab - 147001
+              <span style="color:var(--dsh-charcoal);">Dharampura Bazar, Near Anardana Chowk, Patiala, Punjab &ndash; 147001</span>
             </div>
           </div>
           <div class="d-flex align-items-center gap-3 mb-3">
             <i class="bi bi-telephone-fill" style="font-size:1.4rem; color:var(--dsh-gold-dark);"></i>
             <div>
-              <strong style="color:var(--dsh-navy);">Phone Enquiries:</strong><br>
-              9914469211 &bull; 9814041822 &bull; 9914141822
+              <strong style="color:var(--dsh-navy);">Direct Helpline:</strong><br>
+              <span style="color:var(--dsh-charcoal);">+91 9914469211 &bull; +91 9814041822</span>
             </div>
           </div>
           <div class="d-flex align-items-center gap-3">
             <i class="bi bi-whatsapp" style="font-size:1.4rem; color:#25D366;"></i>
             <div>
-              <strong style="color:var(--dsh-navy);">WhatsApp Assistance:</strong><br>
-              +91 9914469211 (Quick inquiries &amp; product photos)
+              <strong style="color:var(--dsh-navy);">Instant WhatsApp:</strong><br>
+              <span style="color:var(--dsh-charcoal);">Chat with our in-store team for live inventory &amp; product photos</span>
             </div>
           </div>
         </div>
+
         <div class="d-flex gap-3 flex-wrap">
-          <a href="https://wa.me/919914469211" target="_blank" class="hero-btn-pill" style="background:#25D366; border-color:#25D366;">
-            <i class="bi bi-whatsapp me-1"></i> WhatsApp Us Now
+          <a href="https://wa.me/919914469211?text=<?php echo e(urlencode('Hi Durable Suitcase House, I would like to enquire about your luggage and bag collection.')); ?>" target="_blank" class="hero-cta-btn" style="background:#25D366; color:#fff; box-shadow:0 10px 30px rgba(37,211,102,0.35); opacity:1; transform:none; display:inline-flex;">
+            <i class="bi bi-whatsapp"></i> Chat On WhatsApp
           </a>
-          <a href="<?php echo e(route('contact.index')); ?>" class="hero-btn-outline-pill">
-            Get Directions
+          <a href="https://maps.google.com/?q=Durable+Suitcase+House+Near+Anardana+Chowk+Dharampura+Bazar+Patiala" target="_blank" class="hero-cta-btn" style="background:var(--dsh-navy); border:1px solid var(--dsh-navy); color:#ffffff; box-shadow:none; opacity:1; transform:none; display:inline-flex;">
+            <i class="bi bi-geo-alt"></i> Get Directions
           </a>
         </div>
       </div>
+
       <div class="col-lg-6">
-        <div style="border-radius:14px; overflow:hidden; border:2px solid var(--dsh-cream-dark); box-shadow:0 12px 32px rgba(20,45,78,0.1);">
-          <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?w=800&q=80&fit=crop" alt="Durable Suitcase House Storefront" style="width:100%; height:auto; display:block;">
+        <div class="store-img-wrap">
+          <img src="<?php echo e(asset('images/Durableshop.png')); ?>" alt="Durable Suitcase House Patiala Showroom">
         </div>
       </div>
     </div>
@@ -713,11 +1789,255 @@
 
 <?php $__env->startPush('scripts'); ?>
 <script>
-new Swiper('.heroSwiper', {
-  loop: true,
-  speed: 800,
-  autoplay: { delay: 5000, disableOnInteraction: false },
-  pagination: { el: '.hero-pagination', clickable: true },
+document.addEventListener('DOMContentLoaded', function () {
+  // Check if GSAP & ScrollTrigger are loaded
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+    console.warn('GSAP or ScrollTrigger not loaded; falling back to static presentation.');
+    const s1 = document.getElementById('heroScene1');
+    if (s1) s1.style.opacity = '1';
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const wrapper = document.getElementById('heroScrollWrapper');
+  const viewport = document.getElementById('heroViewport');
+
+  const scene1 = document.getElementById('heroScene1');
+  const bgScene1 = document.getElementById('bgScene1');
+
+  const scene2 = document.getElementById('heroScene2');
+  const bgScene2 = document.getElementById('bgScene2');
+
+  const scene3 = document.getElementById('heroScene3');
+  const bgTraveler = document.getElementById('bgTraveler');
+  const storyColTraveler = document.getElementById('storyColTraveler');
+  const traveler1 = document.getElementById('traveler1');
+  const traveler2 = document.getElementById('traveler2');
+  const traveler3 = document.getElementById('traveler3');
+  const travelerSupporting = document.getElementById('travelerSupporting');
+  const travelerCta = document.getElementById('travelerCta');
+
+  const scene4 = document.getElementById('heroScene4');
+  const bgBridal = document.getElementById('bgBridal');
+  const storyColBridal = document.getElementById('storyColBridal');
+  const bridal1 = document.getElementById('bridal1');
+  const bridal2 = document.getElementById('bridal2');
+  const bridal3 = document.getElementById('bridal3');
+  const bridalSupporting = document.getElementById('bridalSupporting');
+  const bridalCta = document.getElementById('bridalCta');
+
+  const dot1 = document.getElementById('dot1');
+  const dot2 = document.getElementById('dot2');
+  const dot3 = document.getElementById('dot3');
+  const dot4 = document.getElementById('dot4');
+  const progressBar = document.getElementById('heroProgressBar');
+  const hudStatus = document.getElementById('hudStatus');
+
+  // -------------------------------------------------------------
+  // 1. MOBILE STANDALONE SWIPER (< 992px)
+  // -------------------------------------------------------------
+  if (window.innerWidth < 992) {
+    if (typeof Swiper !== 'undefined') {
+      new Swiper('#mobileHeroSwiper', {
+        loop: true,
+        speed: 400,
+        autoplay: {
+          delay: 4500,
+          disableOnInteraction: false,
+        },
+        navigation: {
+          nextEl: '#swiperNextBtn',
+          prevEl: '#swiperPrevBtn',
+        },
+        pagination: {
+          el: '.mobile-swiper-pagination',
+          clickable: true,
+        },
+      });
+    }
+    return; // Don't run GSAP ScrollTrigger on mobile
+  }
+
+  // -------------------------------------------------------------
+  // 2. DESKTOP CINEMATIC GSAP SCROLLTRIGGER (>= 992px)
+  // -------------------------------------------------------------
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+    return;
+  }
+
+  // Initial States for Desktop GSAP ScrollTrigger
+  gsap.set(scene1, { opacity: 1, pointerEvents: 'auto' });
+  gsap.set(bgScene1, { scale: 1 });
+
+  gsap.set(scene2, { opacity: 0, pointerEvents: 'none' });
+  gsap.set(bgScene2, { scale: 1.15, y: 30 });
+
+  gsap.set(scene3, { opacity: 0, pointerEvents: 'none' });
+  gsap.set(bgTraveler, { scale: 1.05 });
+  gsap.set(storyColTraveler, { opacity: 0, x: -50 });
+
+  gsap.set(scene4, { opacity: 0, pointerEvents: 'none' });
+  gsap.set(bgBridal, { scale: 1.05 });
+  gsap.set(storyColBridal, { opacity: 0, x: -50 });
+
+  // Pinned GSAP ScrollTrigger Master Timeline (4 Scenes)
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: wrapper,
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: 1, // Smooth scrub
+      onUpdate: (self) => {
+        const prog = self.progress;
+        if (progressBar) progressBar.style.width = (prog * 100) + '%';
+
+        // Update step dots & HUD
+        if (prog < 0.25) {
+          if (dot1) dot1.classList.add('active');
+          if (dot2) dot2.classList.remove('active');
+          if (dot3) dot3.classList.remove('active');
+          if (dot4) dot4.classList.remove('active');
+          if (hudStatus) hudStatus.textContent = 'SCENE 1: THE STORE';
+        } else if (prog < 0.50) {
+          if (dot1) dot1.classList.remove('active');
+          if (dot2) dot2.classList.add('active');
+          if (dot3) dot3.classList.remove('active');
+          if (dot4) dot4.classList.remove('active');
+          if (hudStatus) hudStatus.textContent = 'SCENE 2: SHOWROOM LUGGAGE';
+        } else if (prog < 0.75) {
+          if (dot1) dot1.classList.remove('active');
+          if (dot2) dot2.classList.remove('active');
+          if (dot3) dot3.classList.add('active');
+          if (dot4) dot4.classList.remove('active');
+          if (hudStatus) hudStatus.textContent = 'SCENE 3: THE TRAVELER';
+        } else {
+          if (dot1) dot1.classList.remove('active');
+          if (dot2) dot2.classList.remove('active');
+          if (dot3) dot3.classList.remove('active');
+          if (dot4) dot4.classList.add('active');
+          if (hudStatus) hudStatus.textContent = 'SCENE 4: BRIDAL PURSE COLLECTION';
+        }
+      }
+    }
+  });
+
+  /* -------------------------------------------------------------
+     SCENE 1 -> SCENE 2 TRANSITION (0 to ~1.0)
+     ------------------------------------------------------------- */
+  tl.to(bgScene1, {
+    scale: 1.1,
+    ease: 'none',
+    duration: 1.2
+  }, 0)
+  .to(scene1, {
+    opacity: 0,
+    ease: 'power2.inOut',
+    duration: 0.6,
+    onComplete: () => { if (scene1) scene1.style.pointerEvents = 'none'; }
+  }, 0.8);
+
+  /* -------------------------------------------------------------
+     SCENE 2 (0.8 to ~2.0)
+     ------------------------------------------------------------- */
+  tl.to(scene2, {
+    opacity: 1,
+    ease: 'power2.out',
+    duration: 0.6,
+    onStart: () => { if (scene2) scene2.style.pointerEvents = 'auto'; }
+  }, 0.8)
+  .to(bgScene2, {
+    scale: 1.0,
+    y: 0,
+    ease: 'none',
+    duration: 1.2
+  }, 0.8)
+  .to(scene2, {
+    opacity: 0,
+    ease: 'power2.inOut',
+    duration: 0.6,
+    onComplete: () => { if (scene2) scene2.style.pointerEvents = 'none'; }
+  }, 1.8);
+
+  /* -------------------------------------------------------------
+     SCENE 3: Traveler & Story (1.8 to ~3.0) - Right Side Text
+     ------------------------------------------------------------- */
+  tl.to(scene3, {
+    opacity: 1,
+    ease: 'power2.out',
+    duration: 0.6,
+    onStart: () => { if (scene3) scene3.style.pointerEvents = 'auto'; }
+  }, 1.8)
+  .to(bgTraveler, {
+    scale: 1.0,
+    ease: 'none',
+    duration: 1.2
+  }, 1.8)
+  .to(storyColTraveler, {
+    opacity: 1,
+    x: 0,
+    ease: 'power2.out',
+    duration: 0.6
+  }, 2.0)
+  .to(traveler1, { opacity: 1, x: 0, ease: 'power2.out', duration: 0.3 }, 2.1)
+  .to(traveler2, { opacity: 1, x: 0, ease: 'power2.out', duration: 0.3 }, 2.3)
+  .to(traveler3, { opacity: 1, x: 0, ease: 'power2.out', duration: 0.3 }, 2.5)
+  .to(travelerSupporting, { opacity: 1, y: 0, ease: 'power2.out', duration: 0.4 }, 2.6)
+  .to(travelerCta, { opacity: 1, y: 0, ease: 'power2.out', duration: 0.4 }, 2.7)
+  .to(scene3, {
+    opacity: 0,
+    ease: 'power2.inOut',
+    duration: 0.6,
+    onComplete: () => { if (scene3) scene3.style.pointerEvents = 'none'; }
+  }, 3.0);
+
+  /* -------------------------------------------------------------
+     SCENE 4: Bridal Panorama (3.0 to 4.2) - Left Side Text
+     ------------------------------------------------------------- */
+  tl.to(scene4, {
+    opacity: 1,
+    ease: 'power2.out',
+    duration: 0.6,
+    onStart: () => { if (scene4) scene4.style.pointerEvents = 'auto'; }
+  }, 3.0)
+  .to(bgBridal, {
+    scale: 1.0,
+    ease: 'none',
+    duration: 1.2
+  }, 3.0)
+  .to(storyColBridal, {
+    opacity: 1,
+    x: 0,
+    ease: 'power2.out',
+    duration: 0.6
+  }, 3.2)
+  .to(bridal1, { opacity: 1, x: 0, ease: 'power2.out', duration: 0.3 }, 3.3)
+  .to(bridal2, { opacity: 1, x: 0, ease: 'power2.out', duration: 0.3 }, 3.5)
+  .to(bridal3, { opacity: 1, x: 0, ease: 'power2.out', duration: 0.3 }, 3.7)
+  .to(bridalSupporting, { opacity: 1, y: 0, ease: 'power2.out', duration: 0.4 }, 3.8)
+  .to(bridalCta, { opacity: 1, y: 0, ease: 'power2.out', duration: 0.4 }, 3.9);
+});
+
+// Accessible Pause / Resume Toggle for Brands Carousel
+document.addEventListener('DOMContentLoaded', () => {
+  const container = document.getElementById('brandsCarouselContainer');
+  const toggleBtn = document.getElementById('brandsPauseToggle');
+  const controlIcon = document.getElementById('brandsControlIcon');
+  const controlText = document.getElementById('brandsControlText');
+
+  if (toggleBtn && container) {
+    toggleBtn.addEventListener('click', () => {
+      const isPaused = container.classList.toggle('is-paused');
+      toggleBtn.setAttribute('aria-pressed', isPaused ? 'true' : 'false');
+      if (isPaused) {
+        controlIcon.className = 'bi bi-play-fill';
+        controlText.textContent = 'Resume Animation';
+      } else {
+        controlIcon.className = 'bi bi-pause-fill';
+        controlText.textContent = 'Pause Animation';
+      }
+    });
+  }
 });
 </script>
 <?php $__env->stopPush(); ?>

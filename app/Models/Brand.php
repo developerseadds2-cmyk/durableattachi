@@ -24,4 +24,31 @@ class Brand extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public function getLogoUrlAttribute(): ?string
+    {
+        if (!$this->logo) {
+            // Check if file exists in public/images/brands/
+            foreach (['svg', 'png', 'webp', 'jpg', 'avif'] as $ext) {
+                if (file_exists(public_path('images/brands/' . $this->slug . '.' . $ext))) {
+                    return asset('images/brands/' . $this->slug . '.' . $ext);
+                }
+            }
+            return null;
+        }
+
+        if (Str::startsWith($this->logo, ['http://', 'https://'])) {
+            return $this->logo;
+        }
+
+        if (file_exists(public_path('uploads/brands/' . $this->logo))) {
+            return asset('uploads/brands/' . $this->logo);
+        }
+
+        if (file_exists(public_path($this->logo))) {
+            return asset($this->logo);
+        }
+
+        return asset('uploads/' . $this->logo);
+    }
 }

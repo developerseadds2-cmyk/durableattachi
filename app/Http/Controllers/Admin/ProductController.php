@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Brand;
+use App\Models\Color;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -35,7 +36,15 @@ class ProductController extends Controller
             $query->where('stock_quantity', 0);
         }
 
-        $products   = $query->paginate(20)->withQueryString();
+        // Support per_page option: 10, 20, 50, 100 or 'all'
+        $perPage = $request->input('per_page', 20);
+        if ($perPage === 'all' || (int)$perPage > 500) {
+            $perPage = 1000;
+        } else {
+            $perPage = max(10, min(100, (int)$perPage));
+        }
+
+        $products   = $query->paginate($perPage)->withQueryString();
         $categories = Category::active()->whereNull('parent_id')->with('children')->get();
 
         return view('admin.products.index', compact('products', 'categories'));
@@ -45,29 +54,35 @@ class ProductController extends Controller
     {
         $categories = Category::active()->orderBy('name')->get();
         $brands     = Brand::where('status', true)->orderBy('name')->get();
-        return view('admin.products.create', compact('categories', 'brands'));
+        $colors     = Color::where('status', true)->orderBy('name')->get();
+        return view('admin.products.create', compact('categories', 'brands', 'colors'));
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name'              => 'required|string|max:191',
-            'slug'              => 'nullable|string|max:191|unique:products,slug',
-            'category_id'       => 'required|exists:categories,id',
-            'brand_id'          => 'nullable|exists:brands,id',
-            'sku'               => 'nullable|string|max:100|unique:products',
-            'price'             => 'required|numeric|min:0',
-            'sale_price'        => 'nullable|numeric|min:0|lt:price',
-            'stock_quantity'    => 'required|integer|min:0',
-            'short_description' => 'nullable|string',
-            'description'       => 'nullable|string',
-            'material'          => 'nullable|string|max:150',
-            'metal_type'        => 'nullable|string|max:100',
-            'stone_type'        => 'nullable|string|max:100',
-            'weight'            => 'nullable|numeric|min:0',
-            'status'            => 'required|in:active,inactive,draft',
-            'thumbnail'         => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
-            'images.*'          => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'name'                 => 'required|string|max:191',
+            'slug'                 => 'nullable|string|max:191|unique:products,slug',
+            'category_id'          => 'required|exists:categories,id',
+            'brand_id'             => 'nullable|exists:brands,id',
+            'color_id'             => 'nullable|exists:colors,id',
+            'sku'                  => 'nullable|string|max:100|unique:products',
+            'price'                => 'required|numeric|min:0',
+            'sale_price'           => 'nullable|numeric|min:0|lt:price',
+            'cost_price'           => 'nullable|numeric|min:0',
+            'stock_quantity'       => 'required|integer|min:0',
+            'short_description'    => 'nullable|string',
+            'description'          => 'nullable|string',
+            'material'             => 'nullable|string|max:150',
+            'warranty_details'     => 'nullable|string|max:255',
+            'product_warranty'     => 'nullable|string|max:100',
+            'manufacturer_details' => 'nullable|string',
+            'tax_rate'             => 'nullable|numeric|min:0|max:100',
+            'hsn_code'             => 'nullable|string|max:50',
+            'weight'               => 'nullable|numeric|min:0',
+            'status'               => 'required|in:active,inactive,draft',
+            'thumbnail'            => 'nullable|file',
+            'images.*'             => 'nullable|file',
         ]);
 
         $validated['slug'] = Str::slug($request->input('slug') ?: $request->name);
@@ -164,24 +179,34 @@ class ProductController extends Controller
         $product->load(['images', 'attributes']);
         $categories = Category::active()->orderBy('name')->get();
         $brands     = Brand::where('status', true)->orderBy('name')->get();
-        return view('admin.products.edit', compact('product', 'categories', 'brands'));
+        $colors     = Color::where('status', true)->orderBy('name')->get();
+        return view('admin.products.edit', compact('product', 'categories', 'brands', 'colors'));
     }
 
     public function update(Request $request, Product $product)
     {
         $validated = $request->validate([
-            'name'              => 'required|string|max:191',
-            'slug'              => ['nullable', 'string', 'max:191', Rule::unique('products', 'slug')->ignore($product->id)],
-            'category_id'       => 'required|exists:categories,id',
-            'brand_id'          => 'nullable|exists:brands,id',
-            'sku'               => 'nullable|string|max:100|unique:products,sku,' . $product->id,
-            'price'             => 'required|numeric|min:0',
-            'sale_price'        => 'nullable|numeric|min:0',
-            'stock_quantity'    => 'required|integer|min:0',
-            'short_description' => 'nullable|string',
-            'description'       => 'nullable|string',
-            'status'            => 'required|in:active,inactive,draft',
-            'thumbnail'         => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'name'                 => 'required|string|max:191',
+            'slug'                 => ['nullable', 'string', 'max:191', Rule::unique('products', 'slug')->ignore($product->id)],
+            'category_id'          => 'required|exists:categories,id',
+            'brand_id'             => 'nullable|exists:brands,id',
+            'color_id'             => 'nullable|exists:colors,id',
+            'sku'                  => 'nullable|string|max:100|unique:products,sku,' . $product->id,
+            'price'                => 'required|numeric|min:0',
+            'sale_price'           => 'nullable|numeric|min:0',
+            'cost_price'           => 'nullable|numeric|min:0',
+            'stock_quantity'       => 'required|integer|min:0',
+            'short_description'    => 'nullable|string',
+            'description'          => 'nullable|string',
+            'material'             => 'nullable|string|max:150',
+            'warranty_details'     => 'nullable|string|max:255',
+            'product_warranty'     => 'nullable|string|max:100',
+            'manufacturer_details' => 'nullable|string',
+            'tax_rate'             => 'nullable|numeric|min:0|max:100',
+            'hsn_code'             => 'nullable|string|max:50',
+            'weight'               => 'nullable|numeric|min:0',
+            'status'               => 'required|in:active,inactive,draft',
+            'thumbnail'            => 'nullable|file',
         ]);
 
         if ($request->hasFile('thumbnail')) {
@@ -229,6 +254,31 @@ class ProductController extends Controller
 
         return redirect()->route('admin.products.index')
             ->with('success', 'Product deleted successfully.');
+    }
+
+    public function bulkDelete(Request $request)
+    {
+        $ids = $request->input('ids');
+        if (empty($ids) || !is_array($ids)) {
+            return redirect()->route('admin.products.index')
+                ->with('error', 'Please select at least one product to delete.');
+        }
+
+        $products = Product::whereIn('id', $ids)->get();
+        $count = $products->count();
+
+        foreach ($products as $product) {
+            foreach ($product->images as $img) {
+                @unlink(public_path('uploads/products/' . $img->image));
+            }
+            if ($product->thumbnail) {
+                @unlink(public_path('uploads/products/' . $product->thumbnail));
+            }
+            $product->delete();
+        }
+
+        return redirect()->route('admin.products.index')
+            ->with('success', "Successfully deleted {$count} product(s).");
     }
 
     public function toggleStatus(Product $product)

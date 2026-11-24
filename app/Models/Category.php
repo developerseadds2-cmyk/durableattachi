@@ -46,6 +46,22 @@ class Category extends Model
     public function getImageUrlAttribute(): string
     {
         if ($this->image) {
+            // If already a full URL
+            if (str_starts_with($this->image, 'http://') || str_starts_with($this->image, 'https://')) {
+                return $this->image;
+            }
+            // If path already starts with uploads/ or images/
+            if (str_starts_with($this->image, 'uploads/') || str_starts_with($this->image, 'images/')) {
+                return asset($this->image);
+            }
+            // Standard category upload path
+            if (file_exists(public_path('uploads/categories/' . $this->image))) {
+                return asset('uploads/categories/' . $this->image);
+            }
+            // Direct public path check
+            if (file_exists(public_path($this->image))) {
+                return asset($this->image);
+            }
             return asset('uploads/categories/' . $this->image);
         }
 
@@ -53,9 +69,15 @@ class Category extends Model
         if ($this->relationLoaded('products') && $this->products->isNotEmpty()) {
             $first = $this->products->first(fn($p) => !empty($p->thumbnail));
             if ($first && $first->thumbnail) {
+                if (str_starts_with($first->thumbnail, 'http://') || str_starts_with($first->thumbnail, 'https://')) {
+                    return $first->thumbnail;
+                }
                 return asset('uploads/products/' . $first->thumbnail);
             }
         } elseif ($product = $this->products()->whereNotNull('thumbnail')->first()) {
+            if (str_starts_with($product->thumbnail, 'http://') || str_starts_with($product->thumbnail, 'https://')) {
+                return $product->thumbnail;
+            }
             return asset('uploads/products/' . $product->thumbnail);
         }
 

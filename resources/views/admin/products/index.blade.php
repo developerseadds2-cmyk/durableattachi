@@ -45,6 +45,14 @@
         <option value="out" {{ request('stock') == 'out' ? 'selected' : '' }}>Out of Stock</option>
       </select>
     </div>
+    <div class="col-md-2 col-lg-1">
+      <select name="per_page" class="form-select form-select-sm" onchange="this.form.submit()">
+        <option value="20" {{ request('per_page') == '20' ? 'selected' : '' }}>20 / page</option>
+        <option value="50" {{ request('per_page') == '50' ? 'selected' : '' }}>50 / page</option>
+        <option value="100" {{ request('per_page') == '100' ? 'selected' : '' }}>100 / page</option>
+        <option value="all" {{ request('per_page') == 'all' ? 'selected' : '' }}>List All</option>
+      </select>
+    </div>
     <div class="col-auto">
       <button type="submit" class="btn btn-sm btn-gold">Filter</button>
       <a href="{{ route('admin.products.index') }}" class="btn btn-sm btn-outline-secondary ms-1">Reset</a>
@@ -53,13 +61,26 @@
 </div>
 
 <div class="admin-table">
-  <div class="d-flex justify-content-between align-items-center p-3 border-bottom">
-    <span class="text-muted small">{{ $products->total() }} products found</span>
+  <div class="d-flex justify-content-between align-items-center p-3 border-bottom flex-wrap gap-2">
+    <div class="d-flex align-items-center gap-3">
+      <span class="text-muted small">{{ $products->total() }} products found</span>
+      <span id="selectedCount" class="badge bg-secondary d-none">0 selected</span>
+    </div>
     <div class="d-flex gap-2">
+      <a href="{{ route('admin.products.index', array_merge(request()->query(), ['per_page' => 'all'])) }}" class="btn btn-sm {{ request('per_page') == 'all' ? 'btn-gold' : 'btn-outline-dark' }}">
+        <i class="bi bi-list-ul me-1"></i>List All Products
+      </a>
+      <button type="button" id="bulkDeleteBtn" class="btn btn-sm btn-danger d-none" onclick="submitBulkDelete()">
+        <i class="bi bi-trash me-1"></i>Delete Selected (<span id="deleteCount">0</span>)
+      </button>
       <button class="btn btn-sm btn-outline-secondary"><i class="bi bi-download me-1"></i>Export</button>
     </div>
   </div>
   <div class="table-responsive">
+    <form id="bulkDeleteForm" method="POST" action="{{ route('admin.products.bulk-delete') }}" style="display:none;">
+      @csrf
+      <div id="bulkDeleteInputs"></div>
+    </form>
     <table class="table">
       <thead>
         <tr>
@@ -149,8 +170,59 @@ function confirmDelete(url) {
     document.getElementById('deleteForm').submit();
   }
 }
-document.getElementById('checkAll').addEventListener('change', function() {
-  document.querySelectorAll('.row-check').forEach(c => c.checked = this.checked);
+
+const checkAll = document.getElementById('checkAll');
+const rowChecks = document.querySelectorAll('.row-check');
+const bulkDeleteBtn = document.getElementById('bulkDeleteBtn');
+const selectedCount = document.getElementById('selectedCount');
+const deleteCount = document.getElementById('deleteCount');
+
+function updateBulkState() {
+  const checked = document.querySelectorAll('.row-check:checked');
+  const count = checked.length;
+  if (count > 0) {
+    bulkDeleteBtn.classList.remove('d-none');
+    selectedCount.classList.remove('d-none');
+    selectedCount.textContent = count + ' selected';
+    deleteCount.textContent = count;
+  } else {
+    bulkDeleteBtn.classList.add('d-none');
+    selectedCount.classList.add('d-none');
+  }
+  if (checkAll) {
+    checkAll.checked = (count === rowChecks.length && rowChecks.length > 0);
+  }
+}
+
+if (checkAll) {
+  checkAll.addEventListener('change', function() {
+    rowChecks.forEach(c => c.checked = this.checked);
+    updateBulkState();
+  });
+}
+
+rowChecks.forEach(c => {
+  c.addEventListener('change', updateBulkState);
 });
+
+function submitBulkDelete() {
+  const checked = document.querySelectorAll('.row-check:checked');
+  if (checked.length === 0) {
+    alert('Please select at least one product to delete.');
+    return;
+  }
+  if (confirm('Are you sure you want to delete ' + checked.length + ' selected product(s)? This action cannot be undone.')) {
+    const container = document.getElementById('bulkDeleteInputs');
+    container.innerHTML = '';
+    checked.forEach(c => {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = 'ids[]';
+      input.value = c.value;
+      container.appendChild(input);
+    });
+    document.getElementById('bulkDeleteForm').submit();
+  }
+}
 </script>
 @endpush

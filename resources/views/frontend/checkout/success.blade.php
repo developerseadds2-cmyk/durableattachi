@@ -1,4 +1,4 @@
-﻿@extends('frontend.layouts.app')
+@extends('frontend.layouts.app')
 @section('title', 'Order Confirmed — Durable Suitcase House')
 
 @push('styles')
@@ -115,7 +115,7 @@
       Order Confirmed!
     </h1>
     <p class="text-muted small mb-0">
-      Your herbal wellness order has been placed successfully. A confirmation message has been sent to your account.
+      Your order has been placed successfully. A confirmation message has been sent to your account.
     </p>
 
     <!-- Order Quick Info -->

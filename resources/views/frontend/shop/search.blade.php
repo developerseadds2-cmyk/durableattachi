@@ -1,4 +1,4 @@
-﻿@extends('frontend.layouts.app')
+@extends('frontend.layouts.app')
 @section('title', $q ? 'Search: '.$q.' — Durable Suitcase House' : 'Search — Durable Suitcase House')
 
 @push('styles')
@@ -83,7 +83,7 @@
     <span class="section-label">Find Your Favorite</span>
     <h1 style="font-family:var(--font-serif);font-size:2.5rem;font-weight:400;margin-bottom:6px;">Search Results</h1>
     <form action="{{ route('search') }}" method="GET" class="search-form-wrap">
-      <input type="search" name="q" value="{{ $q }}" class="form-control search-input-custom" placeholder="Search herbal products, wellness..." required minlength="2">
+      <input type="search" name="q" value="{{ $q }}" class="form-control search-input-custom" placeholder="Search suitcases, backpacks, handbags..." required minlength="2">
       <button class="btn-glamora" style="padding:11px 26px;border-radius:8px;">
         <i class="bi bi-search me-1"></i> Search
       </button>
@@ -122,7 +122,7 @@
         {{ $q ? 'No products found for "'.e($q).'"' : 'What are you looking for?' }}
       </h5>
       <p class="text-muted small mb-4">
-        {{ $q ? 'Try another herbal product name or category.' : 'Search our Ayurvedic herbal collection by product name or category.' }}
+        {{ $q ? 'Try another product name or category.' : 'Search our collection by product name or category.' }}
       </p>
       <a href="{{ route('shop.index') }}" class="btn-glamora" style="padding:11px 28px;border-radius:6px;">
         <i class="bi bi-shop me-1"></i> Browse All Products

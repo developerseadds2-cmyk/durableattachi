@@ -1,4 +1,4 @@
-﻿@extends('frontend.layouts.app')
+@extends('frontend.layouts.app')
 @section('title', 'My Wishlist — Durable Suitcase House')
 
 @section('content')
@@ -95,7 +95,7 @@
               <i class="bi bi-heart" style="font-size:2rem;color:var(--dsh-navy-light);"></i>
             </div>
             <h5 style="font-family:var(--font-serif);font-size:1.25rem;color:var(--dsh-navy);margin-bottom:6px;">Your Wishlist is Empty</h5>
-            <p class="text-muted small mb-4">Explore our pure Ayurvedic wellness and herbal collection and save your favorites.</p>
+            <p class="text-muted small mb-4">Explore our authentic luggage, bags, and bridal purse collection and save your favorites.</p>
             <a href="{{ route('shop.index') }}" class="btn-glamora" style="padding:11px 28px;border-radius:6px;">
               <i class="bi bi-shop me-1"></i> Browse Products
             </a>

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -102,13 +102,14 @@
   .admin-table .table td { padding: 14px 16px; vertical-align: middle; border-color: #f0f0f0; font-size: 0.875rem; }
   .admin-table .table tbody tr:hover { background: #fafbff; }
 
-  /* Pagination */
-  .admin-table .pagination { margin: 0; justify-content: flex-end; gap: 4px; }
-  .admin-table .page-link { border: 1px solid #e2e6ef; border-radius: 7px !important; color: #596579; min-width: 36px; text-align: center; padding: 7px 11px; font-size: .8rem; background: #fff; }
-  .admin-table .page-link:hover { color: #1a1a2e; background: #fff8e8; border-color: var(--admin-gold); }
-  .admin-table .page-item.active .page-link { background: var(--admin-gold); border-color: var(--admin-gold); color: #1a1a2e; font-weight: 700; }
-  .admin-table .page-item.disabled .page-link { color: #b7bdc8; background: #f8f9fc; }
-  .admin-table nav p.small { margin: 0; color: #7b8494; font-size: .78rem; }
+  /* Pagination Global Fix */
+  .pagination { margin: 0; gap: 4px; display: inline-flex; }
+  .pagination svg, nav svg { width: 14px !important; height: 14px !important; max-width: 16px !important; max-height: 16px !important; }
+  .page-link { border: 1px solid #e2e6ef; border-radius: 7px !important; color: #596579; min-width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center; padding: 4px 10px; font-size: .82rem; background: #fff; }
+  .page-link:hover { color: #1a1a2e; background: #fff8e8; border-color: var(--admin-gold); }
+  .page-item.active .page-link { background: var(--admin-gold); border-color: var(--admin-gold); color: #1a1a2e; font-weight: 700; }
+  .page-item.disabled .page-link { color: #b7bdc8; background: #f8f9fc; }
+  nav p.small { margin: 0; color: #7b8494; font-size: .8rem; }
 
   /* Page header */
   .page-header { background: #fff; border-radius: 16px; padding: 20px 24px;
@@ -173,14 +174,15 @@
 
     <!-- Catalog -->
     <li class="sidebar-category">Catalog</li>
-    <li class="nav-item has-submenu {{ request()->routeIs('admin.products*') ? 'open' : '' }}">
+    <li class="nav-item has-submenu {{ request()->routeIs('admin.products*', 'admin.colors*') ? 'open' : '' }}">
       <a href="#" class="nav-link" onclick="toggleSubmenu(this); return false;">
         <i class="bi bi-bag-heart"></i> <span class="sidebar-label">Products</span>
         <i class="bi bi-chevron-right arrow sidebar-label"></i>
       </a>
-      <ul class="submenu {{ request()->routeIs('admin.products*') ? 'show' : '' }}">
+      <ul class="submenu {{ request()->routeIs('admin.products*', 'admin.colors*') ? 'show' : '' }}">
         <li><a href="{{ route('admin.products.index') }}" class="nav-link {{ request()->routeIs('admin.products.index') ? 'active' : '' }}"><span class="sidebar-label">All Products</span></a></li>
         <li><a href="{{ route('admin.products.create') }}" class="nav-link {{ request()->routeIs('admin.products.create') ? 'active' : '' }}"><span class="sidebar-label">Add Product</span></a></li>
+        <li><a href="{{ route('admin.colors.index') }}" class="nav-link {{ request()->routeIs('admin.colors*') ? 'active' : '' }}"><span class="sidebar-label">Colors</span></a></li>
       </ul>
     </li>
     <li class="nav-item">

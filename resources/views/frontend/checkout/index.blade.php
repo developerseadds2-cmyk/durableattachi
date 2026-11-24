@@ -1,4 +1,4 @@
-﻿@extends('frontend.layouts.app')
+@extends('frontend.layouts.app')
 @section('title', 'Checkout — Durable Suitcase House')
 
 @push('styles')
@@ -377,7 +377,7 @@
                 <i class="bi bi-cash-stack text-success" style="font-size:1.15rem;"></i>
                 <strong class="text-dark">Cash on Delivery (COD)</strong>
               </div>
-              <p class="text-muted small mb-0 mt-1">Pay with cash when your herbal package arrives at your doorstep.</p>
+              <p class="text-muted small mb-0 mt-1">Pay with cash when your package arrives at your doorstep.</p>
             </div>
           </label>
 

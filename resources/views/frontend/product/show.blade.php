@@ -1,4 +1,4 @@
-﻿@extends('frontend.layouts.app')
+@extends('frontend.layouts.app')
 @section('title', $product->name . ' — Durable Suitcase House Since 1960')
 @section('meta_description', $product->meta_description ?? $product->short_description)
 
@@ -8,12 +8,17 @@
 .main-image { 
   aspect-ratio: 1; 
   overflow: hidden; 
-  background: var(--pd-ice); 
+  background: #ffffff; 
   border-radius: var(--border-radius, 12px);
   box-shadow: var(--shadow-sm);
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ebebeb;
+  padding: 15px;
 }
-.main-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+.main-image img { width: 100%; height: 100%; object-fit: contain; transition: transform 0.4s ease; }
 .main-image:hover img { transform: scale(1.04); }
 .thumb-gallery { 
   display: grid; 
@@ -25,17 +30,21 @@
   aspect-ratio: 1; 
   overflow: hidden; 
   cursor: pointer; 
-  border: 2px solid transparent; 
+  border: 2px solid #ebebeb; 
   border-radius: 8px;
-  background: var(--pd-ice);
+  background: #ffffff;
   transition: all 0.2s ease; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
 }
 .thumb-item.active, .thumb-item:hover { 
   border-color: var(--dsh-navy, #163624); 
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
-.thumb-item img { width: 100%; height: 100%; object-fit: cover; }
+.thumb-item img { width: 100%; height: 100%; object-fit: contain; }
 .product-title { 
   font-family: var(--font-serif); 
   font-size: 2rem; 
@@ -373,18 +382,70 @@
         </button>
       </div>
 
-      <!-- Meta info -->
-      <div class="border-top pt-4">
-        @if($product->material)<div class="product-meta-row"><span class="product-meta-label">Material:</span> <span>{{ $product->material }}</span></div>@endif
-        @if($product->metal_type)<div class="product-meta-row"><span class="product-meta-label">Metal:</span> <span>{{ $product->metal_type }}</span></div>@endif
-        @if($product->stone_type)<div class="product-meta-row"><span class="product-meta-label">Stone:</span> <span>{{ $product->stone_type }}</span></div>@endif
-        @if($product->weight)<div class="product-meta-row"><span class="product-meta-label">Weight:</span> <span>{{ $product->weight }}g</span></div>@endif
-        <div class="product-meta-row"><span class="product-meta-label">Availability:</span>
-          @if($product->isInStock())
-            <span class="text-success fw-600">In Stock ({{ $product->stock_quantity }} available)</span>
-          @else
-            <span class="text-danger fw-600">Out of Stock</span>
+      <!-- Highlights Section -->
+      <div class="border-top pt-3 mt-3">
+        <h6 class="fw-bold mb-3" style="color:var(--dsh-navy, #142D4E); font-size: 1.05rem; letter-spacing: 0.5px;">
+          <i class="bi bi-stars me-2 text-warning"></i>Highlights
+        </h6>
+        <div class="p-3 rounded-3 mb-3" style="background:#f9f9f6; border:1px solid #ebe9df;">
+          @if($product->brand)
+            <div class="product-meta-row py-1"><span class="product-meta-label fw-bold" style="color:#555;">Brand:</span> <span class="fw-600 text-dark">{{ $product->brand->name }}</span></div>
           @endif
+          @if($product->color)
+            <div class="product-meta-row py-1 d-flex align-items-center gap-2">
+              <span class="product-meta-label fw-bold" style="color:#555;">Color:</span>
+              <span class="d-inline-flex align-items-center gap-2 fw-600 text-dark">
+                <span style="display:inline-block; width:16px; height:16px; border-radius:50%; background:{{ $product->color->code ?: '#C0C0C0' }}; border:1px solid #bbb;"></span>
+                {{ $product->color->name }}
+              </span>
+            </div>
+          @endif
+          @if($product->short_description)
+            <div class="product-meta-row py-1">
+              <span class="product-meta-label fw-bold" style="color:#555;">Product Features:</span>
+              <span class="text-dark">{{ $product->short_description }}</span>
+            </div>
+          @endif
+          @if($product->warranty_details)
+            <div class="product-meta-row py-1">
+              <span class="product-meta-label fw-bold" style="color:#555;">Warranty Details:</span>
+              <span class="text-success fw-600"><i class="bi bi-shield-check me-1"></i>{{ $product->warranty_details }}</span>
+            </div>
+          @endif
+        </div>
+      </div>
+
+      <!-- Other Info Section -->
+      <div class="border-top pt-3 mt-3">
+        <h6 class="fw-bold mb-3" style="color:var(--dsh-navy, #142D4E); font-size: 1.05rem; letter-spacing: 0.5px;">
+          <i class="bi bi-info-circle me-2 text-primary"></i>Other Info
+        </h6>
+        <div class="p-3 rounded-3 mb-3" style="background:#ffffff; border:1px solid #ebebeb;">
+          @if($product->product_warranty)
+            <div class="product-meta-row py-1"><span class="product-meta-label fw-bold" style="color:#555;">Product Warranty:</span> <span class="text-dark">{{ $product->product_warranty }}</span></div>
+          @endif
+          @if($product->manufacturer_details)
+            <div class="product-meta-row py-1"><span class="product-meta-label fw-bold" style="color:#555;">Manufacturer Details:</span> <span class="text-dark">{{ $product->manufacturer_details }}</span></div>
+          @endif
+          @if($product->tax_rate)
+            <div class="product-meta-row py-1"><span class="product-meta-label fw-bold" style="color:#555;">Tax Rate:</span> <span class="text-dark">{{ number_format($product->tax_rate, 2) }}%</span></div>
+          @endif
+          @if($product->hsn_code)
+            <div class="product-meta-row py-1"><span class="product-meta-label fw-bold" style="color:#555;">HSN:</span> <span class="text-dark">{{ $product->hsn_code }}</span></div>
+          @endif
+          @if($product->material)
+            <div class="product-meta-row py-1"><span class="product-meta-label fw-bold" style="color:#555;">Material:</span> <span class="text-dark">{{ $product->material }}</span></div>
+          @endif
+          @if($product->weight)
+            <div class="product-meta-row py-1"><span class="product-meta-label fw-bold" style="color:#555;">Weight:</span> <span class="text-dark">{{ $product->weight }} kg</span></div>
+          @endif
+          <div class="product-meta-row py-1"><span class="product-meta-label fw-bold" style="color:#555;">Availability:</span>
+            @if($product->isInStock())
+              <span class="text-success fw-600">In Stock ({{ $product->stock_quantity }} available)</span>
+            @else
+              <span class="text-danger fw-600">Out of Stock</span>
+            @endif
+          </div>
         </div>
       </div>
 

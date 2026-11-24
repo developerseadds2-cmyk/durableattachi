@@ -1,4 +1,4 @@
-﻿@extends('frontend.layouts.app')
+@extends('frontend.layouts.app')
 @section('title', 'Shopping Cart — Durable Suitcase House')
 
 @push('styles')
@@ -252,7 +252,7 @@
     <div class="text-center py-5">
       <i class="bi bi-bag" style="font-size:4rem;color:var(--border);display:block;margin-bottom:20px;"></i>
       <h4 style="font-family:var(--font-serif); color:var(--dsh-navy);">Your cart is empty</h4>
-      <p class="text-muted">Explore authentic Ayurvedic wellness and herbal remedies</p>
+      <p class="text-muted">Explore authentic suitcases, luggage, handbags, and travel essentials</p>
       <a href="{{ route('shop.index') }}" class="btn-glamora" style="padding:14px 36px;">Continue Shopping</a>
     </div>
   @else

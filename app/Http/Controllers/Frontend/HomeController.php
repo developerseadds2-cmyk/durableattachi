@@ -18,9 +18,9 @@ class HomeController extends Controller
     {
         $sliders      = Slider::active()->get();
         $categories   = Category::active()->whereNull('parent_id')->withCount('products')->orderBy('sort_order')->get();
-        $featured     = Product::active()->featured()->with('category')->limit(8)->get();
-        $newArrivals  = Product::active()->newArrivals()->with('category')->latest()->limit(8)->get();
-        $bestSellers  = Product::active()->bestSellers()->with('category')->limit(8)->get();
+        $featured     = Product::active()->featured()->with('category')->limit(10)->get();
+        $newArrivals  = Product::active()->newArrivals()->with('category')->latest()->limit(10)->get();
+        $bestSellers  = Product::active()->bestSellers()->with('category')->limit(10)->get();
         $banners      = Banner::active()->where('type', 'promo')->get();
         $recentPosts  = BlogPost::published()->with('author', 'category')->latest('published_at')->limit(3)->get();
 

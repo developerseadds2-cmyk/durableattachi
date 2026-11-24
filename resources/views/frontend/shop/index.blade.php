@@ -1,4 +1,4 @@
-﻿@extends('frontend.layouts.app')
+@extends('frontend.layouts.app')
 @section('title', 'Shop — Durable Suitcase House')
 
 @push('styles')
@@ -193,15 +193,45 @@
 </style>
 @endpush
 
+@php
+  $activeBrand = request('brand') ? $brands->firstWhere('slug', request('brand')) ?? \App\Models\Brand::where('slug', request('brand'))->first() : null;
+  $activeCat = request('category') ? $categories->firstWhere('slug', request('category')) ?? \App\Models\Category::where('slug', request('category'))->first() : null;
+
+  if ($activeBrand) {
+      $shopTitle = $activeBrand->name . ' Collection';
+      $breadcrumbCurrent = $activeBrand->name;
+      $sectionLabel = 'Authorized Brand';
+  } elseif ($activeCat) {
+      $shopTitle = $activeCat->name;
+      $breadcrumbCurrent = $activeCat->name;
+      $sectionLabel = 'Category';
+  } elseif (request('new_arrival')) {
+      $shopTitle = 'New Season Arrivals';
+      $breadcrumbCurrent = 'New Arrivals';
+      $sectionLabel = 'Fresh In Store';
+  } elseif (request('featured')) {
+      $shopTitle = 'Featured Collection';
+      $breadcrumbCurrent = 'Featured';
+      $sectionLabel = 'Curated Selection';
+  } else {
+      $shopTitle = 'Shop All Travel Gear & Bags';
+      $breadcrumbCurrent = 'All Products';
+      $sectionLabel = 'Our Collection';
+  }
+@endphp
+
 @section('content')
 <div class="shop-hero">
   <div class="container-xl-custom">
-    <span class="section-label">Our Collection</span>
-    <h1 style="font-family:var(--font-serif); font-size:2.5rem; font-weight:400; margin-bottom:6px;">Shop All Ayurvedic Products</h1>
+    <span class="section-label">{{ $sectionLabel }}</span>
+    <h1 style="font-family:var(--font-serif); font-size:2.5rem; font-weight:700; color:var(--dsh-navy, #142D4E); margin-bottom:6px;">{{ $shopTitle }}</h1>
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb justify-content-center small text-muted" style="background:none; padding:0; margin:0;">
         <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-        <li class="breadcrumb-item active">Shop</li>
+        <li class="breadcrumb-item"><a href="{{ route('shop.index') }}">Shop</a></li>
+        @if($breadcrumbCurrent !== 'All Products')
+          <li class="breadcrumb-item active" style="color:var(--dsh-gold-dark, #A97E3B); font-weight:600;">{{ $breadcrumbCurrent }}</li>
+        @endif
       </ol>
     </nav>
   </div>
