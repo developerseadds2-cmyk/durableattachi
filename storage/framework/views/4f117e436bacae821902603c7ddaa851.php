@@ -18,6 +18,8 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <!-- Bootstrap Icons -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<!-- Font Awesome 6 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <!-- Animate.css -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 <!-- Swiper -->
@@ -100,6 +102,9 @@
 html, body {
   margin: 0;
   padding: 0;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: clip;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -110,10 +115,18 @@ body {
   background: #fff;
   font-size: 16px;
   line-height: 1.6;
-  overflow-x: hidden;
+  overflow-x: clip;
+  position: relative;
 }
 
-main { display: block; margin: 0; padding: 0; }
+main {
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: clip;
+}
 
 h1,h2,h3,h4,h5,h6 { font-family: var(--font-serif); font-weight: 500; color: var(--dark); }
 
@@ -209,7 +222,7 @@ img { max-width: 100%; }
   padding: 0 32px;
   background: #ffffff;
   position: relative;
-  z-index: 2;
+  z-index: 1050;
 }
 .header-row1-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 82px; padding: 6px 0; }
 
@@ -257,7 +270,7 @@ img { max-width: 100%; }
 .site-logo:hover img { opacity: 0.85; }
 
 /* Search Bar - High Contrast Option 1 */
-.header-search-bar { flex:1; max-width:540px; margin:0 auto; }
+.header-search-bar { flex:1; max-width:540px; margin:0 auto; position: relative; z-index: 1060; }
 .header-search-form {
   display:flex; align-items:center; border:2px solid #C59A55;
   border-radius:28px; padding:0 18px; height:46px; background:#ffffff;
@@ -293,8 +306,8 @@ img { max-width: 100%; }
   background: #fff;
   border-radius: 12px;
   border: 1px solid #e2e8f0;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.14);
-  z-index: 1050;
+  box-shadow: 0 16px 36px rgba(0,0,0,0.18);
+  z-index: 9999;
   max-height: 380px;
   overflow-y: auto;
   display: none;
@@ -751,13 +764,14 @@ img { max-width: 100%; }
 .cart-drawer {
   position: fixed;
   top: 0; right: 0;
-  width: 400px;
+  width: 420px;
+  max-width: 100vw;
   height: 100vh;
-  background: #fff;
-  z-index: 9998;
-  box-shadow: -10px 0 50px rgba(0,0,0,0.15);
+  background: #ffffff;
+  z-index: 99998;
+  box-shadow: -10px 0 40px rgba(0,0,0,0.18);
   transform: translateX(100%);
-  transition: transform 0.35s ease;
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
 }
@@ -765,24 +779,210 @@ img { max-width: 100%; }
 .cart-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.5);
-  z-index: 9997;
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(2px);
+  z-index: 99997;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s;
+  transition: all 0.3s ease;
 }
 .cart-overlay.active { opacity: 1; visibility: visible; }
-.cart-header { padding: 24px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
-.cart-body { flex: 1; overflow-y: auto; padding: 16px; }
-.cart-footer { padding: 20px; border-top: 1px solid var(--border); }
-.cart-item { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); }
-.cart-item-img { width: 70px; height: 80px; object-fit: cover; flex-shrink: 0; }
-.cart-item-remove { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 1rem; padding: 0; }
-.cart-item-remove:hover { color: #dc3545; }
-.cart-quantity { display:flex; align-items:center; gap:7px; margin-top:7px; }
-.cart-quantity button { width:22px; height:22px; padding:0; border:1px solid var(--border); background:#fff; color:var(--text); line-height:1; cursor:pointer; }
-.cart-quantity button:hover { border-color:var(--pd-blue); color:var(--pd-blue); }
-.cart-quantity span { min-width:18px; text-align:center; font-size:.78rem; }
+.cart-header {
+  padding: 20px 24px;
+  border-bottom: 1px solid #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+}
+.cart-header-title {
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 2px;
+}
+.cart-header-count {
+  font-size: 0.85rem;
+  color: #64748b;
+  font-weight: 500;
+}
+.cart-close-btn {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  color: #64748b;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s;
+}
+.cart-close-btn:hover { color: #0f172a; }
+
+.cart-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 24px;
+}
+.cart-item {
+  display: flex;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid #f1f5f9;
+  align-items: flex-start;
+}
+.cart-item:last-child { border-bottom: none; }
+.cart-item-img-wrap {
+  width: 76px;
+  height: 84px;
+  border-radius: 10px;
+  background: #f8fafc;
+  border: 1px solid #eef2f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 6px;
+}
+.cart-item-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.cart-item-info {
+  flex: 1;
+  min-width: 0;
+}
+.cart-item-title {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #1e293b;
+  text-decoration: none;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color 0.15s;
+}
+.cart-item-title:hover { color: #142D4E; }
+.cart-item-remove {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  font-size: 0.95rem;
+  padding: 2px 4px;
+  transition: color 0.15s;
+  flex-shrink: 0;
+}
+.cart-item-remove:hover { color: #ef4444; }
+.cart-item-price-unit {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin-top: 2px;
+}
+.cart-qty-pill {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: #ffffff;
+  padding: 2px;
+}
+.cart-qty-btn {
+  width: 26px;
+  height: 26px;
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #475569;
+  font-size: 0.72rem;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+.cart-qty-btn:hover { background: #f1f5f9; color: #0f172a; }
+.cart-qty-val {
+  min-width: 24px;
+  text-align: center;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+.cart-item-total {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.cart-footer {
+  padding: 20px 24px 24px;
+  border-top: 1px solid #f1f5f9;
+  background: #fafafa;
+}
+.cart-subtotal-line {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.cart-subtotal-label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #475569;
+}
+.cart-subtotal-val {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+.btn-cart-view {
+  background: #ffffff;
+  color: #142D4E;
+  border: 1.5px solid #142D4E;
+  border-radius: 8px;
+  padding: 11px 18px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-decoration: none;
+  text-align: center;
+  display: block;
+  transition: all 0.2s;
+}
+.btn-cart-view:hover {
+  background: #f8fafc;
+  color: #0f233d;
+  border-color: #0f233d;
+}
+.btn-cart-checkout {
+  background: #142D4E;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 18px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-decoration: none;
+  text-align: center;
+  display: block;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(20,45,78,0.25);
+}
+.btn-cart-checkout:hover {
+  background: #0f233d;
+  color: #ffffff;
+  box-shadow: 0 6px 16px rgba(20,45,78,0.35);
+  transform: translateY(-1px);
+}
 
 /* ============================================
    BUTTONS
@@ -1122,6 +1322,189 @@ nav p.small {
   width: 100%;
 }
 
+/* Global Uppercase Product Card Styles & Add to Cart Button */
+.btn-green-add-cart {
+  background: var(--dsh-navy, #142D4E);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+.btn-green-add-cart:hover {
+  background: #0f233d;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(20,45,78,0.25);
+  transform: translateY(-1px);
+}
+.btn-green-add-cart:active {
+  transform: translateY(0);
+}
+
+.uppercase-card {
+  background: #ffffff;
+  border: 1px solid #eef2f6;
+  border-radius: 16px;
+  padding: 14px;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+.uppercase-card .product-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+.card-meta-slot {
+  min-height: 22px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+}
+.uppercase-card .product-card-name {
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin-top: 0;
+  margin-bottom: 6px;
+  line-height: 1.35;
+  height: 2.7em;
+  white-space: normal !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  word-break: break-word;
+}
+.uppercase-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+}
+.uppercase-card .product-card-img {
+  aspect-ratio: 1;
+  background: #f8fafc;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
+}
+.uppercase-card .product-card-img img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+.uppercase-card:hover .product-card-img img {
+  transform: scale(1.04);
+}
+.card-color-swatches {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  min-height: 18px;
+}
+.card-color-bubble {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.15);
+  display: inline-block;
+}
+.card-color-bubble.active {
+  box-shadow: 0 0 0 1.5px #142D4E;
+}
+.card-rating-line {
+  font-size: 0.78rem;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 20px;
+}
+.stars-gold {
+  color: #f59e0b;
+  letter-spacing: 1px;
+}
+.rating-val {
+  font-weight: 700;
+  color: #334155;
+}
+.badge-discount-red {
+  background: #fee2e2;
+  color: #dc2626;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* Recently Viewed Indicator Pill (Displayed cleanly in content body, never on top of product image) */
+.recently-viewed-pill {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  background: #f1f5f9;
+  color: #142D4E;
+  border: 1px solid #cbd5e1;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 4px;
+  margin-bottom: 0;
+  letter-spacing: 0.2px;
+  pointer-events: none;
+  animation: fadeInBadge 0.3s ease;
+  width: fit-content;
+  line-height: 1.4;
+}
+.recently-viewed-pill i {
+  color: #142D4E;
+  font-size: 0.65rem;
+}
+@media (max-width: 768px) {
+  .recently-viewed-pill {
+    font-size: 0.62rem;
+    padding: 2px 6px;
+  }
+}
+.product-card-price {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  margin-bottom: 2px;
+  min-height: 24px;
+}
+.product-card-bottom-actions {
+  margin-top: auto !important;
+  padding-top: 10px;
+}
+@keyframes fadeInBadge {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 /* Stars */
 .stars { color: var(--pd-sapphire); font-size: 0.75rem; letter-spacing: 1px; }
 .stars-count { font-size: 0.7rem; color: var(--text-muted); margin-left: 4px; }
@@ -1217,8 +1600,9 @@ nav p.small {
 .mobile-menu-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.5);
-  z-index: 9995;
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(2px);
+  z-index: 1000000;
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s;
@@ -1232,7 +1616,7 @@ nav p.small {
   height: 100%;
   max-height: 100vh;
   background: #fff;
-  z-index: 9996;
+  z-index: 1000001;
   overflow-y: auto;
   transition: right 0.3s ease;
   padding: 0;
@@ -1270,35 +1654,50 @@ nav p.small {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 18px;
-  font-size: 0.84rem;
-  line-height: 1.25;
+  padding: 14px 20px;
+  font-size: 0.95rem;
+  line-height: 1.3;
   font-weight: 500;
-  color: var(--text);
-  border-bottom: 1px solid var(--border);
-  letter-spacing: 0.3px;
+  color: #1e293b;
+  border-bottom: 1px solid #f1f5f9;
+  letter-spacing: -0.2px;
   cursor: pointer;
   text-decoration: none;
-  transition: all 0.2s;
-  background: #fff;
+  transition: all 0.15s ease;
+  background: #ffffff;
 }
-.mobile-nav-item > .mobile-nav-link:hover { color: var(--gold); background: var(--cream); }
+.mobile-nav-item > .mobile-nav-link:hover {
+  color: #0f172a;
+  background: #f8fafc;
+}
+.mobile-nav-title {
+  color: #1e293b;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
 .mobile-dropdown-arrow {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 28px; height: 28px;
-  background: var(--cream);
+  width: 24px;
+  height: 24px;
+  background: transparent;
   border-radius: 4px;
-  transition: transform 0.3s ease, background 0.2s;
+  transition: transform 0.25s ease;
   flex-shrink: 0;
 }
-.mobile-dropdown-arrow i { font-size: 0.75rem; color: var(--text-muted); transition: color 0.2s; }
+.mobile-dropdown-arrow i {
+  font-size: 0.85rem;
+  color: #64748b;
+  transition: transform 0.25s ease, color 0.2s;
+}
 .mobile-nav-item.open > .mobile-nav-link .mobile-dropdown-arrow {
   transform: rotate(180deg);
-  background: var(--pd-blue);
+  background: transparent;
 }
-.mobile-nav-item.open > .mobile-nav-link .mobile-dropdown-arrow i { color: #fff; }
+.mobile-nav-item.open > .mobile-nav-link .mobile-dropdown-arrow i {
+  color: #0f172a;
+}
 .mobile-sub-header {
   padding: 8px 20px 6px 40px;
   font-size: 0.65rem;
@@ -1536,8 +1935,8 @@ nav p.small {
       height: 60px;
       background: #ffffff;
       border-top: 1px solid #e7eae3;
-      box-shadow: 0 -3px 16px rgba(0,0,0,0.06);
-      z-index: 9990;
+      box-shadow: 0 -3px 16px rgba(0,0,0,0.08);
+      z-index: 999999; /* Ensure always on top of page contents and sticky bars */
       align-items: center;
       justify-content: space-around;
       padding: 0 8px;
@@ -1848,16 +2247,27 @@ nav p.small {
         <?php $__currentLoopData = $catNavItems; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $idx => $nav): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <?php
           $navUrl = $nav->url ? trim($nav->url) : '';
-          $currentPath = '/' . ltrim(request()->path(), '/');
-          $navPath = parse_url($navUrl, PHP_URL_PATH) ?: $navUrl;
-          $navPath = '/' . ltrim($navPath, '/');
           $isActive = false;
 
           if ($navUrl && $navUrl !== '#') {
-            if ($navPath === '/') {
-              $isActive = request()->routeIs('home') || $currentPath === '/';
+            $parsedNav = parse_url($navUrl);
+            $navPath = '/' . ltrim($parsedNav['path'] ?? '', '/');
+            parse_str($parsedNav['query'] ?? '', $navQuery);
+
+            $currentPath = '/' . ltrim(request()->path(), '/');
+
+            // Exact route/path match
+            if ($navPath === '/' && ($currentPath === '/' || request()->routeIs('home'))) {
+              $isActive = true;
             } elseif ($navPath === '/shop') {
-              $isActive = request()->routeIs('shop.index') && !request()->route('slug');
+              // If menu item has a category query, e.g. /shop?category=luggage
+              if (!empty($navQuery['category'])) {
+                $currentCat = request('category') ?: request()->route('slug');
+                $isActive = ($currentCat === $navQuery['category']);
+              } else {
+                // Generic /shop
+                $isActive = request()->routeIs('shop.index') && !request('category') && !request()->route('slug');
+              }
             } else {
               $isActive = ($currentPath === $navPath) || (url()->current() === url($navUrl));
             }
@@ -1949,30 +2359,30 @@ nav p.small {
 <div class="cart-drawer" id="cartDrawer">
   <div class="cart-header">
     <div>
-      <h5 class="mb-0" style="font-family:var(--font-serif);">Your Cart</h5>
-      <span class="small text-muted" id="cartItemCount">0 items</span>
+      <h5 class="cart-header-title">Your Cart</h5>
+      <span class="cart-header-count" id="cartItemCount">0 items</span>
     </div>
-    <button onclick="closeCart()" style="background:none; border:none; font-size:1.5rem; cursor:pointer; color:var(--text);">&times;</button>
+    <button onclick="closeCart()" class="cart-close-btn" aria-label="Close cart">&times;</button>
   </div>
   <div class="cart-body" id="cartBody">
     <div class="text-center py-5" id="emptyCart">
-      <i class="bi bi-bag" style="font-size:3rem; color:var(--border); display:block; margin-bottom:16px;"></i>
-      <p class="text-muted">Your cart is empty</p>
-      <a href="<?php echo e(route('shop.index')); ?>" class="btn-glamora" style="padding:10px 24px; font-size:0.72rem;" onclick="closeCart()">Shop Now</a>
+      <i class="fa-solid fa-bag-shopping" style="font-size:3rem; color:#cbd5e1; display:block; margin-bottom:16px;"></i>
+      <p class="text-muted fw-500 mb-3">Your cart is currently empty</p>
+      <a href="<?php echo e(route('shop.index')); ?>" class="btn-cart-checkout" style="max-width:180px; margin:0 auto; padding:10px 18px; font-size:0.8rem;" onclick="closeCart()">Start Shopping</a>
     </div>
     <div id="cartItems"></div>
   </div>
   <div class="cart-footer">
-    <div class="d-flex justify-content-between mb-3">
-      <span class="fw-600">Subtotal</span>
-      <span class="fw-700" id="cartSubtotal">₨0.00</span>
+    <div class="cart-subtotal-line">
+      <span class="cart-subtotal-label">Subtotal</span>
+      <span class="cart-subtotal-val" id="cartSubtotal">₹0</span>
     </div>
     <div class="d-grid gap-2">
-      <a href="<?php echo e(route('cart.index')); ?>" class="btn-outline-glamora justify-content-center" onclick="closeCart()">View Cart</a>
-      <a href="<?php echo e(route('checkout.index')); ?>" class="btn-glamora justify-content-center" onclick="closeCart()">Checkout</a>
+      <a href="<?php echo e(route('cart.index')); ?>" class="btn-cart-view" onclick="closeCart()">View Cart</a>
+      <a href="<?php echo e(route('checkout.index')); ?>" class="btn-cart-checkout" onclick="closeCart()">Checkout</a>
     </div>
-    <p class="text-center text-muted small mt-2 mb-0">
-      <i class="bi bi-shield-lock me-1"></i>Secure Checkout
+    <p class="text-center text-muted small mt-3 mb-0">
+      <i class="fa-solid fa-shield-halved me-1 text-success"></i> 100% Safe & Secure Checkout
     </p>
   </div>
 </div>
@@ -2000,13 +2410,7 @@ nav p.small {
         
         <li class="mobile-nav-item">
           <div class="mobile-nav-link" onclick="toggleMobileDropdown(this)">
-            <span>
-              <?php echo e($menu->title); ?>
-
-              <?php if($menu->badge_text): ?>
-                <span class="nav-badge ms-2" style="background:<?php echo e($menu->badge_color ?? 'var(--gold)'); ?>"><?php echo e($menu->badge_text); ?></span>
-              <?php endif; ?>
-            </span>
+            <span class="mobile-nav-title"><?php echo e($menu->title); ?></span>
             <span class="mobile-dropdown-arrow"><i class="bi bi-chevron-down"></i></span>
           </div>
           <ul class="mobile-sub list-unstyled mb-0">
@@ -2026,50 +2430,44 @@ nav p.small {
         
         <li class="mobile-nav-item">
           <a href="<?php echo e($menu->url ?? '#'); ?>" class="mobile-nav-link" onclick="closeMobileMenu()">
-            <span>
-              <?php echo e($menu->title); ?>
-
-              <?php if($menu->badge_text): ?>
-                <span class="nav-badge ms-2" style="background:<?php echo e($menu->badge_color ?? 'var(--gold)'); ?>"><?php echo e($menu->badge_text); ?></span>
-              <?php endif; ?>
-            </span>
+            <span class="mobile-nav-title"><?php echo e($menu->title); ?></span>
           </a>
         </li>
       <?php endif; ?>
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
     
-    <li style="height:1px;background:var(--border);margin:8px 0;"></li>
+    <li style="height:1px;background:#eef2f6;margin:10px 0;"></li>
 
     
     <?php if(auth()->guard()->check()): ?>
       <li class="mobile-nav-item">
         <a href="<?php echo e(route('account.dashboard')); ?>" class="mobile-nav-link" onclick="closeMobileMenu()">
-          <span><i class="bi bi-person me-2 text-gold"></i>My Account</span>
+          <span class="mobile-nav-title">My Account</span>
         </a>
       </li>
       <li class="mobile-nav-item">
         <a href="<?php echo e(route('wishlist.index')); ?>" class="mobile-nav-link" onclick="closeMobileMenu()">
-          <span><i class="bi bi-heart me-2 text-gold"></i>Wishlist</span>
+          <span class="mobile-nav-title">Wishlist</span>
         </a>
       </li>
       <li class="mobile-nav-item">
         <form method="POST" action="<?php echo e(route('logout')); ?>">
           <?php echo csrf_field(); ?>
           <button type="submit" class="mobile-nav-link w-100" style="border:none;text-align:left;cursor:pointer;">
-            <span><i class="bi bi-box-arrow-right me-2 text-gold"></i>Logout</span>
+            <span class="mobile-nav-title">Logout</span>
           </button>
         </form>
       </li>
     <?php else: ?>
       <li class="mobile-nav-item">
         <a href="<?php echo e(route('login')); ?>" class="mobile-nav-link" onclick="closeMobileMenu()">
-          <span><i class="bi bi-person me-2 text-gold"></i>Login</span>
+          <span class="mobile-nav-title">Login</span>
         </a>
       </li>
       <li class="mobile-nav-item">
         <a href="<?php echo e(route('register')); ?>" class="mobile-nav-link" onclick="closeMobileMenu()">
-          <span><i class="bi bi-person-plus me-2 text-gold"></i>Register</span>
+          <span class="mobile-nav-title">Register</span>
         </a>
       </li>
     <?php endif; ?>
@@ -2550,23 +2948,35 @@ function renderCart(data) {
   if (cartBadge) cartBadge.textContent = data.count || 0;
   if (mobileCartBadge) mobileCartBadge.textContent = data.count || 0;
   if (itemCount) itemCount.textContent = `${data.count || 0} item${data.count === 1 ? '' : 's'}`;
-  if (subtotal) subtotal.textContent = '₨' + Number(data.subtotal || 0).toLocaleString('en-PK', { minimumFractionDigits: 2 });
+  if (subtotal) subtotal.textContent = '₹' + Number(data.subtotal || 0).toLocaleString('en-IN', { maximumFractionDigits: 0 });
   if (emptyCart) emptyCart.style.display = items.length ? 'none' : 'block';
 
   cartItems.innerHTML = items.map(item => `
     <div class="cart-item" data-row-id="${escapeCartText(item.row_id)}">
-      <img src="${escapeCartText(item.thumbnail)}" alt="${escapeCartText(item.name)}" class="cart-item-img">
-      <div class="flex-grow-1">
-        <a href="${escapeCartText(item.slug ? '<?php echo e(url('/product')); ?>/' + item.slug : '#')}" class="small fw-600 d-block">${escapeCartText(item.name)}</a>
-        <div class="text-muted small">${item.quantity} × ₨${Number(item.price).toLocaleString('en-PK', { minimumFractionDigits: 2 })}</div>
-        <div class="cart-quantity">
-          <button type="button" onclick="updateCartItem('${escapeCartText(item.row_id)}', ${item.quantity - 1})" aria-label="Decrease quantity">−</button>
-          <span>${item.quantity}</span>
-          <button type="button" onclick="updateCartItem('${escapeCartText(item.row_id)}', ${item.quantity + 1})" aria-label="Increase quantity">+</button>
-        </div>
-        <div class="fw-700 small mt-1">₨${Number(item.total).toLocaleString('en-PK', { minimumFractionDigits: 2 })}</div>
+      <div class="cart-item-img-wrap">
+        <img src="${escapeCartText(item.thumbnail)}" alt="${escapeCartText(item.name)}" class="cart-item-img">
       </div>
-      <button type="button" class="cart-item-remove" title="Remove" onclick="removeCartItem('${escapeCartText(item.row_id)}')"><i class="bi bi-trash"></i></button>
+      <div class="cart-item-info">
+        <div class="d-flex align-items-start justify-content-between gap-2">
+          <a href="${escapeCartText(item.slug ? '<?php echo e(url('/product')); ?>/' + item.slug : '#')}" class="cart-item-title">${escapeCartText(item.name)}</a>
+          <button type="button" class="cart-item-remove" title="Remove item" onclick="removeCartItem('${escapeCartText(item.row_id)}')">
+            <i class="fa-regular fa-trash-can"></i>
+          </button>
+        </div>
+        <div class="cart-item-price-unit">₹${Number(item.price).toLocaleString('en-IN', { maximumFractionDigits: 0 })}</div>
+        <div class="d-flex align-items-center justify-content-between mt-2 pt-1">
+          <div class="cart-qty-pill">
+            <button type="button" class="cart-qty-btn" onclick="updateCartItem('${escapeCartText(item.row_id)}', ${item.quantity - 1})" aria-label="Decrease quantity">
+              <i class="fa-solid fa-minus"></i>
+            </button>
+            <span class="cart-qty-val">${item.quantity}</span>
+            <button type="button" class="cart-qty-btn" onclick="updateCartItem('${escapeCartText(item.row_id)}', ${item.quantity + 1})" aria-label="Increase quantity">
+              <i class="fa-solid fa-plus"></i>
+            </button>
+          </div>
+          <div class="cart-item-total">₹${Number(item.total).toLocaleString('en-IN', { maximumFractionDigits: 0 })}</div>
+        </div>
+      </div>
     </div>
   `).join('');
 }
@@ -2687,6 +3097,9 @@ window.addEventListener('load', function () {
   }
 });
 </script>
+<!-- Site Promotional & Offer Popup -->
+<?php echo $__env->make('frontend.partials.popup', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
+
 <?php echo $__env->yieldPushContent('scripts'); ?>
 </body>
 </html>

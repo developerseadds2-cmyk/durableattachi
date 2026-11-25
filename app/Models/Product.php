@@ -11,9 +11,9 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
-        'category_id', 'brand_id', 'color_id', 'name', 'slug', 'sku', 'short_description',
+        'category_id', 'brand_id', 'color_id', 'size_id', 'name', 'slug', 'sku', 'short_description',
         'description', 'price', 'sale_price', 'cost_price', 'stock_quantity',
-        'low_stock_threshold', 'weight', 'material', 'warranty_details',
+        'low_stock_threshold', 'weight', 'material', 'capacity', 'dimensions', 'warranty_details',
         'product_warranty', 'manufacturer_details', 'tax_rate', 'hsn_code',
         'metal_type', 'stone_type',
         'is_featured', 'is_new_arrival', 'is_best_seller', 'status',
@@ -53,6 +53,11 @@ class Product extends Model
     public function color()
     {
         return $this->belongsTo(Color::class);
+    }
+
+    public function size()
+    {
+        return $this->belongsTo(Size::class);
     }
 
     public function images()

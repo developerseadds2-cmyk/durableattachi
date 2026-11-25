@@ -10,14 +10,16 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <!-- Bootstrap Icons -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+<!-- Font Awesome 6 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 <!-- Animate.css -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
 <style>
   :root {
     --admin-gold: #c9a96e;
-    --admin-dark: #1a1a2e;
-    --admin-sidebar: #16213e;
-    --admin-sidebar-hover: #0f3460;
+    --admin-dark: #142D4E;
+    --admin-sidebar: #142D4E;
+    --admin-sidebar-hover: #1e3f6b;
     --admin-text: #e0e0e0;
     --admin-accent: #c9a96e;
   }
@@ -25,10 +27,11 @@
 
   /* Sidebar */
   #sidebar {
-    width: 260px; height: 100vh; max-height: 100vh; background: var(--admin-dark);
+    width: 260px; height: 100vh; max-height: 100vh; background: #142D4E;
     position: fixed; top: 0; left: 0; z-index: 1000;
     transition: all 0.3s ease; overflow-x: hidden; overflow-y: auto;
     scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.28) transparent;
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
   }
   #sidebar.collapsed { width: 70px; }
   #sidebar.collapsed .sidebar-label, #sidebar.collapsed .sidebar-logo-text,
@@ -37,35 +40,37 @@
   #sidebar.collapsed .nav-link i { margin: 0; font-size: 1.3rem; }
 
   .sidebar-header {
-    padding: 20px 15px; border-bottom: 1px solid rgba(255,255,255,0.08);
-    display: flex; align-items: center; gap: 10px;
+    padding: 16px 20px; border-bottom: 1px solid rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(0, 0, 0, 0.15);
   }
-  .sidebar-logo { width: 38px; height: 38px; background: var(--admin-gold);
-    border-radius: 8px; display: flex; align-items: center; justify-content: center;
-    font-weight: 700; color: #1a1a2e; font-size: 1.1rem; flex-shrink: 0; }
-  .sidebar-logo-text { color: #fff; font-weight: 700; font-size: 1.1rem; }
-  .sidebar-logo-text span { color: var(--admin-gold); }
+  .sidebar-brand-link {
+    display: flex; align-items: center; justify-content: center; width: 100%; text-decoration: none;
+  }
+  .sidebar-brand-img {
+    height: 36px; max-width: 180px; object-fit: contain; filter: brightness(0) invert(1);
+  }
 
   .sidebar-category {
-    padding: 10px 18px 4px; font-size: 0.65rem; font-weight: 700;
+    padding: 10px 18px 4px; font-size: 0.62rem; font-weight: 700;
     text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.35);
   }
 
   #sidebar .nav-link {
-    color: rgba(255,255,255,0.7); padding: 10px 18px; border-radius: 8px;
+    color: rgba(255,255,255,0.78); padding: 8px 14px; border-radius: 7px;
     margin: 1px 8px; display: flex; align-items: center; gap: 10px;
-    font-size: 0.875rem; transition: all 0.2s; text-decoration: none;
+    font-size: 0.85rem; font-weight: 500; transition: all 0.2s; text-decoration: none;
   }
   #sidebar .nav-link:hover, #sidebar .nav-link.active {
     background: var(--admin-sidebar-hover); color: #fff;
   }
   #sidebar .nav-link.active { background: var(--admin-gold); color: #1a1a2e; font-weight: 600; }
-  #sidebar .nav-link i { font-size: 1rem; width: 20px; flex-shrink: 0; }
+  #sidebar .nav-link i { font-size: 0.95rem; width: 18px; flex-shrink: 0; }
 
   /* Submenu */
-  .submenu { display: none; padding-left: 20px; }
+  .submenu { display: none; padding-left: 14px; margin-bottom: 4px; }
   .submenu.show { display: block; }
-  .submenu .nav-link { font-size: 0.82rem; padding: 7px 12px; margin: 0 8px; }
+  .submenu .nav-link { font-size: 0.8rem; padding: 6px 12px; margin: 1px 6px; }
   .submenu .nav-link::before { content: '›'; margin-right: 6px; }
   .has-submenu > .nav-link { position: relative; }
   .has-submenu > .nav-link .arrow { margin-left: auto; transition: transform 0.2s; font-size: 0.75rem; }
@@ -159,13 +164,17 @@
 <!-- Sidebar -->
 <nav id="sidebar">
   <div class="sidebar-header">
-    <div class="sidebar-logo">G</div>
-    <div class="sidebar-logo-text"><span>Durable Suitcase House</span> Admin</div>
+    <a href="{{ route('admin.dashboard') }}" class="sidebar-brand-link">
+      @if(file_exists(public_path('images/logo.png')))
+        <img src="{{ asset('images/logo.png') }}" alt="{{ config('app.name', 'Durable Suitcase House') }}" class="sidebar-brand-img">
+      @else
+        <span class="text-white fw-bold">Durable Suitcase House</span>
+      @endif
+    </a>
   </div>
 
   <ul class="nav flex-column py-2">
     <!-- Main -->
-    <li class="sidebar-category">Main</li>
     <li class="nav-item">
       <a href="{{ route('admin.dashboard') }}" class="nav-link {{ request()->routeIs('admin.dashboard*') ? 'active' : '' }}">
         <i class="bi bi-grid-1x2-fill"></i> <span class="sidebar-label">Dashboard</span>
@@ -174,26 +183,19 @@
 
     <!-- Catalog -->
     <li class="sidebar-category">Catalog</li>
-    <li class="nav-item has-submenu {{ request()->routeIs('admin.products*', 'admin.colors*') ? 'open' : '' }}">
+    <li class="nav-item has-submenu {{ request()->routeIs('admin.products*', 'admin.categories*', 'admin.brands*', 'admin.colors*', 'admin.sizes*') ? 'open' : '' }}">
       <a href="#" class="nav-link" onclick="toggleSubmenu(this); return false;">
         <i class="bi bi-bag-heart"></i> <span class="sidebar-label">Products</span>
         <i class="bi bi-chevron-right arrow sidebar-label"></i>
       </a>
-      <ul class="submenu {{ request()->routeIs('admin.products*', 'admin.colors*') ? 'show' : '' }}">
+      <ul class="submenu {{ request()->routeIs('admin.products*', 'admin.categories*', 'admin.brands*', 'admin.colors*', 'admin.sizes*') ? 'show' : '' }}">
         <li><a href="{{ route('admin.products.index') }}" class="nav-link {{ request()->routeIs('admin.products.index') ? 'active' : '' }}"><span class="sidebar-label">All Products</span></a></li>
         <li><a href="{{ route('admin.products.create') }}" class="nav-link {{ request()->routeIs('admin.products.create') ? 'active' : '' }}"><span class="sidebar-label">Add Product</span></a></li>
+        <li><a href="{{ route('admin.categories.index') }}" class="nav-link {{ request()->routeIs('admin.categories*') ? 'active' : '' }}"><span class="sidebar-label">Categories</span></a></li>
+        <li><a href="{{ route('admin.brands.index') }}" class="nav-link {{ request()->routeIs('admin.brands*') ? 'active' : '' }}"><span class="sidebar-label">Brands</span></a></li>
         <li><a href="{{ route('admin.colors.index') }}" class="nav-link {{ request()->routeIs('admin.colors*') ? 'active' : '' }}"><span class="sidebar-label">Colors</span></a></li>
+        <li><a href="{{ route('admin.sizes.index') }}" class="nav-link {{ request()->routeIs('admin.sizes*') ? 'active' : '' }}"><span class="sidebar-label">Sizes Master</span></a></li>
       </ul>
-    </li>
-    <li class="nav-item">
-      <a href="{{ route('admin.categories.index') }}" class="nav-link {{ request()->routeIs('admin.categories*') ? 'active' : '' }}">
-        <i class="bi bi-tags"></i> <span class="sidebar-label">Categories</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="{{ route('admin.brands.index') }}" class="nav-link {{ request()->routeIs('admin.brands*') ? 'active' : '' }}">
-        <i class="bi bi-award"></i> <span class="sidebar-label">Brands</span>
-      </a>
     </li>
     <li class="nav-item">
       <a href="{{ route('admin.reviews.index') }}" class="nav-link {{ request()->routeIs('admin.reviews*') ? 'active' : '' }}">
@@ -203,7 +205,7 @@
       </a>
     </li>
 
-    <!-- Orders -->
+    <!-- Sales -->
     <li class="sidebar-category">Sales</li>
     <li class="nav-item">
       <a href="{{ route('admin.orders.index') }}" class="nav-link {{ request()->routeIs('admin.orders*') ? 'active' : '' }}">
@@ -223,16 +225,11 @@
       </a>
     </li>
 
-    <!-- Customers -->
-    <li class="sidebar-category">Customers</li>
+    <!-- Customers & Enquiries -->
+    <li class="sidebar-category">Customers &amp; Marketing</li>
     <li class="nav-item">
       <a href="{{ route('admin.users.index') }}" class="nav-link {{ request()->routeIs('admin.users*') ? 'active' : '' }}">
         <i class="bi bi-people"></i> <span class="sidebar-label">Users</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="{{ route('admin.newsletters.index') }}" class="nav-link {{ request()->routeIs('admin.newsletters*') ? 'active' : '' }}">
-        <i class="bi bi-envelope-paper"></i> <span class="sidebar-label">Newsletter</span>
       </a>
     </li>
     <li class="nav-item">
@@ -242,50 +239,24 @@
         @if($unread > 0) <span class="badge bg-primary ms-auto sidebar-label">{{ $unread }}</span> @endif
       </a>
     </li>
-
-    <!-- CMS -->
-    <li class="sidebar-category">Content</li>
     <li class="nav-item">
-      <a href="{{ route('admin.sliders.index') }}" class="nav-link {{ request()->routeIs('admin.sliders*') ? 'active' : '' }}">
-        <i class="bi bi-images"></i> <span class="sidebar-label">Sliders</span>
+      <a href="{{ route('admin.popups.index') }}" class="nav-link {{ request()->routeIs('admin.popups*') ? 'active' : '' }}">
+        <i class="bi bi-window-stack"></i> <span class="sidebar-label">Popups &amp; Offers</span>
       </a>
     </li>
     <li class="nav-item">
-      <a href="{{ route('admin.banners.index') }}" class="nav-link {{ request()->routeIs('admin.banners*') ? 'active' : '' }}">
-        <i class="bi bi-card-image"></i> <span class="sidebar-label">Banners</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="{{ route('admin.megamenu.index') }}" class="nav-link {{ request()->routeIs('admin.megamenu*') ? 'active' : '' }}">
-        <i class="bi bi-layout-text-sidebar"></i> <span class="sidebar-label">Mega Menu</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="{{ route('admin.pages.index') }}" class="nav-link {{ request()->routeIs('admin.pages*') ? 'active' : '' }}">
-        <i class="bi bi-file-earmark-text"></i> <span class="sidebar-label">Pages</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="{{ route('admin.blog.index') }}" class="nav-link {{ request()->routeIs('admin.blog*') ? 'active' : '' }}">
-        <i class="bi bi-journal-text"></i> <span class="sidebar-label">Blog</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a href="{{ route('admin.blog-categories.index') }}" class="nav-link {{ request()->routeIs('admin.blog-categories*') ? 'active' : '' }}">
-        <i class="bi bi-folder2-open"></i> <span class="sidebar-label">Blog Categories</span>
+      <a href="{{ route('admin.newsletters.index') }}" class="nav-link {{ request()->routeIs('admin.newsletters*') ? 'active' : '' }}">
+        <i class="bi bi-envelope-paper"></i> <span class="sidebar-label">Newsletter</span>
       </a>
     </li>
 
-    <!-- Reports -->
-    <li class="sidebar-category">Analytics</li>
+    <!-- System -->
+    <li class="sidebar-category">System</li>
     <li class="nav-item">
       <a href="{{ route('admin.reports.sales') }}" class="nav-link {{ request()->routeIs('admin.reports*') ? 'active' : '' }}">
         <i class="bi bi-bar-chart-line"></i> <span class="sidebar-label">Reports</span>
       </a>
     </li>
-
-    <!-- Settings -->
-    <li class="sidebar-category">System</li>
     <li class="nav-item">
       <a href="{{ route('admin.settings.index') }}" class="nav-link {{ request()->routeIs('admin.settings*') ? 'active' : '' }}">
         <i class="bi bi-gear"></i> <span class="sidebar-label">Settings</span>

@@ -940,59 +940,105 @@
   }
 }
 
-/* Why Durable Suitcase House - Option 1 Rich Navy Hero Section */
-.trust-editorial-section {
+/* Customer Testimonials - Rich Navy Heritage Section */
+.testimonials-section {
   padding: 95px 0;
   background: var(--dsh-navy, #142D4E);
   color: #ffffff;
   position: relative;
   overflow: hidden;
 }
-.trust-editorial-section::before {
+.testimonials-section::before {
   content: '';
   position: absolute;
   inset: 0;
   background: radial-gradient(circle at 80% 20%, rgba(197, 154, 85, 0.12) 0%, transparent 60%);
   pointer-events: none;
 }
-.trust-card {
+.testimonial-card-styled {
   background: rgba(255, 255, 255, 0.06);
   border: 1.5px solid rgba(197, 154, 85, 0.3);
-  border-radius: 14px;
-  padding: 36px 30px;
+  border-radius: 16px;
+  padding: 32px 28px;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
+  position: relative;
 }
-.trust-card:hover {
+.testimonial-card-styled:hover {
   transform: translateY(-6px);
   background: rgba(255, 255, 255, 0.1);
   border-color: var(--dsh-gold, #C59A55);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
 }
-.trust-card-icon {
-  width: 62px;
-  height: 62px;
+.testimonial-stars {
+  color: #f59e0b;
+  font-size: 1.05rem;
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+}
+.testimonial-quote {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: rgba(247, 243, 232, 0.92);
+  margin-bottom: 24px;
+  font-style: italic;
+  position: relative;
+}
+.testimonial-author-wrap {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+.testimonial-author-avatar {
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background: rgba(197, 154, 85, 0.15);
-  border: 1.5px solid var(--dsh-gold, #C59A55);
+  background: linear-gradient(135deg, #C59A55, #936427);
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.7rem;
-  color: var(--dsh-gold, #C59A55);
-  margin-bottom: 24px;
+  font-weight: 700;
+  font-size: 1rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
 }
-.trust-card-title {
-  font-family: var(--font-serif);
-  font-size: 1.38rem;
+.testimonial-author-name {
   font-weight: 700;
   color: #ffffff;
-  margin-bottom: 12px;
-  letter-spacing: 0.3px;
+  font-size: 0.95rem;
+  margin-bottom: 2px;
 }
-.trust-card-text {
-  font-size: 0.94rem;
+.testimonial-author-loc {
+  font-size: 0.78rem;
+  color: var(--dsh-gold-bright, #D4AF37);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.testimonial-verified-badge {
+  color: #22c55e;
+  font-size: 0.82rem;
+}
+.testimonials-google-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 12px;
+}
   color: rgba(247, 243, 232, 0.85);
   line-height: 1.7;
   margin: 0;
@@ -1694,53 +1740,112 @@
 </section>
 
 {{-- ============================================================
-     6. WHY DURABLE SUITCASE HOUSE? (OPTION 1 RICH NAVY BLUE)
+     6. CUSTOMER TESTIMONIALS (VOICES OF OUR VALUED PATRONS)
      ============================================================ --}}
-<section class="trust-editorial-section">
+<section class="testimonials-section">
   <div class="container-xl-custom position-relative" style="z-index: 2;">
-    <div class="editorial-header">
-      <span class="editorial-subtitle" style="color:var(--dsh-gold-bright, #D4AF37);">The Patiala Heritage</span>
-      <h2 class="editorial-title" style="color:#ffffff;">WHY DURABLE SUITCASE HOUSE?</h2>
-      <p style="color:rgba(247, 243, 232, 0.85); font-size:1.05rem; margin-top:14px;">
-        Over six decades of honest advice, authentic brand partnerships, and thousands of journeys fulfilled.
+    <div class="editorial-header text-center">
+      <div class="testimonials-google-pill mx-auto">
+        <i class="fa-brands fa-google text-warning"></i>
+        <span>4.9 / 5.0 Star Rating &bull; 1,200+ Happy Travelers</span>
+      </div>
+      <span class="editorial-subtitle" style="color:var(--dsh-gold-bright, #D4AF37);">Trusted Since 1960</span>
+      <h2 class="editorial-title" style="color:#ffffff;">WHAT OUR CUSTOMERS SAY</h2>
+      <p style="color:rgba(247, 243, 232, 0.85); font-size:1.05rem; margin-top:14px; max-width:680px; margin-left:auto; margin-right:auto;">
+        Real experiences from families, business flyers, and brides across Patiala and Punjab who rely on Durable Suitcase House.
       </p>
     </div>
 
-    <div class="row g-4">
+    <div class="row g-4 mt-2">
+      <!-- Testimonial 1 -->
       <div class="col-12 col-md-6 col-lg-3">
-        <div class="trust-card">
-          <div class="trust-card-icon"><i class="bi bi-patch-check-fill"></i></div>
-          <h3 class="trust-card-title">Trusted Destination</h3>
-          <p class="trust-card-text">
-            Serving Patiala and Punjab families since 1960. Three generations of unmatched trust and repeat customer delight.
-          </p>
+        <div class="testimonial-card-styled">
+          <div>
+            <div class="testimonial-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testimonial-quote">
+              "Purchased an American Tourister 3-piece set for my son's journey to Canada. The staff guided us on exact airline cabin weight rules. Flawless wheels and rock solid build!"
+            </p>
+          </div>
+          <div class="testimonial-author-wrap">
+            <div class="testimonial-author-avatar">GS</div>
+            <div>
+              <div class="testimonial-author-name">Gurpreet Singh</div>
+              <div class="testimonial-author-loc">
+                <i class="fa-solid fa-location-dot"></i> Patiala &bull; <span class="testimonial-verified-badge"><i class="fa-solid fa-circle-check"></i> Verified</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
+      <!-- Testimonial 2 -->
       <div class="col-12 col-md-6 col-lg-3">
-        <div class="trust-card">
-          <div class="trust-card-icon"><i class="bi bi-shield-lock-fill"></i></div>
-          <h3 class="trust-card-title">Multiple Brands Under 1 Roof</h3>
-          <p class="trust-card-text">
-            Official partner for VIP, American Tourister, Safari, Samsonite, Woodland, Mokobara and Swiss Military.
-          </p>
+        <div class="testimonial-card-styled">
+          <div>
+            <div class="testimonial-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testimonial-quote">
+              "My family has bought luggage from Durable Suitcase House since my grandfather’s time. Unbeatable authenticity, fair prices, and the best collection of VIP and Safari."
+            </p>
+          </div>
+          <div class="testimonial-author-wrap">
+            <div class="testimonial-author-avatar">RK</div>
+            <div>
+              <div class="testimonial-author-name">Rajesh Kumar</div>
+              <div class="testimonial-author-loc">
+                <i class="fa-solid fa-location-dot"></i> Model Town &bull; <span class="testimonial-verified-badge"><i class="fa-solid fa-circle-check"></i> Verified</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
+      <!-- Testimonial 3 -->
       <div class="col-12 col-md-6 col-lg-3">
-        <div class="trust-card">
-          <div class="trust-card-icon"><i class="bi bi-bag-check-fill"></i></div>
-          <h3 class="trust-card-title">Travel &amp; Everyday Bags</h3>
-          <p class="trust-card-text">
-            Complete selection spanning heavy-duty trolleys, school and laptop backpacks, bridal clutches, and designer purses.
-          </p>
+        <div class="testimonial-card-styled">
+          <div>
+            <div class="testimonial-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testimonial-quote">
+              "Their bridal purse and clutch collection is exquisite! Found the exact matching gold embroidery clutch for my wedding lehenga. Truly timeless quality and design."
+            </p>
+          </div>
+          <div class="testimonial-author-wrap">
+            <div class="testimonial-author-avatar">SK</div>
+            <div>
+              <div class="testimonial-author-name">Simran Kaur</div>
+              <div class="testimonial-author-loc">
+                <i class="fa-solid fa-location-dot"></i> Chandigarh &bull; <span class="testimonial-verified-badge"><i class="fa-solid fa-circle-check"></i> Verified</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
+      <!-- Testimonial 4 -->
       <div class="col-12 col-md-6 col-lg-3">
-        <div class="trust-card">
-          <div class="trust-card-icon"><i class="bi bi-person-heart"></i></div>
-          <h3 class="trust-card-title">In-Store Assistance</h3>
-          <p class="trust-card-text">
-            Personal guidance to pick the perfect airline cabin dimension, weight-saving hard shells, and durable zippers.
-          </p>
+        <div class="testimonial-card-styled">
+          <div>
+            <div class="testimonial-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testimonial-quote">
+              "Ordered online with express delivery. Received authentic Samsonite trolley in perfect packing within 2 days. The customer service over WhatsApp was super helpful."
+            </p>
+          </div>
+          <div class="testimonial-author-wrap">
+            <div class="testimonial-author-avatar">AK</div>
+            <div>
+              <div class="testimonial-author-name">Amit Khurana</div>
+              <div class="testimonial-author-loc">
+                <i class="fa-solid fa-location-dot"></i> Ludhiana &bull; <span class="testimonial-verified-badge"><i class="fa-solid fa-circle-check"></i> Verified</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

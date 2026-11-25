@@ -44,7 +44,7 @@ class CheckoutController extends Controller
             'billing_postal_code'=> 'required|string|max:20',
             'billing_country'    => 'required|string|max:100',
             'shipping_method_id' => 'required|exists:shipping_methods,id',
-            'payment_method'     => 'required|in:cod,stripe,paypal',
+            'payment_method'     => 'required|in:cod,razorpay,stripe,paypal',
             'notes'              => 'nullable|string',
         ]);
 
@@ -115,18 +115,20 @@ class CheckoutController extends Controller
 
             DB::commit();
 
-            // Clear cart
-            Session::forget('cart');
-            Session::forget('coupon');
-
-            // For COD, redirect to success
+            // For COD, finalize order and clear cart now
             if ($request->payment_method === 'cod') {
+                Session::forget('cart');
+                Session::forget('coupon');
                 return redirect()->route('checkout.success', $order->order_number)
                     ->with('success', 'Order placed successfully!');
             }
 
-            // For Stripe/PayPal, redirect to payment
+            // For online gateways (Razorpay, Stripe, PayPal): Keep cart intact until payment succeeds!
             Session::put('pending_order_id', $order->id);
+
+            if ($request->payment_method === 'razorpay') {
+                return redirect()->route('payment.razorpay.process', ['order_id' => $order->id]);
+            }
 
             if ($request->payment_method === 'stripe') {
                 return redirect()->route('payment.stripe.process')->with(['order_id' => $order->id]);

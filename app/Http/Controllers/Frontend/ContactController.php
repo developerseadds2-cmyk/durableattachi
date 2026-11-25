@@ -22,7 +22,6 @@ class ContactController extends Controller
             'phone'   => 'nullable|string|max:20',
             'subject' => 'nullable|string|max:255',
             'message' => 'required|string|min:10',
-            'consent' => 'accepted',
         ]);
 
         Contact::create($request->only(['name', 'email', 'phone', 'subject', 'message']));

@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\BrandController as AdminBrandController;
 use App\Http\Controllers\Admin\ColorController as AdminColorController;
+use App\Http\Controllers\Admin\SizeController as AdminSizeController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\MegamenuController as AdminMegamenuController;
@@ -31,6 +32,7 @@ use App\Http\Controllers\Admin\ShippingController as AdminShippingController;
 use App\Http\Controllers\Admin\NewsletterController as AdminNewsletterController;
 use App\Http\Controllers\Admin\ContactController as AdminContactController;
 use App\Http\Controllers\Admin\ReportController as AdminReportController;
+use App\Http\Controllers\Admin\PopupController as AdminPopupController;
 use App\Http\Controllers\PaymentController;
 
 /*
@@ -46,10 +48,11 @@ Route::post('/newsletter', [HomeController::class, 'newsletter'])->name('newslet
 // Shop
 Route::get('/shop', [ShopController::class, 'index'])->name('shop.index');
 Route::get('/shop/{slug}', [ShopController::class, 'category'])->name('shop.category');
+Route::get('/category/{slug}', [ShopController::class, 'category'])->name('category.show');
 
 // Product
 Route::get('/product/{slug}', [ProductController::class, 'show'])->name('product.show');
-Route::post('/product/{id}/review', [ProductController::class, 'storeReview'])->name('product.review')->middleware('auth');
+Route::post('/product/{id}/review', [ProductController::class, 'storeReview'])->name('product.review');
 Route::get('/search', [ProductController::class, 'search'])->name('search');
 
 // Cart
@@ -81,6 +84,8 @@ Route::prefix('payment')->name('payment.')->group(function () {
     Route::get('/paypal/redirect', [PaymentController::class, 'paypalRedirect'])->name('paypal.redirect');
     Route::get('/paypal/success', [PaymentController::class, 'paypalSuccess'])->name('paypal.success');
     Route::get('/paypal/cancel', [PaymentController::class, 'paypalCancel'])->name('paypal.cancel');
+    Route::get('/razorpay/process', [PaymentController::class, 'razorpayProcess'])->name('razorpay.process');
+    Route::post('/razorpay/verify', [PaymentController::class, 'razorpayVerify'])->name('razorpay.verify');
     Route::post('/stripe/webhook', [PaymentController::class, 'stripeWebhook'])->name('stripe.webhook');
 });
 
@@ -165,7 +170,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('brands', AdminBrandController::class);
 
         // Colors
+        Route::post('colors/bulk-delete', [AdminColorController::class, 'bulkDelete'])->name('colors.bulk-delete');
         Route::resource('colors', AdminColorController::class);
+
+        // Sizes
+        Route::post('sizes/bulk-delete', [AdminSizeController::class, 'bulkDelete'])->name('sizes.bulk-delete');
+        Route::resource('sizes', AdminSizeController::class);
 
         // Orders
         Route::resource('orders', AdminOrderController::class)->only(['index', 'show', 'update', 'destroy']);
@@ -193,6 +203,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Banners
         Route::resource('banners', AdminBannerController::class);
+
+        // Popups
+        Route::resource('popups', AdminPopupController::class);
+        Route::post('popups/{popup}/toggle-status', [AdminPopupController::class, 'toggleStatus'])->name('popups.toggle-status');
 
         // Blog
         Route::resource('blog', AdminBlogController::class);

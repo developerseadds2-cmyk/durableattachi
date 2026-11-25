@@ -45,7 +45,7 @@
           <small class="text-muted">Use lowercase letters, numbers and hyphens.</small>
         </div>
         <div class="row g-3">
-          <div class="col-md-4">
+          <div class="col-md-3">
             <label class="form-label">Category <span class="text-danger">*</span></label>
             <select name="category_id" class="form-select" required>
               @foreach($categories as $cat)
@@ -53,7 +53,7 @@
               @endforeach
             </select>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <label class="form-label">Brand</label>
             <select name="brand_id" class="form-select">
               <option value="">No Brand</option>
@@ -62,7 +62,16 @@
               @endforeach
             </select>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
+            <label class="form-label">Size</label>
+            <select name="size_id" class="form-select">
+              <option value="">No Size / Universal</option>
+              @foreach($sizes as $size)
+                <option value="{{ $size->id }}" {{ old('size_id', $product->size_id) == $size->id ? 'selected' : '' }}>{{ $size->name }} @if($size->code)({{ $size->code }})@endif</option>
+              @endforeach
+            </select>
+          </div>
+          <div class="col-md-3">
             <label class="form-label">Color</label>
             <div class="dropdown custom-color-dropdown">
               <input type="hidden" name="color_id" id="colorIdInput" value="{{ old('color_id', $product->color_id) }}">
@@ -110,13 +119,21 @@
             <label class="form-label">Product Features <small class="text-muted">(Short description & key features)</small></label>
             <textarea name="short_description" class="form-control" rows="2" placeholder="e.g. Securitech zipper, TSA lock, Full PVC convipack, Double wheels, Expander">{{ old('short_description', $product->short_description) }}</textarea>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-3">
             <label class="form-label">Warranty Details</label>
             <input type="text" name="warranty_details" class="form-control" value="{{ old('warranty_details', $product->warranty_details ?? '5 years international warranty') }}" placeholder="e.g. 5 years international warranty">
           </div>
-          <div class="col-md-6">
+          <div class="col-md-3">
             <label class="form-label">Material & Shell</label>
-            <input type="text" name="material" class="form-control" value="{{ old('material', $product->material) }}" placeholder="e.g. Polycarbonate / Ballistic Nylon / Full Grain Leather">
+            <input type="text" name="material" class="form-control" value="{{ old('material', $product->material) }}" placeholder="e.g. Polycarbonate / Ballistic Nylon">
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Product Capacity</label>
+            <input type="text" name="capacity" class="form-control" value="{{ old('capacity', $product->capacity) }}" placeholder="e.g. 45 Litres, 32 L, 103 L">
+          </div>
+          <div class="col-md-3">
+            <label class="form-label">Product Dimensions</label>
+            <input type="text" name="dimensions" class="form-control" value="{{ old('dimensions', $product->dimensions) }}" placeholder="e.g. 45 x 28 x 68 cm">
           </div>
         </div>
       </div>

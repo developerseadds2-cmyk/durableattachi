@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Brand;
 use App\Models\Color;
+use App\Models\Size;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -55,7 +56,8 @@ class ProductController extends Controller
         $categories = Category::active()->orderBy('name')->get();
         $brands     = Brand::where('status', true)->orderBy('name')->get();
         $colors     = Color::where('status', true)->orderBy('name')->get();
-        return view('admin.products.create', compact('categories', 'brands', 'colors'));
+        $sizes      = Size::where('status', true)->orderBy('name')->get();
+        return view('admin.products.create', compact('categories', 'brands', 'colors', 'sizes'));
     }
 
     public function store(Request $request)
@@ -66,6 +68,7 @@ class ProductController extends Controller
             'category_id'          => 'required|exists:categories,id',
             'brand_id'             => 'nullable|exists:brands,id',
             'color_id'             => 'nullable|exists:colors,id',
+            'size_id'              => 'nullable|exists:sizes,id',
             'sku'                  => 'nullable|string|max:100|unique:products',
             'price'                => 'required|numeric|min:0',
             'sale_price'           => 'nullable|numeric|min:0|lt:price',
@@ -74,6 +77,8 @@ class ProductController extends Controller
             'short_description'    => 'nullable|string',
             'description'          => 'nullable|string',
             'material'             => 'nullable|string|max:150',
+            'capacity'             => 'nullable|string|max:100',
+            'dimensions'           => 'nullable|string|max:150',
             'warranty_details'     => 'nullable|string|max:255',
             'product_warranty'     => 'nullable|string|max:100',
             'manufacturer_details' => 'nullable|string',
@@ -180,7 +185,8 @@ class ProductController extends Controller
         $categories = Category::active()->orderBy('name')->get();
         $brands     = Brand::where('status', true)->orderBy('name')->get();
         $colors     = Color::where('status', true)->orderBy('name')->get();
-        return view('admin.products.edit', compact('product', 'categories', 'brands', 'colors'));
+        $sizes      = Size::where('status', true)->orderBy('name')->get();
+        return view('admin.products.edit', compact('product', 'categories', 'brands', 'colors', 'sizes'));
     }
 
     public function update(Request $request, Product $product)
@@ -191,6 +197,7 @@ class ProductController extends Controller
             'category_id'          => 'required|exists:categories,id',
             'brand_id'             => 'nullable|exists:brands,id',
             'color_id'             => 'nullable|exists:colors,id',
+            'size_id'              => 'nullable|exists:sizes,id',
             'sku'                  => 'nullable|string|max:100|unique:products,sku,' . $product->id,
             'price'                => 'required|numeric|min:0',
             'sale_price'           => 'nullable|numeric|min:0',
@@ -199,6 +206,8 @@ class ProductController extends Controller
             'short_description'    => 'nullable|string',
             'description'          => 'nullable|string',
             'material'             => 'nullable|string|max:150',
+            'capacity'             => 'nullable|string|max:100',
+            'dimensions'           => 'nullable|string|max:150',
             'warranty_details'     => 'nullable|string|max:255',
             'product_warranty'     => 'nullable|string|max:100',
             'manufacturer_details' => 'nullable|string',

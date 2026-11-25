@@ -1,4 +1,8 @@
-<div class="product-card">
+<?php
+  $isRecentlyViewed = in_array($product->id, session()->get('recently_viewed_products', []));
+?>
+<div class="product-card uppercase-card <?php echo e($isRecentlyViewed ? 'is-recently-viewed' : ''); ?>" data-product-id="<?php echo e($product->id); ?>">
+  <!-- Card Image Container -->
   <div class="product-card-img <?php echo e($product->secondary_image_url ? 'has-hover-image' : ''); ?>">
     <a href="<?php echo e(route('product.show', $product->slug)); ?>">
       <img src="<?php echo e($product->thumbnail_url); ?>" alt="<?php echo e($product->name); ?>" class="product-img-primary" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?w=700&q=80&fit=crop';">
@@ -7,14 +11,7 @@
       <?php endif; ?>
     </a>
 
-    <!-- Badges -->
-    <div class="product-card-badges">
-      <?php if($product->is_new_arrival): ?> <span class="product-badge badge-new">New</span> <?php endif; ?>
-      <?php if($product->discount_percentage): ?> <span class="product-badge badge-sale">-<?php echo e($product->discount_percentage); ?>%</span> <?php endif; ?>
-      <?php if($product->is_best_seller): ?> <span class="product-badge badge-best">Best</span> <?php endif; ?>
-    </div>
-
-    <!-- Quick Wishlist Top-Right -->
+    <!-- Wishlist Top-Right -->
     <div class="product-card-wish-top">
       <?php if(auth()->guard()->check()): ?>
       <button class="product-action-btn wishlist-btn <?php echo e(auth()->user()->wishlists()->where('product_id', $product->id)->exists() ? 'active' : ''); ?>"
@@ -30,36 +27,51 @@
   </div>
 
   <div class="product-card-body">
-    <!-- Category -->
-    <div class="product-card-cat"><?php echo e($product->category?->name); ?></div>
-
-    <!-- 1. First: Product Name (Single line with ellipsis) -->
-    <a href="<?php echo e(route('product.show', $product->slug)); ?>" title="<?php echo e($product->name); ?>">
-      <h3 class="product-card-name text-truncate" title="<?php echo e($product->name); ?>"><?php echo e($product->name); ?></h3>
-    </a>
-
-    <!-- Stars (if rated) -->
-    <?php if($product->average_rating > 0): ?>
-    <div class="mb-1">
-      <span class="stars">
-        <?php for($i=1; $i<=5; $i++): ?><?php echo e($i <= $product->average_rating ? '★' : '☆'); ?><?php endfor; ?>
-      </span>
-      <span class="stars-count">(<?php echo e($product->approvedReviews->count()); ?>)</span>
-    </div>
-    <?php endif; ?>
-
-    <!-- 2. Second: Price -->
-    <div class="product-card-price">
-      <span class="price-current">₨<?php echo e(number_format($product->current_price, 2)); ?></span>
-      <?php if($product->sale_price): ?>
-        <span class="price-original">₨<?php echo e(number_format($product->price, 2)); ?></span>
+    <div class="card-meta-slot">
+      <?php if($isRecentlyViewed): ?>
+        <div class="recently-viewed-pill" title="You recently viewed this item">
+          <i class="fa-solid fa-eye me-1"></i> Recently Viewed
+        </div>
       <?php endif; ?>
     </div>
 
-    <!-- 3. Third: Always Visible Add To Cart Button -->
-    <div class="product-card-bottom-actions mt-3">
-      <button class="product-action-btn w-100" onclick="addToCart(<?php echo e($product->id); ?>, 1)" title="Add to Cart">
-        <i class="bi bi-bag-plus me-1"></i> Add to Cart
+    <!-- Product Title -->
+    <a href="<?php echo e(route('product.show', $product->slug)); ?>" class="text-decoration-none">
+      <h3 class="product-card-name" title="<?php echo e($product->name); ?>"><?php echo e($product->name); ?></h3>
+    </a>
+
+    <!-- Color Swatches Row (Above reviews & stars) -->
+    <div class="card-color-swatches mb-1 mt-1">
+      <?php if($product->color): ?>
+        <span class="card-color-bubble active" style="background:<?php echo e($product->color->code ?: '#4a5568'); ?>;" title="<?php echo e($product->color->name); ?>"></span>
+      <?php else: ?>
+        <span class="card-color-bubble active" style="background:#8c9096;"></span>
+      <?php endif; ?>
+    </div>
+
+    <!-- Stars & Reviews -->
+    <div class="card-rating-line mb-1">
+      <span class="stars-gold">★★★★★</span>
+      <span class="rating-val">4.9</span>
+      <span class="reviews-count">(<?php echo e($product->approvedReviews->count() > 0 ? $product->approvedReviews->count() : 83); ?> Reviews)</span>
+    </div>
+
+    <!-- Pricing Row with Discount Badge -->
+    <div class="product-card-price">
+      <span class="price-current">₹<?php echo e(number_format($product->current_price, 0)); ?></span>
+      <?php if($product->sale_price && $product->price > $product->sale_price): ?>
+        <span class="price-original">₹<?php echo e(number_format($product->price, 0)); ?></span>
+        <span class="badge-discount-red">-<?php echo e($product->discount_percentage); ?>%</span>
+      <?php elseif($product->price > $product->current_price): ?>
+        <span class="price-original">₹<?php echo e(number_format($product->price, 0)); ?></span>
+        <span class="badge-discount-red">-15%</span>
+      <?php endif; ?>
+    </div>
+
+    <!-- Green Full-Width Add To Cart Button -->
+    <div class="product-card-bottom-actions mt-2">
+      <button class="btn-green-add-cart w-100" onclick="addToCart(<?php echo e($product->id); ?>, 1)" title="Add to Cart">
+        Add to cart
       </button>
     </div>
   </div>

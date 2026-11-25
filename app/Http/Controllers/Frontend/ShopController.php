@@ -12,16 +12,26 @@ class ShopController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Product::active()->with('category', 'brand');
+        $query = Product::active()->with(['category', 'brand', 'color', 'size', 'images']);
 
         $this->applyFilters($query, $request);
 
         $products   = $query->paginate(12)->withQueryString();
         $categories = Category::active()->whereNull('parent_id')->with('children')->withCount('products')->get();
         $brands     = Brand::where('status', true)->withCount('products')->get();
-        $priceRange = ['min' => 0, 'max' => Product::active()->max('price') ?? 100000];
+        $colors     = \App\Models\Color::where('status', true)->withCount('products')->get();
+        $sizes      = \App\Models\Size::where('status', true)->withCount('products')->get();
+        $priceRange = ['min' => 0, 'max' => Product::active()->max('price') ?? 50000];
 
-        return view('frontend.shop.index', compact('products', 'categories', 'brands', 'priceRange'));
+        if ($request->ajax()) {
+            return response()->json([
+                'html'       => view('frontend.shop.partials.products-list', compact('products'))->render(),
+                'pagination' => (string) $products->links(),
+                'total'      => $products->total(),
+            ]);
+        }
+
+        return view('frontend.shop.index', compact('products', 'categories', 'brands', 'colors', 'sizes', 'priceRange'));
     }
 
     public function category(string $slug)
@@ -60,6 +70,14 @@ class ShopController extends Controller
             $query->whereHas('brand', fn($q) => $q->where('slug', $request->brand));
         }
 
+        if ($request->color) {
+            $query->whereHas('color', fn($q) => $q->where('id', $request->color)->orWhere('name', $request->color));
+        }
+
+        if ($request->size) {
+            $query->whereHas('size', fn($q) => $q->where('id', $request->size)->orWhere('name', $request->size));
+        }
+
         if ($request->min_price) $query->where('price', '>=', $request->min_price);
         if ($request->max_price) $query->where('price', '<=', $request->max_price);
 
@@ -72,10 +90,10 @@ class ShopController extends Controller
         switch ($request->sort) {
             case 'price_asc':    $query->orderBy('price'); break;
             case 'price_desc':   $query->orderByDesc('price'); break;
-            case 'newest':       $query->latest(); break;
             case 'name_asc':     $query->orderBy('name'); break;
-            case 'best_seller':  $query->bestSellers()->orderBy('name'); break;
-            default:             $query->latest(); break;
+            case 'best_seller':  $query->orderByDesc('is_best_seller')->latest(); break;
+            case 'newest':       $query->latest(); break;
+            default:             $query->orderByDesc('is_best_seller')->latest(); break;
         }
     }
 }

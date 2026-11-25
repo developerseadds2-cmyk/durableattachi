@@ -68,4 +68,17 @@ class ColorController extends Controller
         return redirect()->route('admin.colors.index')
             ->with('success', 'Color deleted successfully.');
     }
+
+    public function bulkDelete(Request $request)
+    {
+        $request->validate([
+            'ids' => 'required|array',
+            'ids.*' => 'exists:colors,id',
+        ]);
+
+        $count = Color::whereIn('id', $request->ids)->delete();
+
+        return redirect()->route('admin.colors.index')
+            ->with('success', "{$count} colors deleted successfully.");
+    }
 }

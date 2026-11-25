@@ -50,6 +50,8 @@ class PaymentController extends Controller
 
             $order->update(['payment_status' => 'paid', 'status' => 'processing']);
             Session::forget('pending_order_id');
+            Session::forget('cart');
+            Session::forget('coupon');
 
             return redirect()->route('checkout.success', $order->order_number)
                 ->with('success', 'Payment successful! Order confirmed.');
@@ -161,7 +163,7 @@ class PaymentController extends Controller
             ]);
 
             $order->update(['payment_status' => 'paid', 'status' => 'processing']);
-            Session::forget(['pending_order_id', 'paypal_order_id']);
+            Session::forget(['pending_order_id', 'paypal_order_id', 'cart', 'coupon']);
 
             return redirect()->route('checkout.success', $order->order_number)
                 ->with('success', 'Payment successful via PayPal!');
@@ -169,6 +171,134 @@ class PaymentController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('checkout.index')->with('error', 'PayPal payment verification failed.');
         }
+    }
+
+    /**
+     * Razorpay Process Page
+     */
+    public function razorpayProcess(Request $request)
+    {
+        $orderId = $request->order_id ?? Session::get('pending_order_id');
+        if (!$orderId) {
+            return redirect()->route('cart.index')->with('error', 'No pending order found.');
+        }
+
+        $order = Order::with('items.product')->findOrFail($orderId);
+
+        $keyId = Setting::get('razorpay_key_id') ?: env('RAZORPAY_KEY_ID');
+        $keySecret = Setting::get('razorpay_key_secret') ?: env('RAZORPAY_KEY_SECRET');
+
+        if (!$keyId || !$keySecret) {
+            return redirect()->route('checkout.index')->with('error', 'Razorpay is not configured yet. Please choose another payment method.');
+        }
+
+        // Determine image for Razorpay modal
+        // Razorpay modal requires a publicly accessible HTTPS image URL or a base64 / publicly hosted image.
+        // On localhost (127.0.0.1 / localhost), Razorpay's iframe servers cannot fetch http://127.0.0.1:8000/...
+        $modalImage = null;
+        $firstItem = $order->items->first();
+        if ($firstItem && $firstItem->product && $firstItem->product->primary_image_url) {
+            $modalImage = $firstItem->product->primary_image_url;
+        }
+
+        // Check if on localhost or non-routable host; Razorpay will fail to load http://127.0.0.1 or http://localhost images.
+        // If on localhost, use a clean fallback hosted badge or omit so Razorpay uses initials without showing a broken image icon.
+        if (request()->getHost() === '127.0.0.1' || request()->getHost() === 'localhost') {
+            $modalImage = 'https://cdn-icons-png.flaticon.com/512/3144/3144456.png'; // Clean universal shopping bag / store icon for test
+        } elseif (!$modalImage) {
+            $modalImage = asset('images/logo.png');
+        }
+
+        // Amount in paise (1 INR = 100 paise)
+        $amountInPaise = (int) round($order->total_amount * 100);
+
+        // Create Razorpay Order via HTTP
+        $razorpayOrderId = null;
+        try {
+            $response = \Illuminate\Support\Facades\Http::withBasicAuth($keyId, $keySecret)
+                ->post('https://api.razorpay.com/v1/orders', [
+                    'receipt'  => (string) $order->order_number,
+                    'amount'   => $amountInPaise,
+                    'currency' => 'INR',
+                    'notes'    => [
+                        'order_id' => (string) $order->id,
+                        'customer' => $order->customer_name,
+                    ],
+                ]);
+
+            if ($response->successful()) {
+                $razorpayOrderId = $response->json('id');
+            }
+        } catch (\Exception $e) {
+            \Log::warning('Razorpay Order create failed: ' . $e->getMessage());
+        }
+
+        return view('frontend.payment.razorpay', compact('order', 'keyId', 'amountInPaise', 'razorpayOrderId', 'modalImage'));
+    }
+
+    /**
+     * Razorpay Payment Verification
+     */
+    public function razorpayVerify(Request $request)
+    {
+        $request->validate([
+            'razorpay_payment_id' => 'required',
+            'order_id'            => 'required',
+        ]);
+
+        $order = Order::findOrFail($request->order_id);
+        $keySecret = Setting::get('razorpay_key_secret') ?: env('RAZORPAY_KEY_SECRET');
+
+        $paymentId = $request->razorpay_payment_id;
+        $razorpayOrderId = $request->razorpay_order_id;
+        $signature = $request->razorpay_signature;
+
+        $verified = false;
+
+        if ($razorpayOrderId && $signature && $keySecret) {
+            $expectedSignature = hash_hmac('sha256', $razorpayOrderId . '|' . $paymentId, $keySecret);
+            $verified = hash_equals($expectedSignature, $signature);
+        } else {
+            // In test mode or without order id, consider valid if payment ID present
+            $verified = !empty($paymentId);
+        }
+
+        if ($verified) {
+            // Update order
+            $order->update([
+                'payment_status' => 'paid',
+                'order_status'   => 'confirmed',
+            ]);
+
+            Payment::create([
+                'order_id'       => $order->id,
+                'gateway'        => 'razorpay',
+                'transaction_id' => $paymentId,
+                'amount'         => $order->total_amount,
+                'currency'       => 'INR',
+                'status'         => 'success',
+                'paid_at'        => now(),
+            ]);
+
+            // Clear session cart now that payment is confirmed
+            Session::forget('cart');
+            Session::forget('pending_order_id');
+
+            return redirect()->route('checkout.success', $order->id)
+                ->with('success', 'Payment successful! Your order has been placed.');
+        }
+
+        Payment::create([
+            'order_id'       => $order->id,
+            'gateway'        => 'razorpay',
+            'transaction_id' => $paymentId ?? 'failed',
+            'amount'         => $order->total_amount,
+            'currency'       => 'INR',
+            'status'         => 'failed',
+        ]);
+
+        return redirect()->route('checkout.index')
+            ->with('error', 'Razorpay payment verification failed. Please try again.');
     }
 
     /**

@@ -1,85 +1,110 @@
-<!-- Categories -->
-<div class="filter-section is-open">
-  <div class="filter-title">
-    <span>Categories</span>
-    <i class="bi bi-chevron-down"></i>
+<!-- Price Range Slider -->
+<div class="filter-group-block">
+  <div class="filter-group-header" onclick="toggleFilterBlock(this)">
+    <span>Price</span>
+    <i class="bi bi-chevron-up"></i>
   </div>
-  <div class="filter-content">
-    <ul class="filter-list">
-      <li>
-        <label>
-          <input type="radio" name="category" value="" {{ !request('category') ? 'checked' : '' }}>
-          <span>All Categories</span>
-        </label>
-      </li>
-      @foreach($categories as $cat)
-        <li>
-          <label>
-            <input type="radio" name="category" value="{{ $cat->slug }}" {{ request('category') == $cat->slug ? 'checked' : '' }}>
-            <span>{{ $cat->name }}</span>
-            @if($cat->products_count)
-              <small class="text-muted ms-auto">({{ $cat->products_count }})</small>
-            @endif
-          </label>
-          @if($cat->children->count() > 0)
-          <ul class="filter-list ps-3 mt-1">
-            @foreach($cat->children as $child)
-            <li>
-              <label>
-                <input type="radio" name="category" value="{{ $child->slug }}" {{ request('category') == $child->slug ? 'checked' : '' }}>
-                <span>{{ $child->name }}</span>
-              </label>
-            </li>
-            @endforeach
-          </ul>
-          @endif
-        </li>
-      @endforeach
-    </ul>
-  </div>
-</div>
-
-<!-- Price Range -->
-<div class="filter-section is-open">
-  <div class="filter-title">
-    <span>Price Range</span>
-    <i class="bi bi-chevron-down"></i>
-  </div>
-  <div class="filter-content">
-    <div class="price-range mb-2">
-      <input type="number" name="min_price" class="price-input" placeholder="Min ₨" value="{{ request('min_price') }}">
-      <span class="text-muted">—</span>
-      <input type="number" name="max_price" class="price-input" placeholder="Max ₨" value="{{ request('max_price') }}">
+  <div class="filter-group-body">
+    <!-- Slider Track -->
+    <div class="range-slider-wrapper mb-3">
+      <input type="range" class="form-range custom-slider" id="priceRangeSlider" min="0" max="{{ $priceRange['max'] ?? 50000 }}" step="500" value="{{ request('max_price', $priceRange['max'] ?? 50000) }}" oninput="updatePriceInputs(this.value)" onchange="triggerAjaxFilter()">
+    </div>
+    <div class="d-flex align-items-center gap-2">
+      <div class="input-group input-group-sm">
+        <span class="input-group-text bg-white">₹</span>
+        <input type="number" name="min_price" id="minPriceInput" class="form-control text-center" placeholder="0" value="{{ request('min_price', 0) }}" onchange="triggerAjaxFilter()">
+      </div>
+      <span class="text-muted small">To</span>
+      <div class="input-group input-group-sm">
+        <span class="input-group-text bg-white">₹</span>
+        <input type="number" name="max_price" id="maxPriceInput" class="form-control text-center" placeholder="{{ $priceRange['max'] ?? 50000 }}" value="{{ request('max_price', $priceRange['max'] ?? 50000) }}" onchange="triggerAjaxFilter()">
+      </div>
     </div>
   </div>
 </div>
 
-<!-- Product Highlights -->
-<div class="filter-section is-open">
-  <div class="filter-title">
-    <span>Highlights</span>
-    <i class="bi bi-chevron-down"></i>
+<!-- Bag Style / Categories (Checkboxes) -->
+<div class="filter-group-block">
+  <div class="filter-group-header" onclick="toggleFilterBlock(this)">
+    <span>Bag Style</span>
+    <i class="bi bi-chevron-up"></i>
   </div>
-  <div class="filter-content">
-    <ul class="filter-list">
-      <li>
-        <label>
-          <input type="checkbox" name="best_seller" value="1" {{ request('best_seller') ? 'checked' : '' }}>
-          <span>Best Sellers</span>
+  <div class="filter-group-body">
+    <div class="custom-checkbox-list">
+      @foreach($categories as $cat)
+        <label class="custom-check-item">
+          <input type="checkbox" name="category" value="{{ $cat->slug }}" {{ request('category') == $cat->slug ? 'checked' : '' }} onchange="triggerAjaxFilter(this)">
+          <span class="check-box"></span>
+          <span class="check-label">{{ $cat->name }} @if($cat->products_count)({{ $cat->products_count }})@endif</span>
         </label>
-      </li>
-      <li>
-        <label>
-          <input type="checkbox" name="new_arrival" value="1" {{ request('new_arrival') ? 'checked' : '' }}>
-          <span>New Arrivals</span>
+        @foreach($cat->children as $child)
+          <label class="custom-check-item ps-3">
+            <input type="checkbox" name="category" value="{{ $child->slug }}" {{ request('category') == $child->slug ? 'checked' : '' }} onchange="triggerAjaxFilter(this)">
+            <span class="check-box"></span>
+            <span class="check-label">{{ $child->name }}</span>
+          </label>
+        @endforeach
+      @endforeach
+    </div>
+  </div>
+</div>
+
+<!-- Colors Grid -->
+<div class="filter-group-block">
+  <div class="filter-group-header" onclick="toggleFilterBlock(this)">
+    <span>Color</span>
+    <i class="bi bi-chevron-up"></i>
+  </div>
+  <div class="filter-group-body">
+    <div class="color-bubbles-grid">
+      @foreach($colors as $color)
+        <button type="button" 
+                class="filter-color-bubble {{ request('color') == $color->id ? 'active' : '' }}" 
+                style="background:{{ $color->code ?: '#4a5568' }};" 
+                title="{{ $color->name }}" 
+                data-color-id="{{ $color->id }}"
+                onclick="toggleColorFilter('{{ $color->id }}', this)">
+        </button>
+      @endforeach
+    </div>
+    <input type="hidden" name="color" id="selectedColorFilter" value="{{ request('color') }}">
+  </div>
+</div>
+
+<!-- Sizes -->
+<div class="filter-group-block">
+  <div class="filter-group-header" onclick="toggleFilterBlock(this)">
+    <span>Sizes</span>
+    <i class="bi bi-chevron-up"></i>
+  </div>
+  <div class="filter-group-body">
+    <div class="custom-checkbox-list">
+      @foreach($sizes as $sz)
+        <label class="custom-check-item">
+          <input type="checkbox" name="size" value="{{ $sz->id }}" {{ request('size') == $sz->id ? 'checked' : '' }} onchange="triggerAjaxFilter(this)">
+          <span class="check-box"></span>
+          <span class="check-label">{{ $sz->name }} @if($sz->products_count)({{ $sz->products_count }})@endif</span>
         </label>
-      </li>
-      <li>
-        <label>
-          <input type="checkbox" name="featured" value="1" {{ request('featured') ? 'checked' : '' }}>
-          <span>Featured Products</span>
+      @endforeach
+    </div>
+  </div>
+</div>
+
+<!-- Brand Filter -->
+<div class="filter-group-block">
+  <div class="filter-group-header" onclick="toggleFilterBlock(this)">
+    <span>Brands</span>
+    <i class="bi bi-chevron-up"></i>
+  </div>
+  <div class="filter-group-body">
+    <div class="custom-checkbox-list">
+      @foreach($brands as $b)
+        <label class="custom-check-item">
+          <input type="checkbox" name="brand" value="{{ $b->slug }}" {{ request('brand') == $b->slug ? 'checked' : '' }} onchange="triggerAjaxFilter(this)">
+          <span class="check-box"></span>
+          <span class="check-label">{{ $b->name }} @if($b->products_count)({{ $b->products_count }})@endif</span>
         </label>
-      </li>
-    </ul>
+      @endforeach
+    </div>
   </div>
 </div>

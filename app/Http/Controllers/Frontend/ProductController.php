@@ -13,10 +13,19 @@ class ProductController extends Controller
     {
         $product = Product::where('slug', $slug)
             ->active()
-            ->with(['category', 'brand', 'images', 'attributes', 'approvedReviews.user'])
+            ->with(['category', 'brand', 'color', 'size', 'images', 'attributes', 'approvedReviews.user'])
             ->firstOrFail();
 
         $product->increment('views');
+
+        // Track recently viewed products in session
+        $recentlyViewed = session()->get('recently_viewed_products', []);
+        if (!in_array($product->id, $recentlyViewed)) {
+            array_unshift($recentlyViewed, $product->id);
+            // keep up to 20 recently viewed items
+            $recentlyViewed = array_slice($recentlyViewed, 0, 20);
+            session()->put('recently_viewed_products', $recentlyViewed);
+        }
 
         $related = Product::active()
             ->where('category_id', $product->category_id)
@@ -37,28 +46,35 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
 
-        $request->validate([
+        $rules = [
             'rating' => 'required|integer|min:1|max:5',
             'title'  => 'nullable|string|max:191',
-            'body'   => 'required|string|min:10',
-        ]);
+            'body'   => 'required|string|min:5|max:2000',
+        ];
 
-        // Check if already reviewed
-        $existing = Review::where('product_id', $id)->where('user_id', auth()->id())->first();
-        if ($existing) {
-            return back()->with('error', 'You have already reviewed this product.');
+        if (!auth()->check()) {
+            $rules['customer_name']  = 'required|string|max:100';
+            $rules['customer_email'] = 'required|email|max:150';
         }
 
+        $request->validate($rules);
+
+        $userId = auth()->id();
+        $customerName = auth()->check() ? auth()->user()->name : $request->customer_name;
+        $customerEmail = auth()->check() ? auth()->user()->email : $request->customer_email;
+
         Review::create([
-            'product_id' => $id,
-            'user_id'    => auth()->id(),
-            'rating'     => $request->rating,
-            'title'      => $request->title,
-            'body'       => $request->body,
-            'status'     => 'pending',
+            'product_id'     => $id,
+            'user_id'        => $userId,
+            'customer_name'  => $customerName,
+            'customer_email' => $customerEmail,
+            'rating'         => $request->rating,
+            'title'          => $request->title,
+            'body'           => $request->body,
+            'status'         => 'pending', // Strictly pending until admin approval
         ]);
 
-        return back()->with('success', 'Your review has been submitted and is pending approval.');
+        return back()->with('success', 'Thank you! Your review has been submitted and will appear once approved by our team.');
     }
 
     public function search(Request $request)

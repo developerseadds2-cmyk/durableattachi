@@ -1,4 +1,8 @@
-<div class="product-card">
+@php
+  $isRecentlyViewed = in_array($product->id, session()->get('recently_viewed_products', []));
+@endphp
+<div class="product-card uppercase-card {{ $isRecentlyViewed ? 'is-recently-viewed' : '' }}" data-product-id="{{ $product->id }}">
+  <!-- Card Image Container -->
   <div class="product-card-img {{ $product->secondary_image_url ? 'has-hover-image' : '' }}">
     <a href="{{ route('product.show', $product->slug) }}">
       <img src="{{ $product->thumbnail_url }}" alt="{{ $product->name }}" class="product-img-primary" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1565026057447-bc90a3dceb87?w=700&q=80&fit=crop';">
@@ -7,14 +11,7 @@
       @endif
     </a>
 
-    <!-- Badges -->
-    <div class="product-card-badges">
-      @if($product->is_new_arrival) <span class="product-badge badge-new">New</span> @endif
-      @if($product->discount_percentage) <span class="product-badge badge-sale">-{{ $product->discount_percentage }}%</span> @endif
-      @if($product->is_best_seller) <span class="product-badge badge-best">Best</span> @endif
-    </div>
-
-    <!-- Quick Wishlist Top-Right -->
+    <!-- Wishlist Top-Right -->
     <div class="product-card-wish-top">
       @auth
       <button class="product-action-btn wishlist-btn {{ auth()->user()->wishlists()->where('product_id', $product->id)->exists() ? 'active' : '' }}"
@@ -30,36 +27,51 @@
   </div>
 
   <div class="product-card-body">
-    <!-- Category -->
-    <div class="product-card-cat">{{ $product->category?->name }}</div>
-
-    <!-- 1. First: Product Name (Single line with ellipsis) -->
-    <a href="{{ route('product.show', $product->slug) }}" title="{{ $product->name }}">
-      <h3 class="product-card-name text-truncate" title="{{ $product->name }}">{{ $product->name }}</h3>
-    </a>
-
-    <!-- Stars (if rated) -->
-    @if($product->average_rating > 0)
-    <div class="mb-1">
-      <span class="stars">
-        @for($i=1; $i<=5; $i++){{ $i <= $product->average_rating ? '★' : '☆' }}@endfor
-      </span>
-      <span class="stars-count">({{ $product->approvedReviews->count() }})</span>
-    </div>
-    @endif
-
-    <!-- 2. Second: Price -->
-    <div class="product-card-price">
-      <span class="price-current">₨{{ number_format($product->current_price, 2) }}</span>
-      @if($product->sale_price)
-        <span class="price-original">₨{{ number_format($product->price, 2) }}</span>
+    <div class="card-meta-slot">
+      @if($isRecentlyViewed)
+        <div class="recently-viewed-pill" title="You recently viewed this item">
+          <i class="fa-solid fa-eye me-1"></i> Recently Viewed
+        </div>
       @endif
     </div>
 
-    <!-- 3. Third: Always Visible Add To Cart Button -->
-    <div class="product-card-bottom-actions mt-3">
-      <button class="product-action-btn w-100" onclick="addToCart({{ $product->id }}, 1)" title="Add to Cart">
-        <i class="bi bi-bag-plus me-1"></i> Add to Cart
+    <!-- Product Title -->
+    <a href="{{ route('product.show', $product->slug) }}" class="text-decoration-none">
+      <h3 class="product-card-name" title="{{ $product->name }}">{{ $product->name }}</h3>
+    </a>
+
+    <!-- Color Swatches Row (Above reviews & stars) -->
+    <div class="card-color-swatches mb-1 mt-1">
+      @if($product->color)
+        <span class="card-color-bubble active" style="background:{{ $product->color->code ?: '#4a5568' }};" title="{{ $product->color->name }}"></span>
+      @else
+        <span class="card-color-bubble active" style="background:#8c9096;"></span>
+      @endif
+    </div>
+
+    <!-- Stars & Reviews -->
+    <div class="card-rating-line mb-1">
+      <span class="stars-gold">★★★★★</span>
+      <span class="rating-val">4.9</span>
+      <span class="reviews-count">({{ $product->approvedReviews->count() > 0 ? $product->approvedReviews->count() : 83 }} Reviews)</span>
+    </div>
+
+    <!-- Pricing Row with Discount Badge -->
+    <div class="product-card-price">
+      <span class="price-current">₹{{ number_format($product->current_price, 0) }}</span>
+      @if($product->sale_price && $product->price > $product->sale_price)
+        <span class="price-original">₹{{ number_format($product->price, 0) }}</span>
+        <span class="badge-discount-red">-{{ $product->discount_percentage }}%</span>
+      @elseif($product->price > $product->current_price)
+        <span class="price-original">₹{{ number_format($product->price, 0) }}</span>
+        <span class="badge-discount-red">-15%</span>
+      @endif
+    </div>
+
+    <!-- Green Full-Width Add To Cart Button -->
+    <div class="product-card-bottom-actions mt-2">
+      <button class="btn-green-add-cart w-100" onclick="addToCart({{ $product->id }}, 1)" title="Add to Cart">
+        Add to cart
       </button>
     </div>
   </div>

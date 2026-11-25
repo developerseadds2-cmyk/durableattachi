@@ -32,14 +32,16 @@ class ReviewController extends Controller
         return view('admin.reviews.show', compact('review'));
     }
 
-    public function approve(Review $review)
+    public function approve($id)
     {
+        $review = Review::findOrFail($id);
         $review->update(['status' => 'approved']);
-        return back()->with('success', 'Review approved.');
+        return back()->with('success', 'Review approved successfully.');
     }
 
-    public function reject(Review $review)
+    public function reject($id)
     {
+        $review = Review::findOrFail($id);
         $review->update(['status' => 'rejected']);
         return back()->with('success', 'Review rejected.');
     }

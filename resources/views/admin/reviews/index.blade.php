@@ -26,7 +26,10 @@
         @forelse($reviews as $review)
         <tr>
           <td class="small fw-600">{{ $review->product?->name }}</td>
-          <td class="small">{{ $review->user?->name }}</td>
+          <td class="small">
+            <div class="fw-bold text-dark">{{ $review->author_name }}</div>
+            @if($review->customer_email)<div class="text-muted" style="font-size:0.75rem;">{{ $review->customer_email }}</div>@endif
+          </td>
           <td><span style="color:#c9a96e;">{{ str_repeat('★', $review->rating) }}</span></td>
           <td class="small"><strong>{{ $review->title }}</strong><br>{{ Str::limit($review->body, 80) }}</td>
           <td>
