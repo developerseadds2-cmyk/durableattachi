@@ -1180,20 +1180,32 @@
   .heritage-strip {
     padding: 24px 0 !important;
   }
-  .heritage-strip .p-3 {
-    padding: 12px 10px !important;
-    gap: 10px !important;
+  .heritage-strip .heritage-badge-card {
+    height: 100% !important;
+    min-height: 140px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    padding: 16px 10px !important;
+    gap: 8px !important;
   }
-  .heritage-strip .p-3 > div:first-child {
-    width: 40px !important;
-    height: 40px !important;
-    font-size: 1.15rem !important;
+  .heritage-strip .heritage-badge-card > div:first-child {
+    width: 44px !important;
+    height: 44px !important;
+    font-size: 1.25rem !important;
+    margin: 0 auto !important;
   }
-  .heritage-strip .p-3 div > div {
-    font-size: 0.84rem !important;
+  .heritage-strip .heritage-badge-card .badge-title {
+    font-size: 0.88rem !important;
+    font-weight: 800 !important;
+    margin-bottom: 2px !important;
   }
-  .heritage-strip .p-3 div > span {
-    font-size: 0.7rem !important;
+  .heritage-strip .heritage-badge-card .badge-desc {
+    font-size: 0.72rem !important;
+    line-height: 1.3 !important;
+    display: block !important;
   }
 
   /* Featured products section on Mobile */
@@ -1426,48 +1438,48 @@
      ============================================================ --}}
 <section class="heritage-strip" style="background:#F4EFE6; border-top:2px solid var(--dsh-cream-dark); border-bottom:2px solid var(--dsh-cream-dark); padding:40px 0;">
   <div class="container-xl-custom">
-    <div class="row g-4 align-items-center">
+    <div class="row g-3 g-lg-4 align-items-stretch">
       <div class="col-6 col-lg-3">
-        <div class="d-flex align-items-center gap-3 p-3 bg-white rounded-3 shadow-sm" style="border:1.5px solid var(--dsh-cream-dark);">
+        <div class="heritage-badge-card d-flex align-items-center gap-3 p-3 bg-white rounded-3 shadow-sm h-100" style="border:1.5px solid var(--dsh-cream-dark);">
           <div style="width:54px; height:54px; border-radius:50%; background:var(--dsh-navy-subtle); display:flex; align-items:center; justify-content:center; color:var(--dsh-navy); font-size:1.5rem; flex-shrink:0;">
             <i class="bi bi-clock-history"></i>
           </div>
           <div>
-            <div style="font-size:1.02rem; font-weight:800; color:var(--dsh-navy); line-height:1.2;">Since 1960</div>
-            <span style="font-size:0.82rem; color:var(--dsh-charcoal); font-weight:500;">68+ Years of Trust in Patiala</span>
+            <div class="badge-title" style="font-size:1.02rem; font-weight:800; color:var(--dsh-navy); line-height:1.2;">Since 1960</div>
+            <span class="badge-desc" style="font-size:0.82rem; color:var(--dsh-charcoal); font-weight:500;">68+ Years of Trust in Patiala</span>
           </div>
         </div>
       </div>
       <div class="col-6 col-lg-3">
-        <div class="d-flex align-items-center gap-3 p-3 bg-white rounded-3 shadow-sm" style="border:1.5px solid var(--dsh-cream-dark);">
+        <div class="heritage-badge-card d-flex align-items-center gap-3 p-3 bg-white rounded-3 shadow-sm h-100" style="border:1.5px solid var(--dsh-cream-dark);">
           <div style="width:54px; height:54px; border-radius:50%; background:var(--dsh-navy-subtle); display:flex; align-items:center; justify-content:center; color:var(--dsh-navy); font-size:1.5rem; flex-shrink:0;">
             <i class="bi bi-shield-check"></i>
           </div>
           <div>
-            <div style="font-size:1.02rem; font-weight:800; color:var(--dsh-navy); line-height:1.2;">100% Genuine</div>
-            <span style="font-size:0.82rem; color:var(--dsh-charcoal); font-weight:500;">Direct Brand Warranty</span>
+            <div class="badge-title" style="font-size:1.02rem; font-weight:800; color:var(--dsh-navy); line-height:1.2;">100% Genuine</div>
+            <span class="badge-desc" style="font-size:0.82rem; color:var(--dsh-charcoal); font-weight:500;">Direct Brand Warranty</span>
           </div>
         </div>
       </div>
       <div class="col-6 col-lg-3">
-        <div class="d-flex align-items-center gap-3 p-3 bg-white rounded-3 shadow-sm" style="border:1.5px solid var(--dsh-cream-dark);">
+        <div class="heritage-badge-card d-flex align-items-center gap-3 p-3 bg-white rounded-3 shadow-sm h-100" style="border:1.5px solid var(--dsh-cream-dark);">
           <div style="width:54px; height:54px; border-radius:50%; background:var(--dsh-navy-subtle); display:flex; align-items:center; justify-content:center; color:var(--dsh-navy); font-size:1.5rem; flex-shrink:0;">
             <i class="bi bi-stars"></i>
           </div>
           <div>
-            <div style="font-size:1.02rem; font-weight:800; color:var(--dsh-navy); line-height:1.2;">Bridal &amp; Travel</div>
-            <span style="font-size:0.82rem; color:var(--dsh-charcoal); font-weight:500;">Luggage, Clutches &amp; Backpacks</span>
+            <div class="badge-title" style="font-size:1.02rem; font-weight:800; color:var(--dsh-navy); line-height:1.2;">Bridal &amp; Travel</div>
+            <span class="badge-desc" style="font-size:0.82rem; color:var(--dsh-charcoal); font-weight:500;">Luggage, Clutches &amp; Backpacks</span>
           </div>
         </div>
       </div>
       <div class="col-6 col-lg-3">
-        <div class="d-flex align-items-center gap-3 p-3 bg-white rounded-3 shadow-sm" style="border:1.5px solid var(--dsh-cream-dark);">
+        <div class="heritage-badge-card d-flex align-items-center gap-3 p-3 bg-white rounded-3 shadow-sm h-100" style="border:1.5px solid var(--dsh-cream-dark);">
           <div style="width:54px; height:54px; border-radius:50%; background:rgba(37,211,102,0.15); display:flex; align-items:center; justify-content:center; color:#128C7E; font-size:1.5rem; flex-shrink:0;">
             <i class="bi bi-whatsapp"></i>
           </div>
           <div>
-            <div style="font-size:1.02rem; font-weight:800; color:var(--dsh-navy); line-height:1.2;">Instant WhatsApp</div>
-            <span style="font-size:0.82rem; color:var(--dsh-charcoal); font-weight:500;">Live In-Store Inventory Help</span>
+            <div class="badge-title" style="font-size:1.02rem; font-weight:800; color:var(--dsh-navy); line-height:1.2;">Instant WhatsApp</div>
+            <span class="badge-desc" style="font-size:0.82rem; color:var(--dsh-charcoal); font-weight:500;">Live In-Store Inventory Help</span>
           </div>
         </div>
       </div>
@@ -1562,7 +1574,7 @@
       </p>
     </div>
 
-    <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-3 g-md-4">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-3 g-md-4">
       @forelse($newArrivals->take(10) as $product)
       <div class="col">
         @include('frontend.partials.product-card', ['product' => $product])
@@ -1597,7 +1609,7 @@
       <p class="section-sub-heritage">Top-rated spinner trolley sets, designer leather carryalls, and bridal clutches</p>
     </div>
 
-    <div class="row row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-3 g-md-4">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-3 g-md-4">
       @forelse($featured->take(10) as $product)
       <div class="col">
         @include('frontend.partials.product-card', ['product' => $product])

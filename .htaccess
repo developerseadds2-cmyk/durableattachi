@@ -5,18 +5,26 @@
 
     RewriteEngine On
 
-    # Prevent direct access to sensitive files
-    RewriteRule ^(\.env|\.git|composer\.(json|lock)|package\.(json|lock)|artisan) - [F,L,NC]
+    # Block access to sensitive files and directories
+    RewriteRule ^(\.env|\.git|composer\.(json|lock)|package\.(json|lock)|artisan|phpunit\.xml) - [F,L,NC]
+    RewriteRule ^storage/framework/ - [F,L,NC]
+    RewriteRule ^storage/logs/ - [F,L,NC]
+    RewriteRule ^bootstrap/cache/ - [F,L,NC]
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
-    # Redirect /public/ or /public/index.php to root (removes /public from URLs)
+    # Redirect /public/ or /public/index.php to root (removes /public from user's address bar)
     RewriteCond %{THE_REQUEST} /public/([^\s?]*) [NC]
     RewriteRule ^public/(.*)$ /$1 [L,R=301]
 
-    # Rewrite all requests internally to public/
-    RewriteCond %{REQUEST_URI} !^/public/
+    # If the requested file or folder exists inside public/, serve it directly
+    RewriteCond %{DOCUMENT_ROOT}/public/$1 -f [OR]
+    RewriteCond %{DOCUMENT_ROOT}/public/$1 -d
     RewriteRule ^(.*)$ public/$1 [L]
+
+    # Otherwise route all other requests to public/index.php
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/index.php [L]
 </IfModule>
