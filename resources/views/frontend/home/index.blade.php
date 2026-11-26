@@ -1494,7 +1494,7 @@
   <div class="container-xl-custom">
     <div class="editorial-header">
       <span class="editorial-subtitle">Curated Collection</span>
-      <h2 class="editorial-title">OUR PRODUCT CATEGORIES</h2>
+      <h2 class="editorial-title">Our Product Categories</h2>
       <p style="color:var(--dsh-charcoal); font-size:1.05rem; margin-top:14px;">
         Explore authentic branded luggage, stylish ladies handbags, ergonomic school bags, and our exclusive bridal purse collection.
       </p>
@@ -1762,7 +1762,7 @@
         <span>4.9 / 5.0 Star Rating &bull; 1,200+ Happy Travelers</span>
       </div>
       <span class="editorial-subtitle" style="color:var(--dsh-gold-bright, #D4AF37);">Trusted Since 1960</span>
-      <h2 class="editorial-title" style="color:#ffffff;">WHAT OUR CUSTOMERS SAY</h2>
+      <h2 class="editorial-title" style="color:#ffffff;">What Our Customers Say</h2>
       <p style="color:rgba(247, 243, 232, 0.85); font-size:1.05rem; margin-top:14px; max-width:680px; margin-left:auto; margin-right:auto;">
         Real experiences from families, business flyers, and brides across Patiala and Punjab who rely on Durable Suitcase House.
       </p>
@@ -1872,9 +1872,8 @@
     <div class="row g-5 align-items-center">
       <div class="col-lg-6">
         <span class="editorial-subtitle" style="color:var(--dsh-gold-dark, #A97E3B);">Physical Showroom</span>
-        <h2 style="font-family:var(--font-serif); font-size:clamp(2.4rem, 4vw, 3.6rem); font-weight:700; color:var(--dsh-navy, #142D4E); line-height:1.15; margin-bottom:20px;">
-          YOUR NEXT JOURNEY<br>
-          <span style="color:var(--dsh-gold-dark, #A97E3B);">STARTS HERE.</span>
+        <h2 style="font-family:var(--font-serif); font-size:clamp(2rem, 3.4vw, 3rem); font-weight:700; color:var(--dsh-navy, #142D4E); line-height:1.15; margin-bottom:20px;">
+          Your Next Journey <span style="color:var(--dsh-gold-dark, #A97E3B);">Starts Here.</span>
         </h2>
         <p style="color:var(--dsh-charcoal, #333333); font-size:1.05rem; line-height:1.75; margin-bottom:28px;">
           Visit our flagship showroom in Dharampura Bazar, Near Anardana Chowk, Patiala. Touch, inspect, test the wheel gliding smoothness, and take home authentic brand travel gear.

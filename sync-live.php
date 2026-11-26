@@ -13,6 +13,8 @@ $filesToUpload = [
     'resources/views/frontend/layouts/app.blade.php',
     'resources/views/frontend/product/show.blade.php',
     'resources/views/frontend/contact/index.blade.php',
+    'resources/views/frontend/auth/login.blade.php',
+    'resources/views/frontend/auth/register.blade.php',
     '.htaccess',
 ];
 
