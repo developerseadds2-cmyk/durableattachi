@@ -157,9 +157,10 @@ img { max-width: 100%; }
    MARQUEE STRIP
    ============================================ */
 .marquee-strip {
-  background: var(--pd-grad-ocean);
+  background: #F7F3E8;
+  border-bottom: 1px solid #E5DEC9;
   overflow: hidden;
-  padding: 7px 0;
+  padding: 8px 0;
   position: relative;
 }
 .marquee-track {
@@ -176,11 +177,11 @@ img { max-width: 100%; }
   white-space: nowrap;
 }
 .marquee-content span {
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: 0.78rem;
+  font-weight: 800;
   letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: #fff;
+  color: #4A2C1D;
   padding: 0 40px;
   position: relative;
 }
@@ -192,7 +193,7 @@ img { max-width: 100%; }
   transform: translateY(-50%);
   width: 4px;
   height: 4px;
-  background: rgba(255,255,255,0.5);
+  background: rgba(92, 61, 46, 0.4);
   border-radius: 50%;
 }
 @keyframes marqueeScroll {
@@ -2124,23 +2125,23 @@ nav p.small {
 <!-- Header -->
 <header class="site-header" id="siteHeader">
 
-  <!-- Top Announcement Strip (Option 1 Navy & Gold) -->
-  <div class="marquee-strip" style="background:#142D4E;border-bottom:1px solid rgba(255,255,255,0.12);padding:9px 0;">
+  <!-- Top Announcement Strip (Beige / Off-White & Rich Brown) -->
+  <div class="marquee-strip" style="background:#F7F3E8;border-bottom:1px solid #E5DEC9;padding:9px 0;">
     <div class="marquee-track">
-      <div class="marquee-content" style="color:#ffffff;font-size:0.78rem;letter-spacing:1px;font-weight:600;">
-        <span><i class="bi bi-award-fill me-1" style="color:#C59A55;"></i> 68+ YEARS OF TRUST &bull; SINCE 1960</span>
-        <span><i class="bi bi-shield-check me-1" style="color:#C59A55;"></i> AUTHORIZED DEALER: VIP, AMERICAN TOURISTER, SAFARI, SAMSONITE</span>
-        <span><i class="bi bi-truck me-1" style="color:#C59A55;"></i> FREE DELIVERY ON ORDERS ABOVE ₹{{ number_format(\App\Models\Setting::get('free_shipping_above', 1999)) }}</span>
-        <span><i class="bi bi-stars me-1" style="color:#C59A55;"></i> EXCLUSIVE BRIDAL &amp; WEDDING PURSE COLLECTION</span>
-        <span><i class="bi bi-geo-alt-fill me-1" style="color:#C59A55;"></i> DHARAMPURA BAZAR, NEAR ANARDANA CHOWK, PATIALA</span>
+      <div class="marquee-content" style="color:#4A2C1D;font-size:0.78rem;letter-spacing:1px;font-weight:800;">
+        <span><i class="bi bi-award-fill me-1" style="color:#8B5A2B;"></i> 68+ YEARS OF TRUST &bull; SINCE 1960</span>
+        <span><i class="bi bi-shield-check me-1" style="color:#8B5A2B;"></i> AUTHORIZED DEALER: VIP, AMERICAN TOURISTER, SAFARI, SAMSONITE</span>
+        <span><i class="bi bi-truck me-1" style="color:#8B5A2B;"></i> FREE DELIVERY ON ORDERS ABOVE ₹{{ number_format(\App\Models\Setting::get('free_shipping_above', 1999)) }}</span>
+        <span><i class="bi bi-stars me-1" style="color:#8B5A2B;"></i> EXCLUSIVE BRIDAL &amp; WEDDING PURSE COLLECTION</span>
+        <span><i class="bi bi-geo-alt-fill me-1" style="color:#8B5A2B;"></i> DHARAMPURA BAZAR, NEAR ANARDANA CHOWK, PATIALA</span>
       </div>
       <!-- Duplicate for seamless loop -->
-      <div class="marquee-content" aria-hidden="true" style="color:#ffffff;font-size:0.78rem;letter-spacing:1px;font-weight:600;">
-        <span><i class="bi bi-award-fill me-1" style="color:#C59A55;"></i> 68+ YEARS OF TRUST &bull; SINCE 1960</span>
-        <span><i class="bi bi-shield-check me-1" style="color:#C59A55;"></i> AUTHORIZED DEALER: VIP, AMERICAN TOURISTER, SAFARI, SAMSONITE</span>
-        <span><i class="bi bi-truck me-1" style="color:#C59A55;"></i> FREE DELIVERY ON ORDERS ABOVE ₹{{ number_format(\App\Models\Setting::get('free_shipping_above', 1999)) }}</span>
-        <span><i class="bi bi-stars me-1" style="color:#C59A55;"></i> EXCLUSIVE BRIDAL &amp; WEDDING PURSE COLLECTION</span>
-        <span><i class="bi bi-geo-alt-fill me-1" style="color:#C59A55;"></i> DHARAMPURA BAZAR, NEAR ANARDANA CHOWK, PATIALA</span>
+      <div class="marquee-content" aria-hidden="true" style="color:#4A2C1D;font-size:0.78rem;letter-spacing:1px;font-weight:800;">
+        <span><i class="bi bi-award-fill me-1" style="color:#8B5A2B;"></i> 68+ YEARS OF TRUST &bull; SINCE 1960</span>
+        <span><i class="bi bi-shield-check me-1" style="color:#8B5A2B;"></i> AUTHORIZED DEALER: VIP, AMERICAN TOURISTER, SAFARI, SAMSONITE</span>
+        <span><i class="bi bi-truck me-1" style="color:#8B5A2B;"></i> FREE DELIVERY ON ORDERS ABOVE ₹{{ number_format(\App\Models\Setting::get('free_shipping_above', 1999)) }}</span>
+        <span><i class="bi bi-stars me-1" style="color:#8B5A2B;"></i> EXCLUSIVE BRIDAL &amp; WEDDING PURSE COLLECTION</span>
+        <span><i class="bi bi-geo-alt-fill me-1" style="color:#8B5A2B;"></i> DHARAMPURA BAZAR, NEAR ANARDANA CHOWK, PATIALA</span>
       </div>
     </div>
   </div>

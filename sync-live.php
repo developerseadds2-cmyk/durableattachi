@@ -8,6 +8,7 @@ $port = 21;
 
 $filesToUpload = [
     'resources/views/frontend/home/index.blade.php',
+    'public/images/Durable Storefront at Dusk.png',
     'app/Http/Middleware/AdminMiddleware.php',
     'resources/views/frontend/layouts/app.blade.php',
     'resources/views/frontend/product/show.blade.php',

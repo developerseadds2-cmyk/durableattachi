@@ -1286,8 +1286,8 @@
       {{-- Slide 1: The Store --}}
       <div class="swiper-slide">
         <div class="mobile-slide-box">
-          <img src="{{ asset('images/Durableshop.png') }}" class="mobile-slide-bg-blur" alt="" aria-hidden="true">
-          <img src="{{ asset('images/Durableshop.png') }}" class="mobile-slide-img" alt="Durable Suitcase House Storefront">
+          <img src="{{ asset('images/Durable Storefront at Dusk.png') }}" class="mobile-slide-bg-blur" alt="" aria-hidden="true">
+          <img src="{{ asset('images/Durable Storefront at Dusk.png') }}" class="mobile-slide-img" alt="Durable Suitcase House Storefront">
         </div>
       </div>
 
@@ -1367,8 +1367,8 @@
 
     {{-- SCENE 1: The Storefront (Durableshop.png - Pure Visual, Complete Uncropped) --}}
     <div class="hero-scene" id="heroScene1">
-      <img src="{{ asset('images/Durableshop.png') }}" class="hero-scene-bg-blur" alt="" aria-hidden="true">
-      <img src="{{ asset('images/Durableshop.png') }}" class="hero-scene-bg" id="bgScene1" alt="Durable Suitcase House Storefront">
+      <img src="{{ asset('images/Durable Storefront at Dusk.png') }}" class="hero-scene-bg-blur" alt="" aria-hidden="true">
+      <img src="{{ asset('images/Durable Storefront at Dusk.png') }}" class="hero-scene-bg" id="bgScene1" alt="Durable Suitcase House Storefront">
     </div>
 
     {{-- SCENE 2: The Showroom / Suitcase (personbag.png - Pure Visual, Complete Uncropped) --}}
@@ -1916,7 +1916,7 @@
 
       <div class="col-lg-6">
         <div class="store-img-wrap">
-          <img src="{{ asset('images/Durableshop.png') }}" alt="Durable Suitcase House Patiala Showroom">
+          <img src="{{ asset('images/Durable Storefront at Dusk.png') }}" alt="Durable Suitcase House Patiala Showroom">
         </div>
       </div>
     </div>
