@@ -1,4 +1,4 @@
-﻿@extends('frontend.layouts.app')
+@extends('frontend.layouts.app')
 @section('title', 'Register — Durable Suitcase House')
 
 @section('content')

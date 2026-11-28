@@ -7,7 +7,7 @@
 <title>@yield('title', \App\Models\Setting::get('meta_title', 'Durable Suitcase House — Luggage & Travel Store Since 1960'))</title>
 <meta name="description" content="@yield('meta_description', \App\Models\Setting::get('meta_description', 'Your trusted destination for bags, luggage & travel essentials since 1960.'))">
 
-<link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png">
+<link rel="icon" href="{{ asset('images/brownlogo.png') }}" type="image/png">
 
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -2077,7 +2077,9 @@ nav p.small {
   @php
     $siteLogo = \App\Models\Setting::get('site_logo', 'logo.png');
     $logoSrc = null;
-    if ($siteLogo && file_exists(public_path('uploads/' . $siteLogo))) {
+    if (file_exists(public_path('images/brownlogo.png'))) {
+      $logoSrc = asset('images/brownlogo.png');
+    } elseif ($siteLogo && file_exists(public_path('uploads/' . $siteLogo))) {
       $logoSrc = asset('uploads/' . $siteLogo);
     } elseif ($siteLogo && file_exists(public_path('uploads/logo/' . $siteLogo))) {
       $logoSrc = asset('uploads/logo/' . $siteLogo);
@@ -2164,8 +2166,8 @@ nav p.small {
       <a href="{{ route('home') }}" class="site-logo">
         @php
           $logoUrl = null;
-          if (file_exists(public_path('images/logo.png'))) {
-            $logoUrl = asset('images/logo.png');
+          if (file_exists(public_path('images/brownlogo.png'))) {
+            $logoUrl = asset('images/brownlogo.png');
           } elseif (file_exists(public_path('Durable Suitcase House Logo.png'))) {
             $logoUrl = asset('Durable Suitcase House Logo.png');
           }

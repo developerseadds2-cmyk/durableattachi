@@ -11,6 +11,8 @@ $filesToUpload = [
     'public/images/Durable Storefront at Dusk.png',
     'app/Http/Middleware/AdminMiddleware.php',
     'resources/views/frontend/layouts/app.blade.php',
+    'resources/views/admin/layout/app.blade.php',
+    'public/images/brownlogo.png',
     'resources/views/frontend/product/show.blade.php',
     'resources/views/frontend/contact/index.blade.php',
     'resources/views/frontend/auth/login.blade.php',

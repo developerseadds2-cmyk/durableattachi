@@ -165,8 +165,8 @@
 <nav id="sidebar">
   <div class="sidebar-header">
     <a href="{{ route('admin.dashboard') }}" class="sidebar-brand-link">
-      @if(file_exists(public_path('images/logo.png')))
-        <img src="{{ asset('images/logo.png') }}" alt="{{ config('app.name', 'Durable Suitcase House') }}" class="sidebar-brand-img">
+      @if(file_exists(public_path('images/brownlogo.png')))
+        <img src="{{ asset('images/brownlogo.png') }}" alt="{{ config('app.name', 'Durable Suitcase House') }}" class="sidebar-brand-img">
       @else
         <span class="text-white fw-bold">Durable Suitcase House</span>
       @endif
